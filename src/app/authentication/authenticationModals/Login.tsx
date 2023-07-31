@@ -3,9 +3,9 @@ import { useSetRecoilState } from "recoil";
 import { auth } from "@/firebase/firebase";
 import { authModalState } from "@/atoms/authModalAtom";
 
-type loginProps = {};
+type LoginProps = {};
 
-const login: React.FC<loginProps> = () => {
+const Login: React.FC<LoginProps> = () => {
   const setAuthModalState = useSetRecoilState(authModalState);
 
   const handleForgot = () => {
@@ -35,4 +35,4 @@ const login: React.FC<loginProps> = () => {
   );
 };
 
-export default login;
+export default Login;
