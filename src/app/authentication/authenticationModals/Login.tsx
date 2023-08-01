@@ -1,23 +1,25 @@
+"use client"
+
+
 import React from "react";
-import { useSetRecoilState } from "recoil";
 import { auth } from "@/firebase/firebase";
-import { authModalState } from "@/atoms/authModalAtom";
+import {changePage, closeAuth} from '@/redux/features/auth-slice'
+import {useDispatch} from 'react-redux'
+import { AppDispatch } from "@/redux/Store";
 
 type LoginProps = {};
 
 const Login: React.FC<LoginProps> = () => {
-  const setAuthModalState = useSetRecoilState(authModalState);
+  
+  const dispatch = useDispatch<AppDispatch>()
 
   const handleForgot = () => {
-    setAuthModalState((prevState) => ({
-      ...prevState,
-      type: "forgotPassword",
-    }));
+    dispatch(changePage('forgotPassword'))
   };
 
   return (
     <div>
-      <form>
+      <form className="text-white">
         <label>
           Email:
           <input type="email" name="email" />
