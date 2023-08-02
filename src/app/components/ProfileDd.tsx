@@ -1,10 +1,10 @@
 'use client'
 
 import { auth } from '@/firebase/firebase';
-import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
+import UserObj from './UserObj';
 
 type ProfileDdProps = {
     
@@ -21,7 +21,7 @@ const ProfileDd:React.FC<ProfileDdProps> = () => {
     {/* <!-- Dropdown trigger / Avatar --> */}
     <button onClick={handleToggleMenu} type="button" className="flex mr-3 text-sm bg-grey-300 rounded-full md:mr-0 focus:ring-2 focus:ring-primary hover:opacity-80" id="user-menu-button">
       <span className="sr-only">Open user menu</span>
-      <Image className="rounded-full" src="/profile-avatar.png" width={35} height={35} alt="user photo"/>
+      <UserObj userDetail="profileImgNavbar"/>
     </button>
     
     {/* <!-- Dropdown content --> */}
@@ -42,10 +42,7 @@ const ProfileDd:React.FC<ProfileDdProps> = () => {
             <Link href="#" className="block px-4 py-2 text-sm hover:text-primary hover:bg-grey-400 transition">Manage Profile</Link>
           </li>
           <li>
-            <Link href="/authentication" onClick={() => {
-              
-              signOut()
-            }
+            <Link href="/authentication" onClick={() => signOut()
           } className="block px-4 py-2 text-sm hover:text-primary hover:bg-grey-400 transition">Sign out</Link>
           </li>
         </ul>

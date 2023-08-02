@@ -8,7 +8,6 @@ import { auth } from '@/firebase/firebase'
 
 export default function Header() {
   const [user, loading, error] = useAuthState(auth)
-  //uncomment it ^ when Firebase is set up
   
   return (
     <nav className="bg-grey-400">
