@@ -20,6 +20,12 @@ export default function Header() {
             <li>
               <Link href={'/katas'} className='hover:text-primary border-b-2 border-b-transparent hover:border-b-primary py-5 transition'>Katas</Link>
             </li>
+            <li>
+              <Link href={'/profile'} className='hover:text-primary border-b-2 border-b-transparent hover:border-b-primary py-5 transition'>Profile</Link>
+            </li>
+            <li>
+              <Link href={'/dashboard'} className='hover:text-primary border-b-2 border-b-transparent hover:border-b-primary py-5 transition'>Dashboard</Link>
+            </li>
           </ul>
         </div>
         {/* { user ? <ProfileDd /> : <SignIn /> } */}

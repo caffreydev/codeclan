@@ -17,6 +17,8 @@ module.exports = {
                     400: "#2e2e30",
                     500: "#1e1f21",
                 },
+                decline: "#c70000",
+                accept: "#028f00"
             },
         },
     },

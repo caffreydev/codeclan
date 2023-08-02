@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import kataRequests from '@/sample-data/requests'; 
 import lfp from '@/sample-data/LfP';
 import Image from 'next/image';
 import Button from '../function/button';
 import group from '../function/groupByKata';
 
+
 type pageProps = {};
 
 const page:React.FC<pageProps> = () => {
-  const groupedByKata = group(kataRequests);
+  // const [gbk, setGbk] = useState(group(kataRequests))
+  const groupedByKata = group(kataRequests)
 
   return (
     <div className='max-w-screen-xl w-5/6 border-1px mx-auto py-10 px-2'>
       <h2 className='text-4xl font-bold mb-6'>Dashboard</h2>
       <h3 className='text-3xl font-bold mb-3 my-1'>Requests</h3>
       <hr className='border' />
-      <ul className='my-5 grid-cols-2 auto-rows-auto'>
+      <ul className='my-5 grid grid-cols-2 gap-5 auto-rows-auto'>
         {/* {groupedByKata.map((request, i) => {
           return <li key={request.title} className={`${i % 2 !== 1 ? 'bg-grey-400' : ''} flex p-3 box-border items-center`}>
             <Button style={`${i % 2 !== 1 ? 'bg-grey-400' : ''} mx-3 border-0`}>
@@ -27,12 +29,14 @@ const page:React.FC<pageProps> = () => {
           </li>
         })} */}
         {Object.entries(groupedByKata).map(pair => {
-          return <li className='col-span-1 border-2 p-3 my-3 '>
-            <h4>{pair[0]}</h4>
+          return <li className='col-span-1 p-3 bg-grey-400 border-0 rounded-2xl'>
+            <h4 className='text-xl'>{pair[0]}</h4>
             <ul>
               {pair[1].map(requestObj => {
-                return <li>
-                  {requestObj.sender}
+                return <li className='flex items-center'>
+                  <p className='flex-grow'>{requestObj.sender}</p>
+                  <button className="border-0 rounded-lg p-1 w-9 mx-3 bg-accept">✔</button>
+                  <button className="border-0 rounded-lg p-1 w-9 bg-decline">✘</button>
                 </li>
               })}
             </ul>
