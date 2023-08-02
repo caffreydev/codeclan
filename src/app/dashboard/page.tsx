@@ -16,12 +16,18 @@ const page:React.FC<pageProps> = () => {
       <Link href='/inbox'>
           <Button style='bg-primary border-0'>Inbox</Button>
       </Link>
-      <h3 className='text-3xl font-bold mb-3 my-1'>Requests</h3>
-      <hr className='border' />
-    <RequestList />
-      <h3 className='text-3xl font-bold mb-3 mt-6'>Looking for pairs</h3>
-      <hr className='border' />
-    <JoinList />
+      <div className='grid grid-cols-2 gap-10'>
+        <div>
+          <h3 className='text-3xl font-bold mb-3 my-1'>Requests</h3>
+          <hr className='border' />
+          <RequestList />
+        </div>
+        <div>
+          <h3 className='text-3xl font-bold mb-3'>Looking for pairs</h3>
+          <hr className='border' />
+          <JoinList />
+        </div>
+      </div>
     </div>
   )
 }

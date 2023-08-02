@@ -27,23 +27,23 @@ const RequestList: React.FC<RequestListProps> = () => {
   };
 
   return (
-    <ul className='my-5 grid grid-cols-2 gap-5 auto-rows-auto'>
+    <ul className='my-5 grid gap-5 auto-rows-auto'>
       {Object.entries(grouped).map((pair) => {
         if (pair[1].length === 0) {
           return null;
         }
         return (
-          <li className='col-span-1 p-3 bg-grey-400 border-0 rounded-2xl' key={pair[0]}>
-            <h4 className='text-xl'>{pair[0]}</h4>
+          <li className='col-span-1 p-4 bg-grey-400 border-0 rounded-2xl' key={pair[0]}>
+            <h4 className='text-xl font-bold mb-2'>{pair[0]}</h4>
             <ul>
-              {pair[1].map((requestObj) => {
+              {pair[1].map((requestObj: object, i: number) => {
                 const isAccepted = acceptedRequests.some(
                   (acceptedRequest) =>
                     acceptedRequest.sender === requestObj.sender && acceptedRequest.title === pair[0]
                 );
                 return (
-                  <li className='flex items-center' key={requestObj.reqId}>
-                    <p className='flex-grow'>{requestObj.sender}</p>
+                  <li className={`${ i + 1 == pair[1].length } flex items-center p-2 rounded`} key={requestObj.reqId}>
+                    <Link href="/" className='flex-grow'>{requestObj.sender}</Link>
                     {isAccepted ? (
                       <Link href={`/use-client?sender=${requestObj.sender}&title=${pair[0]}`} className='border-0 rounded-lg p-1 w-15 mx-15 bg-accept'>
                         <p>Click to Join</p>

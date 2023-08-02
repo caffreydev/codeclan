@@ -29,6 +29,30 @@ const kataRequests: any[] = [
     title: 'Recreate codeClan',
     sender: 'KylesNumber1Fan'
   },
+  {
+    reqId: 6,
+    kataId: 5,
+    title: 'Multiplication',
+    sender: 'damiansux'
+  },
+  {
+    reqId: 7,
+    kataId: 5,
+    title: 'Recreate codeClan',
+    sender: 'asadboy'
+  },
+  {
+    reqId: 8,
+    kataId: 5,
+    title: 'Recreate codeClan',
+    sender: 'joemama'
+  },
+  {
+    reqId: 9,
+    kataId: 5,
+    title: 'Multiplication',
+    sender: 'KylesNumber1Fan'
+  },
 ]
 
 export default kataRequests;
