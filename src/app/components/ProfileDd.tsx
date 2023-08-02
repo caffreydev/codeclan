@@ -33,17 +33,17 @@ const ProfileDd:React.FC<ProfileDdProps> = () => {
         </div>
         <ul className="py-2">
           <li>
-            <Link href="#" className="block px-4 py-2 text-sm hover:text-primary hover:bg-grey-400 transition">Profile</Link>
+            <Link href="/profile" className="block px-4 py-2 text-sm hover:text-primary hover:bg-grey-400 transition">Profile</Link>
           </li>
           <li>
-            <Link href="#" className="block px-4 py-2 text-sm hover:text-primary hover:bg-grey-400 transition">Dashboard</Link>
+            <Link href="/dashboard" className="block px-4 py-2 text-sm hover:text-primary hover:bg-grey-400 transition">Dashboard</Link>
           </li>
           <li>
-            <Link href="#" className="block px-4 py-2 text-sm hover:text-primary hover:bg-grey-400 transition">Settings</Link>
+            <Link href="#" className="block px-4 py-2 text-sm hover:text-primary hover:bg-grey-400 transition">Manage Profile</Link>
           </li>
           <li>
             <Link href="/authentication" onClick={() => {
-              console.log(user)
+              
               signOut()
             }
           } className="block px-4 py-2 text-sm hover:text-primary hover:bg-grey-400 transition">Sign out</Link>

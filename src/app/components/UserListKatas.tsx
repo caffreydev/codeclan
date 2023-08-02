@@ -15,12 +15,15 @@ async function getData() {
 }
 
 
+
+
+
 const UserListKatas:React.FC<UserListKatasProps> = async () => {
     const katas = await getData() //katas user
     return (
         <ul>    
             {katas.map((kata: any, index: number) => {
-                return <Link href="#">
+                return <Link href="#" key={kata.id}>
                     <li className={`${index % 2 !== 1 ? 'bg-grey-400' : ''} p-2 rounded-lg flex items-center hover:bg-grey-200 transition`}>
                     <p className='hover:text-grey-100'><span className='mr-2 text-grey-200'>{kata.id}</span>{kata.title}</p>
                     </li>
