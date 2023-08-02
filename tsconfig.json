@@ -35,7 +35,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/katas/page.tsx"
-  ],
+, "src/app/message"  ],
   "exclude": [
     "node_modules"
   ]
