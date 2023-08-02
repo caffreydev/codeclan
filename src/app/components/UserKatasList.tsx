@@ -1,0 +1,33 @@
+import Link from 'next/link';
+import React from 'react';
+
+type UserListKatasProps = {
+    
+};
+
+async function getData() {
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts?limit=10")
+    if (!res.ok) {
+      throw new Error('Failed to fetch data')
+    }
+
+    return res.json()
+}
+
+
+const UserListKatas:React.FC<UserListKatasProps> = async () => {
+    const katas = await getData() //katas user
+    return (
+        <ul>    
+            {katas.map((kata: any, index: number) => {
+                return <Link href="#">
+                    <li className={`${index % 2 !== 1 ? 'bg-grey-400' : ''} p-2 rounded-lg flex items-center hover:bg-grey-200 transition`}>
+                    <p className='hover:text-grey-100'><span className='mr-2 text-grey-200'>{kata.id}</span>{kata.title}</p>
+                    </li>
+                </Link>
+        })}
+        </ul>
+    )
+}
+export default UserListKatas;
+
