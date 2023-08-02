@@ -1,6 +1,3 @@
-
-
-
 import Link from 'next/link';
 import React from 'react';
 import Wrapper from '../components/Wrapper';
@@ -14,7 +11,6 @@ type pageProps = {
 };
 
 const page:React.FC<pageProps> = () => {
-  
     return (<div className='max-w-screen-xl mx-auto'>
     <Wrapper>
         <h2 className="text-3xl font-bold my-7">Profile</h2>
