@@ -27,8 +27,20 @@ export default async function katas() {
         {/* <ProfileDd/> */}
         {/* <SignIn/> */}
     <h1 className="">List of Katas</h1>
-<ul className = "flex flex-col justify-center items-center">{data.articles.map((element)=> {return <li className="m-5 bg-grey-400  p-3 border-0 rounded w-full hover:bg-grey-200 transition ease-in-out">{element.title}</li>})}</ul>
+<ul className = "flex flex-col justify-center items-center">{data.articles.map((element)=> {
+    return   <li className="m-5 bg-grey-400  p-3 border-0 rounded w-full hover:bg-grey-200 transition ease-in-out"> 
+ 
+  <div className="collapse-title">{element.title} </div>
+  
+  
+ 
+  
+  </li>
+  })}
+  
+  </ul>
 </div>
 
     )
+    
 }
