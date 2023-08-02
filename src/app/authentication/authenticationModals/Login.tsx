@@ -7,10 +7,11 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/Store";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
-
+import { useRouter  } from "next/navigation";
 type LoginProps = {};
 
 const Login: React.FC<LoginProps> = () => {
+  const { push } = useRouter()
   const [inputs, setInputs] = useState({ email: "", password: "" });
 
   const [signInWithEmailAndPassword, user, loading, error] =
@@ -42,7 +43,8 @@ const Login: React.FC<LoginProps> = () => {
       if (!login) {
         return;
       }
-      dispatch(closeAuth());
+      push("/dashboard")
+      
     } catch (error: any) {
       alert(error?.message.replace("Firebase: Error ", "Failed login! "));
     }
@@ -59,7 +61,7 @@ const Login: React.FC<LoginProps> = () => {
 
   return (
     <div>
-      <form className="text-white" onSubmit={handleLogin}>
+      <form className="text-grey-100" onSubmit={handleLogin}>
         <label>
           Email:
           <input type="email" name="email" onChange={handleChange} />

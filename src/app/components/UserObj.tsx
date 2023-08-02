@@ -6,7 +6,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import Image from 'next/image';
 
 type UserObjProps = {
-    userDetail: 'displayName' | 'email' | 'profileImg'
+    userDetail: 'displayName' | 'email' | 'profileImg' | 'profileImgNavbar'
 };
 
 const UserObj:React.FC<UserObjProps> = ({userDetail}) => {
@@ -21,6 +21,8 @@ const UserObj:React.FC<UserObjProps> = ({userDetail}) => {
         return <p className="text-grey-200"><span className='text-grey-100'>email: </span>{user?.email}</p>
     case 'profileImg':
         return <Image alt='profile avatar' src={user?.photoURL ? user.photoURL : '/profile-avatar.png'} width={300} height={300} className="self-center w-52 h-52 bg-gray-300 rounded-full shrink-0"></Image>
+        case 'profileImgNavbar':
+            return (<Image alt='profile avatar' src={user?.photoURL ? user.photoURL : '/profile-avatar.png'} width={35} height={35} className="self-center w-8 h-8 bg-gray-300 rounded-full shrink-0"></Image>)
         default:
             return;
     }
