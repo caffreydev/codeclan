@@ -1,3 +1,5 @@
+"use client"
+
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -5,13 +7,17 @@ import Wrapper from '../components/Wrapper';
 import UserListKatas from '../components/UserKatasList';
 import { TbProgress } from "react-icons/tb";
 import { CgCheckO } from "react-icons/cg";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '@/firebase/firebase';
 
 type pageProps = {
     
 };
 
 const page:React.FC<pageProps> = () => {
-    
+    const [user, loading, error] = useAuthState(auth)
+
+
     return (<div className='max-w-screen-xl mx-auto'>
     <Wrapper>
         <h2 className="text-3xl font-bold my-7">Profile</h2>
@@ -20,10 +26,10 @@ const page:React.FC<pageProps> = () => {
             <Image alt='profile avatar' src="/profile-avatar.png" width={300} height={300} className="self-center w-52 h-52 bg-gray-300 rounded-full shrink-0"></Image>
             </div>
             <div className="h-auto rounded-lg bg-grey-300 lg:col-span-2 p-4">
-                <h3 className="text-xl font-bold text-primary">Jessie 👩🏻‍💻</h3>
+                <h3 className="text-xl font-bold text-primary">{user?.displayName} 👩🏻‍💻</h3>
                 <div className='flex items-center justify-between'>
                     <div>
-                        <p className="text-grey-200"><span className='text-grey-100'>email: </span>jessie@codeclan.com</p>
+                        <p className="text-grey-200"><span className='text-grey-100'>email: </span>{user?.email}</p>
                         <p className="text-grey-200 text-sm"><span className='text-grey-100'>Member Since: </span> 01-08-2023</p>
                     </div>
                 <div className="mt-6 flex flex-wrap gap-4 justify-center mb-4">

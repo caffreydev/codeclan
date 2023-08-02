@@ -1,11 +1,11 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import {useCreateUserWithEmailAndPassword} from 'react-firebase-hooks/auth'
+import {useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword, useUpdateProfile} from 'react-firebase-hooks/auth'
 import {auth} from '@/firebase/firebase'
 import {useDispatch} from 'react-redux'
 import { AppDispatch } from "@/redux/Store";
-import { changePage } from '@/redux/features/auth-slice';
+import { changePage, closeAuth } from '@/redux/features/auth-slice';
 
 type CreateAccountProps = {};
 
@@ -17,10 +17,14 @@ const [
   loading,
   error,
 ] = useCreateUserWithEmailAndPassword(auth);
- 
+const [updateProfile, profileUpdating, profileUpdateError] = useUpdateProfile(auth); 
+const [signInWithEmailAndPassword, userLogin, signingIn, signInError] =
+    useSignInWithEmailAndPassword(auth);
+
+
 const dispatch = useDispatch<AppDispatch>()
 
-  const [inputs, setInputs] = useState({email:'',username:'',password:''})
+  const [inputs, setInputs] = useState({email:'',username:'',password:'', confirmPassword: ''})
   
 
   const handleChangeInputs = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -29,17 +33,30 @@ const dispatch = useDispatch<AppDispatch>()
 
   const handleSignup =  async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+
+    if (inputs.password !== inputs.confirmPassword) {
+      return alert('Your passwords do not match, please fix!')
+    }
+
       try {
         const newUser = await createUserWithEmailAndPassword(inputs.email, inputs.password);
       if(!newUser) {
             return
       }
+      const login = await signInWithEmailAndPassword(
+        inputs.email,
+        inputs.password
+      );
+      if (!login) {
         dispatch(changePage('login'))
+        return
+      }
+        updateProfile({displayName: inputs.username})
+        dispatch(closeAuth())
       }
       catch (error:any)
       {
-          
-         alert(error.message.replace('Firebase: Error ', 'Failed signup! '))
+          alert(error.message.replace('Firebase: Error ', 'Failed signup! '))
       }
       
   }
@@ -91,11 +108,12 @@ const dispatch = useDispatch<AppDispatch>()
   <label htmlFor="confirm-password" className="text-sm font-medium block mb-2 text-gray-300">
       Confirm Password
   </label>
-  <input type="password" name="confirm-password" id="confirm-password" className="
+  <input type="password" name="confirmPassword" id="confirm-password" className="
   border-2 outline-none sm:text-sm rounded-1g focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
   bg-gray-600 border-gray-500 placeholder-gray-400 text-white
   "
   placeholder='Harder-toguess_thanthis1234'
+  onChange={handleChangeInputs}
   />
 </div>
 
