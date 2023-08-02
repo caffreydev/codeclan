@@ -1,14 +1,17 @@
+"use client"
+
 import Link from 'next/link'
 import ProfileDd from './ProfileDd'
 import SignIn from './SignIn'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '@/firebase/firebase'
 
 export default function Header() {
-  // const [user, loading, error] = useAuthState(auth)
-  //uncomment it ^ when Firebase is set up
+  const [user, loading, error] = useAuthState(auth)
   
   return (
     <nav className="bg-grey-400">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
+      {user && (<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
         <Link href="/" className="flex items-center">
             <span className="self-center text-2xl font-semibold whitespace-nowrap text-grey-100 hover:text-primary p-4">CodeClan</span>
         </Link>
@@ -28,9 +31,9 @@ export default function Header() {
             </li>
           </ul>
         </div>
-        {/* { user ? <ProfileDd /> : <SignIn /> } */}
-        {/* uncomment it ^ when Firebase is set up */}
-      </div>
+        { user ? <ProfileDd /> : <SignIn /> }
+      </div>)
+}
     </nav>
   )
 }
