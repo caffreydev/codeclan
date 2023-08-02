@@ -24,7 +24,7 @@ const [signInWithEmailAndPassword, userLogin, signingIn, signInError] =
 
 const dispatch = useDispatch<AppDispatch>()
 
-  const [inputs, setInputs] = useState({email:'',username:'',password:'', confirmPassword: ''})
+  const [inputs, setInputs] = useState({email:'',username:'', profileURL: '', password:'', confirmPassword: ''})
   
 
   const handleChangeInputs = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -89,6 +89,18 @@ const dispatch = useDispatch<AppDispatch>()
   bg-gray-600 border-gray-500 placeholder-gray-400 text-white
   "
   placeholder='Joe Codes'
+  onChange={handleChangeInputs}
+  />
+</div>
+<div>
+  <label htmlFor="profileURL" className="text-sm font-medium block mb-2 text-gray-300">
+      Your ProfileURL (optional)
+  </label>
+  <input type="url" name="profileURL" id="profileURL" className="
+  border-2 outline-none sm:text-sm rounded-1g focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
+  bg-gray-600 border-gray-500 placeholder-gray-400 text-white
+  "
+  placeholder='https://photobucket.com/myface.jpg'
   onChange={handleChangeInputs}
   />
 </div>
