@@ -42,7 +42,6 @@ const page: React.FC<pageProps> = () => {
 			const userFunc = new Function(`return ${codeText}`)()
 			
 
-
 			const testResult = kataLibrary[1].handlerFunction(userFunc)
 
 			if (!testResult.length) {
