@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/redux/Store';
 import { changePage, closeAuth } from '@/redux/features/auth-slice';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 type CreateAccountProps = {};
 
@@ -35,7 +36,17 @@ const CreateAccount: React.FC<CreateAccountProps> = () => {
 		e.preventDefault();
 
 		if (inputs.password !== inputs.confirmPassword) {
-			return alert('Your passwords do not match, please fix!');
+			// alert('Your passwords do not match, please fix!');
+			return toast.error('Your passwords do not match, please fix!', {
+				position: "top-right",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "dark",
+			})
 		}
 
 		try {
@@ -58,12 +69,34 @@ const CreateAccount: React.FC<CreateAccountProps> = () => {
 			}
 			push('/dashboard');
 		} catch (error: any) {
-			alert(error.message.replace('Firebase: Error ', 'Failed signup! '));
+			// alert(error.message.replace('Firebase: Error ', 'Failed signup! '));
+			toast.error('Failed sign up!!', {
+				position: "top-right",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "dark",
+			})
 		}
 	};
 
 	useEffect(() => {
-		if (error) alert(error.message.replace('Firebase: Error ', 'Failed signup! ').replace('Firebase: ', 'Failed signup! '));
+		if (error) {
+			// alert(error.message.replace('Firebase: Error ', 'Failed signup! ').replace('Firebase: ', 'Failed signup! '));	
+			toast.error('Failed sign up!!', {
+				position: "top-right",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "dark",
+			})
+		}
 	}, [error]);
 
 	return (
