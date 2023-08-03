@@ -17,7 +17,7 @@ interface Kata {
 
 export const kataLibrary: Kata[] = [
   {
-    id: 1,
+    id: 0,
     title: 'Fibbonaci Funtime',
     problemStatement: `Create a function that will take a parameter, n >= 0, and generator the nth Fibbonaci number.
         Just in case you forgot what you learned in maths classes ... Fn(1) = 1, Fn(2) = 1, Fn(3) = 2, Fn(4) = 3, Fn(5) = 5, ... Fn(n + 2) = Fn(n) + Fn(n + 1)`,
@@ -29,7 +29,7 @@ export const kataLibrary: Kata[] = [
     category: 'Maths',
   },
   {
-    id: 2,
+    id: 1,
     title: 'Friend Filter',
     problemStatement: `You have a group of friends in a friends array, each friend is an object with a number of key value pairs.
         The key that is most important is the "Likes_LOTR" key which has a boolean value.  Since you have too many friends, and have decided to reduce the size
@@ -44,7 +44,7 @@ export const kataLibrary: Kata[] = [
     category: 'Arrays and Objects',
   },
   {
-    id: 3,
+    id: 2,
     title: 'Tied in Knots',
     problemStatement: `
             You are a knot enthusiast who likes nothing better than reading about knots, you also quite like vowels

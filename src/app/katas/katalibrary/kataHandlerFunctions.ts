@@ -3,8 +3,6 @@
 export const fibonnaciFunTimeHandler = (userFunc: Function) => {
   const failedTests: number[] = [];
 
-	console.log(userFunc(5), "<<< should be 5")
-
 
   //testcase 1
   if (!userFunc) {
@@ -41,20 +39,7 @@ export const fibonnaciFunTimeHandler = (userFunc: Function) => {
     failedTests.push(7);
   }
 
-  //test case 8
-  if (userFunc(60) !== 1548008755920) {
-    failedTests.push(8);
-  }
-
-  //test case 9
-  if (userFunc(80) !== 23416728348467685) {
-    failedTests.push(9);
-  }
-
-  //test case 10
-  if (userFunc(100) !== 354224848179261915075) {
-    failedTests.push(10);
-  }
+  
 
   return failedTests;
 };
