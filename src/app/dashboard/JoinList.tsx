@@ -20,7 +20,7 @@ const JoinList:React.FC<JoinListProps> = () => {
               {" "} with you
             </p>
             <Button style="bg-primary border-0" >
-              Join in
+              Send Request
             </Button>
           </li>
         })}
