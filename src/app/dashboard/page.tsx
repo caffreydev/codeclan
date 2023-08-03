@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../function/button';
 import RequestList from './RequestList';
-import JoinList from './JoinList';
+import JoinList from './SendRequest';
 import Link from 'next/link';
 
 

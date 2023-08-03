@@ -1,7 +1,7 @@
 "use client"
 import { useState } from 'react';
 import group from '../function/groupByKata';
-import kataRequests from '@/sample-data/requests';
+import lfp from '@/sample-data/LfP';
 import Link from 'next/link';
 
 interface Request {
@@ -18,21 +18,12 @@ type GroupedRequests = {
   [key: string]: Request[];
 };
 
-type RequestListProps = {};
+type SendRequestProps = {};
 
-const RequestList: React.FC<RequestListProps> = () => {
-  const [grouped, setGrouped] = useState<GroupedRequests>(group(kataRequests));
+const SendRequest:React.FC<SendRequestProps> = () => {
+
+  const [grouped, setGrouped] = useState<GroupedRequests>(group(lfp));
   const [acceptedRequests, setAcceptedRequests] = useState<AcceptedRequest[]>([]);
-
-  const handleDelete = (sender: string, title: string) => {
-    setGrouped((curr) => {
-      const updatedGrouped: GroupedRequests = {
-        ...curr,
-        [title]: curr[title].filter((requestObj) => requestObj.sender !== sender),
-      };
-      return updatedGrouped;
-    });
-  };
 
   const handleAccept = (sender: string, title: string) => {
     setAcceptedRequests([...acceptedRequests, { sender, title }]);
@@ -59,29 +50,16 @@ const RequestList: React.FC<RequestListProps> = () => {
                       {requestObj.sender}
                     </Link>
                     {isAccepted ? (
-                      <Link
-                        href={`/use-client?sender=${requestObj.sender}&title=${pair[0]}`}
-                        className='border-0 rounded-lg p-1 w-15 mx-15 bg-accept'
-                      >
-                        <p>Click to Join</p>
-                      </Link>
+                      <p className=''>Request Sent</p>
                     ) : (
                       <>
                         <button
-                          className='border-0 rounded-lg p-1 w-9 mx-3 bg-accept'
+                          className='border-2 rounded-lg p-1 px-3'
                           onClick={() => {
                             handleAccept(requestObj.sender, pair[0]);
                           }}
                         >
-                          ✔
-                        </button>
-                        <button
-                          className='border-0 rounded-lg p-1 w-9 bg-decline'
-                          onClick={() => {
-                            handleDelete(requestObj.sender, pair[0]);
-                          }}
-                        >
-                          ✘
+                          Send Request
                         </button>
                       </>
                     )}
@@ -94,6 +72,6 @@ const RequestList: React.FC<RequestListProps> = () => {
       })}
     </ul>
   );
-};
-
-export default RequestList;
+   
+}
+export default SendRequest;
