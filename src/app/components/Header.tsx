@@ -7,6 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase/firebase';
 
 export default function Header() {
+  
 	const [user, loading, error] = useAuthState(auth);
 
 	return (
@@ -33,6 +34,11 @@ export default function Header() {
 									Profile
 								</Link>
 							</li>
+              <li>
+                <Link href={'/dashboard'} className='hover:text-primary border-b-2 border-b-transparent hover:border-b-primary py-5 transition'>
+                  Dashboard
+                </Link>
+              </li>
 						</ul>
 					</div>
 					{user ? <ProfileDd /> : <SignIn />}
@@ -40,4 +46,5 @@ export default function Header() {
 			)}
 		</nav>
 	);
+
 }
