@@ -1,0 +1,12 @@
+{
+	"root": true,
+	"extends": [
+		"eslint:recommended",
+		"next",
+		"plugin:prettier/recommended",
+		"plugin:tailwindcss/recommended"
+	],
+	"plugins": [
+		"tailwindcss"
+	]
+}

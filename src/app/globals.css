@@ -2,32 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+
+@layer base {
+
+	a,
+	button,
+	input {
+		@apply outline-primary;
+	}
+
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.Modal {
+	@apply absolute top-12 mb-10 left-0 right-0 mx-auto w-[36rem];
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: #222831;
-  color: white;
+.Modal-heading {
+	@apply text-xl font-medium text-grey-100 text-center py-6;
 }
 
-input {
-  color: black;
+.Modal-body {
+	@apply px-6 pb-6;
 }
-
-.active-tab {
-background-color: #EEEEEE;
-}
-
-
