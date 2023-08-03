@@ -209,5 +209,36 @@ export const friendFilterHandler = (userFunc: Function) => {
 }
 
 export const tiedInKnotsHandler = (userFunc: Function) => {
-    
+
+    //test case 1
+    if (!userFunc) {
+        return 1
+    }
+
+    //test case 2
+    const article2 = `When tieing your shoelace, we recommend a double bow.  This is a simple yet effective knot,
+    that is great at maintaining stability`
+
+    if (userFunc(article2) !== 14) {
+        return 2
+    }
+
+    //test case 3
+    const article3 = `Sailors have always known knots.  The anchor hitch is a beauty of a knot,
+    so is the old buntline hitch.`
+
+    if (userFunc(article3) !== 0) {
+        return 3
+    }
+
+    //test case 4
+    const article4 = `Alexander the Great was not a knot enthusiast.  He used his sword to unravel the
+    legendary Gordian Knot from an oxcart and so become ruler of Phrygia.  Admittedly his large army helped.  
+    `
+
+    if (userFunc(article4) !== 9) {
+        return 4
+    }
+
+    return 0
 }
