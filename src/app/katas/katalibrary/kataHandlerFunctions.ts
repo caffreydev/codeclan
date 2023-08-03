@@ -3,6 +3,9 @@
 export const fibonnaciFunTimeHandler = (userFunc: Function) => {
   const failedTests: number[] = [];
 
+	console.log(userFunc(5), "<<< should be 5")
+
+
   //testcase 1
   if (!userFunc) {
     return [1];
