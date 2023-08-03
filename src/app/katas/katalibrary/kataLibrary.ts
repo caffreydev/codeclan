@@ -38,7 +38,8 @@ export const kataLibrary: Kata[] = [
         id: 3,
         title: 'Tied in Knots',
         problemStatement: `
-            You need to take an article about knots, and count the number of vowels it contains,
+            You are a knot enthusiast who likes nothing better than reading about knots, you also quite like vowels
+            Your task is to take an article about knots, and count the number of vowels it contains,
             however there is a catch, you only should count the vowels that are in a sentence without the word 
             knot (or Knot) included.
 
