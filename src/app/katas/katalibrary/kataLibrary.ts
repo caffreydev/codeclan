@@ -4,7 +4,7 @@ import {
   tiedInKnotsHandler,
 } from './kataHandlerFunctions';
 
-interface Kata {
+export interface Kata {
   id: number;
   title: string;
   problemStatement: string;

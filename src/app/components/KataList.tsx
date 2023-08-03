@@ -1,7 +1,15 @@
 import Link from "next/link"
-import { kataLibrary } from "../katas/katalibrary/kataLibrary"
+import { Kata, kataLibrary } from "../katas/katalibrary/kataLibrary"
 
-export default  function kataList(props) {
+
+type KataListProps = {
+	difficulty: 'Easy' | 'Moderate' | 'Hard' | 'Fiendish' | 'all';
+  category: 'Arrays and Objects' | 'Strings' | 'Maths' | 'Fun' | 'all';
+
+}
+
+
+const KataList: React.FC<KataListProps> = ({difficulty, category}) => {
 
   let filterLib = [...kataLibrary]
 
@@ -9,13 +17,13 @@ export default  function kataList(props) {
 
    
   
-   if (props.difficulty != 'all')
+   if (difficulty != 'all')
    {
-   filterLib = filterLib.filter((kata)=> kata.difficulty === props.difficulty)
+   filterLib = filterLib.filter((kata)=> kata.difficulty === difficulty)
    }
-   if (props.category != 'all')
+   if (category != 'all')
    {
-   filterLib = filterLib.filter((kata)=> kata.category === props.category)
+   filterLib = filterLib.filter((kata)=> kata.category === category)
    }
 
 
@@ -23,11 +31,11 @@ export default  function kataList(props) {
 return ( 
   <>
   {
-   filterLib.map((element: any,i: any) => {
-        if (i%2 ===0) {
-        return <li className=" bg-grey-400 m-1 rounded  w-full hover:bg-grey-200 text-grey-100 py-2 px-3 rounded transition">
+   filterLib.map((element: Kata, i: number) => {
+       
+        return (<li className={`bg-grey-${i % 2 === 0 ? "4" : "3"}00 m-1 rounded  w-full hover:bg-grey-200 text-grey-100 py-2 px-3 rounded transition`}>
   
-       <Link href={`/katas/${element.article_id}`}><div className="collapse-title absolute">{element.title}</div></Link>
+       <Link href={`/playground?kata_id=${element.id}`}><div className="collapse-title absolute">{element.title}</div></Link>
         <details className={`group [&_details ::-webkit-details-marker]:hidden`}>
         <summary className="float-right sticky">Description</summary>
         <p className="leading-relaxed mt-6"> {element.problemStatement} </p>
@@ -35,47 +43,15 @@ return (
         <p className="p-1 bg-grey-100 text-grey-300 rounded w-max">{element.category} </p>
         <p className ="p-1 bg-grey-100 text-grey-300 rounded w-max ml-3">{element.difficulty} </p>
         </div>
-  </details>
- 
- 
- 
-     </li> 
-       }  else {
-         return   <li className=" bg-grey-300 m-1 rounded w-full hover:bg-grey-200 text-grey-100 py-2 px-3 rounded transition">
-           
-           
-         
-  
-         <Link href={`/katas/${element.article_id}`}><div className="collapse-title absolute">{element.title} </div></Link>
-         
-       
-          <details className={`group [&_summary::-webkit-details-marker]:hidden`}>
-         <summary className="float-right">Description</summary>
-         <p className="leading-relaxed mt-6"> {element.problemStatement} </p>
-        <div className=" flex flex-row ">
-        <p className="p-1 bg-grey-100 text-grey-300 rounded w-max">{element.category} </p>
-        <p className ="p-1 bg-grey-100 text-grey-300 rounded w-max ml-3">{element.difficulty} </p>
-        </div>
-    </details>
-    
-    
-    
-    
-    </li>
- 
- 
- 
-       }
- 
- 
- 
-  } )
-  
-  }
-  </>
-)
-
-
-
-
+  	</details>
+ 	</li> )
+       } )
+			}
+		
+			 
+			 </>
+) 
 }
+
+
+export default KataList
