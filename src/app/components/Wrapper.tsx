@@ -1,7 +1,3 @@
-export default function Wrapper({children }: any) {
-    return (
-      <div className='mx-auto px-4 max-w-[87rem] w-full'>
-          { children }
-      </div>
-    )
-  }
+export default function Wrapper({ children }: any) {
+	return <div className='mx-auto w-full max-w-[87rem] px-4'>{children}</div>;
+}

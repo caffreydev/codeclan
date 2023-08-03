@@ -1,11 +1,10 @@
+
 "use client";
 
 import React from "react";
 import Link from "next/link" 
 import { kataLibrary } from "./katalibrary/kataLibrary"
 import KataList from "../components/KataList";
-
-
 import { useState } from "react";
 
 
@@ -55,7 +54,7 @@ const [difficulty, setDifficulty] = useState('all')
 
     )
     
-}
+
 
 
 
