@@ -43,7 +43,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
 			<h3 className='Modal-heading'>Forgotten your password? :(</h3>
 
 			<div className="flex flex-col gap-5">
-				<h4 className='text-sm text-grey-200'>Don't worry, it happens to the best of us... enter your email to get a reset link</h4>
+				<h4 className='text-sm text-grey-150'>Don't worry, it happens to the best of us... enter your email to get a reset link</h4>
 				<label className='focus-within:border-grey-100 relative block rounded-md border border-grey-200 w-full'>
 					<input
 						onChange={handleChange}

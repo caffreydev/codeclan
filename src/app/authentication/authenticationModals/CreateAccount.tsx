@@ -100,7 +100,7 @@ const CreateAccount: React.FC<CreateAccountProps> = () => {
 
 				<label className='focus-within:border-grey-100 relative block rounded-md border border-grey-200 w-full'>
 					<input
-						type='text'
+						type='url'
 						name='profileURL'
 						id='profileURL'
 						className='peer w-full border-none bg-transparent p-3 text-sm text-grey-100 placeholder:text-transparent outline-none'
