@@ -4,31 +4,19 @@ import { useUpdateProfile } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase/firebase';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-function changeProfile(){
-
-}
-
-
-
-
-
+import { toast } from 'react-toastify';
 
 export default function editProfile() {
 	const { push } = useRouter();
     const [updateProfile, profileUpdating, profileUpdateError] = useUpdateProfile(auth);
     const [inputs, setInputs] = useState({
-        email: '',
         username: '',
         profileURL: '',
-        password: '',
-        confirmPassword: '',
     });
-
 
     const handleChangeInputs = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 	};
-
 
 
     const  handleEditProfile = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,21 +24,30 @@ export default function editProfile() {
     
            
             try {
-                if (inputs.username && !inputs.profileURL)
-            {
-                updateProfile({ displayName: inputs.username })
-            } else if (inputs.profileURL && !inputs.username)
-            {
-                updateProfile({ photoURL: inputs.profileURL });
-            } else {
-                updateProfile({
-                    displayName: inputs.username,
-                    photoURL: inputs.profileURL,
-                });
-            }
-
-              push('/profile');
-              
+                if (inputs.username && !inputs.profileURL) {
+                    updateProfile({ displayName: inputs.username })
+                } else if (inputs.profileURL && !inputs.username) {
+                    updateProfile({ photoURL: inputs.profileURL });
+                } else {
+                    updateProfile({
+                        displayName: inputs.username,
+                        photoURL: inputs.profileURL,
+                    });
+                }
+                setInputs({
+                    username: '',
+                    profileURL: '',
+                })
+                return toast.success('Your account has been edited!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                })
             } catch (error: any) {
                 alert(error.message.replace('Firebase: Error ', 'Failed signup! '));
             }
@@ -87,6 +84,7 @@ return (
                 id='username'
                 className='peer w-full border-none bg-transparent p-3 text-sm text-grey-100 placeholder:text-transparent outline-none'
                 placeholder='Joe Codes'
+                value={inputs.username}
                 onChange={handleChangeInputs}
             />
             <span className='pointer-events-none absolute start-2 top-0 -translate-y-1/2 rounded bg-grey-300 px-1 text-xs text-grey-200 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-100'>
@@ -101,10 +99,11 @@ return (
                 id='profileURL'
                 className='peer w-full border-none bg-transparent p-3 text-sm text-grey-100 placeholder:text-transparent outline-none'
                 placeholder='https://photobucket.com/myface.jpg'
+                value={inputs.profileURL}
                 onChange={handleChangeInputs}
             />
             <span className='pointer-events-none absolute start-2 top-0 -translate-y-1/2 rounded bg-grey-300 px-1 text-xs text-grey-200 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-100'>
-                Your ProfileURL (optional)
+                Your ProfileURL
             </span>
         </label>
 
