@@ -27,8 +27,15 @@ const page: React.FC<pageProps> = () => {
 								</p>
 							</div>
 							<div className='mb-4 mt-6 flex flex-wrap justify-center gap-4'>
+
+							<Link href='/editProfile' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
+									Edit
+								</Link>
+								<Link href='#' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
+
 								<Link href='/inbox' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
 									Inbox
+
 								</Link>
 								<Link href='#' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
 									Pair up!
