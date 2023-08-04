@@ -37,11 +37,7 @@ const ProfileDd: React.FC<ProfileDdProps> = () => {
 						<span className='block truncate text-sm text-grey-200'>{user?.email}</span>
 					</div>
 					<ul className='py-2'>
-						<li>
-							<Link href='/profile' className='block px-4 py-2 text-sm transition hover:bg-grey-400 hover:text-primary'>
-								Profile
-							</Link>
-						</li>
+						
 						<li>
 							<Link href='/dashboard' className='block px-4 py-2 text-sm transition hover:bg-grey-400 hover:text-primary'>
 								Dashboard
