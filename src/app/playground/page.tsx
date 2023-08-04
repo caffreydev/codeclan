@@ -6,6 +6,9 @@ import { kataLibrary } from "../katas/katalibrary/kataLibrary"
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import ReactCodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
+import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation'
+
 
 type pageProps = {
 
@@ -29,7 +32,12 @@ switch (n) {
 
 
 const page: React.FC<pageProps> = () => {
-	const [codeText, setCodeText] = useState<string>(kataLibrary[1].starterCode)
+
+
+
+const kataId = useSearchParams().get("kata_id")
+
+	const [codeText, setCodeText] = useState<string>(kataLibrary[kataId].starterCode)
 	const [message, setMessage] = useState<string>("Build your code and hit run!")
 
 
@@ -39,22 +47,38 @@ const page: React.FC<pageProps> = () => {
 
 
 	const handleTestCase = () => {
-			const userFunc = new Function(`return ${codeText}`)()
-			
+		
+		try 
+		{
+				const userFunc = new Function(`return ${codeText}`)()
+				
+		
+				const testResult = kataLibrary[kataId].handlerFunction(userFunc)
+				if (!testResult.length) {
+					setMessage("Great work, you passed all the tests!")
+				} else {
+					let failedTests = " "
 
-			const testResult = kataLibrary[1].handlerFunction(userFunc)
+					testResult.forEach((test: number) => {
+						failedTests += test + ", "
+					})
 
-			if (!testResult.length) {
-				setMessage("Great work, you passed all the tests!")
-				setTimeout(() => setMessage("Build your code and hit run!"), 2000);
+					setMessage("You failed the following tests:" + failedTests.slice(0, failedTests.length - 2))
+				}
+
 			}
-			
-
+			catch (e: any)
+			{
+				
+				setMessage(`There's a bug in your code! Error message: ${e.message}`)
+			}
+					
+			// setTimeout(() => setMessage("Build your code and hit run!"), 2000);
 	}
 
 	return <main>
 		<Split minSize={0} className='split h-full'>
-			<InstructionsPanel />
+			<InstructionsPanel kata={kataId} />
 			<section>
 				<Split direction='vertical' className='h-full'>
 				<ReactCodeMirror onChange={handleChangeValue}

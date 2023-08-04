@@ -1,7 +1,6 @@
 'use client';
-
 import { auth } from '@/firebase/firebase';
-import React, { ReactHTMLElement, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import { changePage, closeAuth } from '@/redux/features/auth-slice';
@@ -31,11 +30,36 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
 				dispatch(changePage('login'));
 			}
 		} catch (error: any) {
-			alert(error.message.replace('Firebase: Error ', 'Reset password failed! '));
+			// alert(error.message.replace('Firebase: Error ', ' '));
+
+			toast.error('Reset password failed!', {
+				position: "top-right",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "dark",
+			})
 		}
 	};
 	useEffect(() => {
-		if (error) alert(error.message.replace('Firebase: Error ', 'Reset password failed! '));
+		if (error) {
+			// if (error) alert(error.message.replace('Firebase: Error ', 'Reset password failed! '));
+
+			toast.error('Reset password failed!', {
+				position: "top-right",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "dark",
+			})
+		}
+
 	}, [error]);
 
 	return (

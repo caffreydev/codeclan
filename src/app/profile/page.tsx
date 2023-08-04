@@ -27,11 +27,15 @@ const page: React.FC<pageProps> = () => {
 								</p>
 							</div>
 							<div className='mb-4 mt-6 flex flex-wrap justify-center gap-4'>
+
 							<Link href='/editProfile' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
 									Edit
 								</Link>
 								<Link href='#' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
-									Message
+
+								<Link href='/inbox' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
+									Inbox
+
 								</Link>
 								<Link href='#' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
 									Pair up!
@@ -41,8 +45,7 @@ const page: React.FC<pageProps> = () => {
 						<hr className='border-grey-200' />
 						<p className='mb-2 mt-4 text-xl font-bold'>Bio</p>
 						<p className='text-grey-100'>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus est vitae tortor ullamcorper, ut vestibulum velit convallis. Aenean posuere
-							risus non velit egestas suscipit.
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus est vitae tortor ullamcorper, ut vestibulum velit convallis. Aenean posuere risus non velit egestas suscipit.
 						</p>
 					</div>
 				</div>
