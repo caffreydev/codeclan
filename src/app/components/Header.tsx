@@ -3,14 +3,16 @@
 import Link from 'next/link';
 import ProfileDd from './ProfileDd';
 import SignIn from './SignIn';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase/firebase';
-
+import { PiSignOutBold } from "react-icons/pi";
+import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
 export default function Header() {
 
-	const [user, loading, error] = useAuthState(auth);
+	const [user] = useAuthState(auth);
+	const [signOut] = useSignOut(auth);
 
 	return (
+
 		<nav className='fixed inset-x-0 top-0 z-50 bg-grey-400'>
 			{user && (
 				<div className='mx-auto flex max-w-screen-xl flex-wrap items-center justify-between'>
@@ -39,14 +41,14 @@ export default function Header() {
 									Dashboard
 								</Link>
 							</li>
-							<li>
-								<Link href={'/playground'} className='hover:text-primary border-b-2 border-b-transparent hover:border-b-primary py-5 transition'>
-									PlayGround
-								</Link>
-							</li>
 						</ul>
 					</div>
-					{user ? <ProfileDd /> : <SignIn />}
+					<div className='flex items-center'>
+						{user ? <ProfileDd /> : <SignIn />}
+						<Link href={'/'} className='hover:text-primary border-b-2 border-b-transparent text-2xl transition' onClick={() => signOut()}>
+							<PiSignOutBold />
+						</Link>
+					</div>
 				</div>
 			)}
 		</nav>

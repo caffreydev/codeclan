@@ -20,7 +20,7 @@ const AuthenticationModal: React.FC<AuthenticationModalProps> = () => {
 	const isOpen = useAppSelector((state) => state.authModalStateReducer.value.isOpen);
 
 	return (
-		isOpen && (
+		isOpen && (<>
 			<div className='Modal'>
 				<header className='relative rounded-t-lg bg-grey-400'>
 					<div className='flex p-4 pb-0'>
@@ -47,6 +47,8 @@ const AuthenticationModal: React.FC<AuthenticationModalProps> = () => {
 					{page === 'forgotPassword' ? <ForgotPassword /> : page === 'createAccount' ? <CreateAccount /> : <Login />}
 				</div>
 			</div>
+			<div className="Modal-overlay" onClick={() => dispatch(closeAuth())}></div>
+		</>
 		)
 	);
 };
