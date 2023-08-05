@@ -1,5 +1,5 @@
 import React from 'react';
-import { kataLibrary } from "../katas/katalibrary/kataLibrary.ts"
+import { kataLibrary } from "../katas/katalibrary/kataLibrary"
 import { FaRegFaceLaughWink, FaRegFaceMeh, FaRegFaceFlushed, FaCode } from "react-icons/fa6";
 type InstructionsPanelProps = {
 	kata: number
@@ -8,8 +8,8 @@ type InstructionsPanelProps = {
 const badgeColour = {
 	Easy: "text-green-700 bg-green-300",
 	Moderate: "text-yellow-700 bg-yellow-300",
-	Hard: "red",
-	Fiendish: "purple"
+	Hard: "text-red-700 bg-red-300",
+	Fiendish: "text-purple-700 bg-purple-300"
 }
 
 const InstructionsPanel: React.FC<InstructionsPanelProps> = ({ kata }) => {

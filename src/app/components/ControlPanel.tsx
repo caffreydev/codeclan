@@ -10,7 +10,7 @@ type ControlPanelProps = {
 const ControlPanel: React.FC<ControlPanelProps> = () => {
 	const kataId = Number(useSearchParams().get("kata_id"))
 
-	return <nav className='fixed left-0 right-0 top-14 py-1 px-4 flex items-center z-30 bg-grey-600 text-xs h-12 justify-center gap-5'>
+	return <nav className='fixed left-0 right-0 top-14 py-1 px-4 flex items-center z-30 bg-grey-600 text-xs h-12 justify-center gap-5	'>
 		<div className='flex items-center gap-2'>
 			<Link href={`/playground?kata_id=${kataId > 0 ? kataId - 1 : 0}`} className='text-xl bg-grey-300 hover:bg-grey-200 rounded'>
 				<span>

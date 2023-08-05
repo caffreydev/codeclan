@@ -70,7 +70,7 @@ const CreateAccount: React.FC<CreateAccountProps> = () => {
 			push('/dashboard');
 		} catch (error: any) {
 			// alert(error.message.replace('Firebase: Error ', 'Failed signup! '));
-			toast.error('Failed sign up!!', {
+			toast.error(error.message.replace('Firebase: Error ', 'Failed signup! '), {
 				position: "top-right",
 				autoClose: 5000,
 				hideProgressBar: false,
@@ -86,7 +86,7 @@ const CreateAccount: React.FC<CreateAccountProps> = () => {
 	useEffect(() => {
 		if (error) {
 			// alert(error.message.replace('Firebase: Error ', 'Failed signup! ').replace('Firebase: ', 'Failed signup! '));	
-			toast.error('Failed sign up!!', {
+			toast.error(error.message.replace('Firebase: Error ', 'Failed signup! ').replace('Firebase: ', 'Failed signup! '), {
 				position: "top-right",
 				autoClose: 5000,
 				hideProgressBar: false,
