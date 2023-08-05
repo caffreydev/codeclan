@@ -51,7 +51,14 @@ function useGetKata(kataTitle: string, setLoading: React.Dispatch<React.SetState
       try {
         const docRef = doc(firestore, 'problems', kataTitle);
         const docSnap = await getDoc(docRef);
-        const data = docSnap.data();
+        const data = docSnap.data() as {
+          category: string;
+          difficulty: string;
+          dislikes: number;
+          id: number;
+          likes: number;
+          title: string;
+        };
 
         if (docSnap) {
           setKata(data);
