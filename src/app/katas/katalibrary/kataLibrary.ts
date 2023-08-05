@@ -1,8 +1,4 @@
-import {
-  fibonnaciFunTimeHandler,
-  friendFilterHandler,
-  tiedInKnotsHandler,
-} from './kataHandlerFunctions';
+import { fibonnaciFunTimeHandler, friendFilterHandler, tiedInKnotsHandler } from './kataHandlerFunctions';
 
 export interface Kata {
   id: number;
@@ -21,8 +17,10 @@ export const kataLibrary: Kata[] = [
     title: 'Fibbonaci Funtime',
     problemStatement: `Create a function that will take a parameter, n >= 0, and generator the nth Fibbonaci number.
         Just in case you forgot what you learned in maths classes ... Fn(1) = 1, Fn(2) = 1, Fn(3) = 2, Fn(4) = 3, Fn(5) = 5, ... Fn(n + 2) = Fn(n) + Fn(n + 1)`,
-    starterCode: `function fibonnaciFunTime(n) {
-            return 1}`,
+    starterCode: `//Do not edit function name
+function fibonnaciFunTime(n) {
+// Write your code here
+};`,
     starterFunctionName: 'fibonnaciFunTime',
     handlerFunction: fibonnaciFunTimeHandler,
     difficulty: 'Easy',
@@ -36,8 +34,10 @@ export const kataLibrary: Kata[] = [
         of your friendship group, you need to use a filter to remove all the friends that don't like Lord of the rings from the array, and hence your social circle.
         To complete the kata, return an array that contains only those friends where the "Likes_LOTR" key has value true.
         `,
-    starterCode: `function friendFilter(friends) {
-            return {} }`,
+    starterCode: `//Do not edit function name
+function friendFilter(friends) {
+// Write your code here
+};`,
     starterFunctionName: 'friendFilter',
     handlerFunction: friendFilterHandler,
     difficulty: 'Easy',
@@ -54,8 +54,10 @@ export const kataLibrary: Kata[] = [
 
             e.g. "I love tieing knots. They are great." - should return 5, ignoring the first sentence.
         `,
-    starterCode: `function tiedInKnots(str) {
-            return 0 }`,
+    starterCode: `//Do not edit function name
+function tiedInKnots(str) {
+// Write your code here
+};`,
     starterFunctionName: 'tiedInKnots',
     handlerFunction: tiedInKnotsHandler,
     difficulty: 'Moderate',
