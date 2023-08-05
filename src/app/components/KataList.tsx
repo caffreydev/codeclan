@@ -19,31 +19,32 @@ const KataList: React.FC<KataListProps> = ({ difficulty, category }) => {
     filterLib = filterLib.filter((kata) => kata.category === category);
   }
 
-  return filterLib.map((element: Kata) => (
-    <li key={element.id} className={`relative w-full rounded-lg bg-grey-400 p-4 text-grey-100 transition hover:opacity-75`}>
-      <Link href={`/playground?kata_id=${element.id}`}>
+  return filterLib.map((kata: Kata) => (
+    <li key={kata.id} className={`relative w-full rounded-lg bg-grey-400 p-4 text-grey-100 transition hover:opacity-75`}>
+      <Link href={`/playground?kata_id=${kata.id}`}>
         <div className='collapse-title'>
-          <h3 className='text-lg text-grey-150 hover:text-primary'>{element.title}</h3>
+          <h3 className='text-lg text-grey-150 hover:text-primary'>{kata.title}</h3>
         </div>
       </Link>
       <details className={`[&_details ::-webkit-details-marker]:hidden group`}>
         <summary className='absolute right-0 top-0 mr-4 h-full leading-[3.5rem] transition-all ease-in-out'>
           <span className='select-none pl-1	text-xs'>Description</span>
         </summary>
-        <p className='mt-2 leading-relaxed'> {element.problemStatement} </p>
+        <p className='mt-2 leading-relaxed'> {kata.problemStatement} </p>
         <div className=' mt-2 flex flex-row gap-2'>
           <p>
             <span className='py-1.3 inline-flex items-center justify-center gap-1 rounded-full bg-primary px-2.5 text-sm  text-teal-950'>
               <FaCode />
-              {element.category}
+              {kata.category}
             </span>
           </p>
           <p>
-            <span className={`${badgeColour[element.difficulty]} py-1.3 inline-flex items-center justify-center gap-1 rounded-full px-2.5 text-sm`}>
-              {element.difficulty === 'Easy' ? <FaRegFaceLaughWink /> : element.difficulty === 'Moderate' ? <FaRegFaceMeh /> : <FaRegFaceFlushed />}
-              {element.difficulty}
+            <span className={`${badgeColour[kata.difficulty]} py-1.3 inline-flex items-center justify-center gap-1 rounded-full px-2.5 text-sm`}>
+              {kata.difficulty === 'Easy' ? <FaRegFaceLaughWink /> : kata.difficulty === 'Moderate' ? <FaRegFaceMeh /> : <FaRegFaceFlushed />}
+              {kata.difficulty}
             </span>
           </p>
+          <KataLikes kataTitle={kata.title} />
         </div>
       </details>
     </li>
