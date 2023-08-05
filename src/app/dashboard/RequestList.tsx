@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import { useState } from 'react';
 import group from '../function/groupByKata';
 import kataRequests from '@/sample-data/requests';
@@ -39,48 +39,42 @@ const RequestList: React.FC<RequestListProps> = () => {
   };
 
   return (
-    <ul className='my-5 grid gap-5 auto-rows-auto'>
+    <ul className='my-5 grid auto-rows-auto gap-5'>
       {Object.entries(grouped).map((pair) => {
         if (pair[1].length === 0) {
           return null;
         }
         return (
-          <li className='col-span-1 p-4 bg-grey-400 border-0 rounded-2xl' key={pair[0]}>
-            <h4 className='text-xl font-bold mb-2'>{pair[0]}</h4>
+          <li className='col-span-1 rounded-2xl border-0 bg-grey-400 p-4' key={pair[0]}>
+            <h4 className='mb-2 text-xl font-bold'>{pair[0]}</h4>
             <ul>
               {pair[1].map((requestObj: Request, i: number) => {
                 const isAccepted = acceptedRequests.some(
-                  (acceptedRequest) =>
-                    acceptedRequest.sender === requestObj.sender && acceptedRequest.title === pair[0]
+                  (acceptedRequest) => acceptedRequest.sender === requestObj.sender && acceptedRequest.title === pair[0],
                 );
                 return (
-                  <li className={`${i + 1 == pair[1].length} flex items-center p-2 rounded`} key={requestObj.reqId}>
-                    <Link href="/" className='flex-grow'>
+                  <li className={`${i + 1 == pair[1].length} flex items-center rounded p-2`} key={requestObj.reqId}>
+                    <Link href='/' className='grow'>
                       {requestObj.sender}
                     </Link>
                     {isAccepted ? (
-                      <Link
-                        href={`/use-client?sender=${requestObj.sender}&title=${pair[0]}`}
-                        className='border-0 rounded-lg p-1 w-15 mx-15 bg-accept'
-                      >
+                      <Link href={`/use-client?sender=${requestObj.sender}&title=${pair[0]}`} className='w-15 mx-15 rounded-lg border-0 bg-accept p-1'>
                         <p>Click to Join</p>
                       </Link>
                     ) : (
                       <>
                         <button
-                          className='border-0 rounded-lg p-1 w-9 mx-3 bg-accept'
+                          className='mx-3 w-9 rounded-lg border-0 bg-accept p-1'
                           onClick={() => {
                             handleAccept(requestObj.sender, pair[0]);
-                          }}
-                        >
+                          }}>
                           ✔
                         </button>
                         <button
-                          className='border-0 rounded-lg p-1 w-9 bg-decline'
+                          className='w-9 rounded-lg border-0 bg-decline p-1'
                           onClick={() => {
                             handleDelete(requestObj.sender, pair[0]);
-                          }}
-                        >
+                          }}>
                           ✘
                         </button>
                       </>

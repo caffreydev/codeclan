@@ -3,50 +3,50 @@ const lfp: any[] = [
     reqId: 1,
     lfpid: 1,
     title: 'Please help',
-    sender: 'asadnotboy'
+    sender: 'asadnotboy',
   },
   {
     reqId: 2,
     lfpid: 2,
     title: 'H',
-    sender: 'KyleIsTheBest'
+    sender: 'KyleIsTheBest',
   },
   {
     reqId: 3,
     lfpid: 3,
     title: 'E',
-    sender: 'dalmanian'
+    sender: 'dalmanian',
   },
   {
     reqId: 4,
     lfpid: 4,
     title: 'L',
-    sender: 'jomama'
+    sender: 'jomama',
   },
   {
     reqId: 5,
     lfpid: 5,
     title: 'P',
-    sender: 'jesscantcode'
+    sender: 'jesscantcode',
   },
   {
     reqId: 5,
     lfpid: 5,
     title: 'H',
-    sender: 'jomama'
+    sender: 'jomama',
   },
   {
     reqId: 5,
     lfpid: 5,
     title: 'L',
-    sender: 'jesscantcode'
+    sender: 'jesscantcode',
   },
   {
     reqId: 5,
     lfpid: 5,
     title: 'P',
-    sender: 'dalmanian'
+    sender: 'dalmanian',
   },
-]
+];
 
-export default lfp
+export default lfp;

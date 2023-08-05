@@ -3,7 +3,6 @@
 export const fibonnaciFunTimeHandler = (userFunc: Function) => {
   const failedTests: number[] = [];
 
-
   //testcase 1
   if (!userFunc) {
     return [1];
@@ -38,8 +37,6 @@ export const fibonnaciFunTimeHandler = (userFunc: Function) => {
   if (userFunc(40) !== 102334155) {
     failedTests.push(7);
   }
-
-  
 
   return failedTests;
 };
@@ -96,11 +93,7 @@ export const friendFilterHandler = (userFunc: Function) => {
     !Array.isArray(result2) ||
     result2.length !== 5 ||
     !result2.every((obj) => {
-      return (
-        Object.keys(obj).includes('name') &&
-        Object.keys(obj).includes('hobbies') &&
-        Object.keys(obj).includes('Likes_LOTR')
-      );
+      return Object.keys(obj).includes('name') && Object.keys(obj).includes('hobbies') && Object.keys(obj).includes('Likes_LOTR');
     })
   ) {
     failedTests.push(2);
@@ -194,11 +187,7 @@ export const friendFilterHandler = (userFunc: Function) => {
     !Array.isArray(result4) ||
     result4.length !== 7 ||
     !result4.every((obj) => {
-      return (
-        Object.keys(obj).includes('name') &&
-        Object.keys(obj).includes('hobbies') &&
-        Object.keys(obj).includes('Likes_LOTR')
-      );
+      return Object.keys(obj).includes('name') && Object.keys(obj).includes('hobbies') && Object.keys(obj).includes('Likes_LOTR');
     })
   ) {
     failedTests.push(4);
