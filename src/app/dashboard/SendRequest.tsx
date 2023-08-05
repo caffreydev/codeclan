@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import { useState } from 'react';
 import group from '../function/groupByKata';
 import lfp from '@/sample-data/LfP';
@@ -20,8 +20,7 @@ type GroupedRequests = {
 
 type SendRequestProps = {};
 
-const SendRequest:React.FC<SendRequestProps> = () => {
-
+const SendRequest: React.FC<SendRequestProps> = () => {
   const [grouped, setGrouped] = useState<GroupedRequests>(group(lfp));
   const [acceptedRequests, setAcceptedRequests] = useState<AcceptedRequest[]>([]);
 
@@ -30,23 +29,22 @@ const SendRequest:React.FC<SendRequestProps> = () => {
   };
 
   return (
-    <ul className='my-5 grid gap-5 auto-rows-auto'>
+    <ul className='my-5 grid auto-rows-auto gap-5'>
       {Object.entries(grouped).map((pair) => {
         if (pair[1].length === 0) {
           return null;
         }
         return (
-          <li className='col-span-1 p-4 bg-grey-400 border-0 rounded-2xl' key={pair[0]}>
-            <h4 className='text-xl font-bold mb-2'>{pair[0]}</h4>
+          <li className='col-span-1 rounded-2xl border-0 bg-grey-400 p-4' key={pair[0]}>
+            <h4 className='mb-2 text-xl font-bold'>{pair[0]}</h4>
             <ul>
               {pair[1].map((requestObj: Request, i: number) => {
                 const isAccepted = acceptedRequests.some(
-                  (acceptedRequest) =>
-                    acceptedRequest.sender === requestObj.sender && acceptedRequest.title === pair[0]
+                  (acceptedRequest) => acceptedRequest.sender === requestObj.sender && acceptedRequest.title === pair[0],
                 );
                 return (
-                  <li className={`${i + 1 == pair[1].length} flex items-center p-2 rounded`} key={requestObj.reqId}>
-                    <Link href="/" className='flex-grow'>
+                  <li className={`${i + 1 == pair[1].length} flex items-center rounded p-2`} key={requestObj.reqId}>
+                    <Link href='/' className='grow'>
                       {requestObj.sender}
                     </Link>
                     {isAccepted ? (
@@ -54,11 +52,10 @@ const SendRequest:React.FC<SendRequestProps> = () => {
                     ) : (
                       <>
                         <button
-                          className='border-2 rounded-lg p-1 px-3'
+                          className='rounded-lg border-2 p-1 px-3'
                           onClick={() => {
                             handleAccept(requestObj.sender, pair[0]);
-                          }}
-                        >
+                          }}>
                           Send Request
                         </button>
                       </>
@@ -72,6 +69,5 @@ const SendRequest:React.FC<SendRequestProps> = () => {
       })}
     </ul>
   );
-   
-}
+};
 export default SendRequest;
