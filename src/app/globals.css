@@ -139,3 +139,14 @@ main {
 .gradients-left {
   @apply -left-56 bg-gradient-to-r from-purple-400 to-primary;
 }
+
+.gradients_top-l {
+  /* background: conic-gradient(from 180deg at 50% 50%, #2a8af6 0deg, #a853ba 180deg, #e92a67 1turn);
+	 */
+  @apply bg-gradient-to-r from-purple-400 to-primary;
+}
+.gradients-top-r {
+  @apply rounded-full mix-blend-normal blur-3xl;
+  filter: blur(75px);
+  will-change: filter;
+}
