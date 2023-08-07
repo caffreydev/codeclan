@@ -38,7 +38,7 @@ export function useGetMessages(
         querySnapshot.forEach((doc) => messagesArray.push(doc.data() as Message));
 
         setMessages(() => {
-          return messagesArray.sort((a, b) => a.timeStamp.seconds - b.timeStamp.seconds);
+          return messagesArray.sort((a, b) => b.timeStamp.seconds - a.timeStamp.seconds);
         });
         setMessagesRetrieved(true);
       } catch {
