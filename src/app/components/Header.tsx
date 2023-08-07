@@ -31,8 +31,8 @@ export default function Header() {
           {user && (
             <ul className='flex space-x-8 rounded-lg p-4 font-medium'>
               <li>
-                <Link href={'/'} data-active={!segment} className='Header-Link'>
-                  Home
+                <Link href={'/dashboard'} data-active={segment == 'dashboard'} className='Header-Link'>
+                  Dashboard
                 </Link>
               </li>
               <li>
@@ -41,8 +41,8 @@ export default function Header() {
                 </Link>
               </li>
               <li>
-                <Link href={'/dashboard'} data-active={segment == 'dashboard'} className='Header-Link'>
-                  Dashboard
+                <Link href={'/profile'} data-active={!segment} className='Header-Link'>
+                  Profile
                 </Link>
               </li>
             </ul>

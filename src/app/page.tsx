@@ -19,32 +19,34 @@ export default function Home() {
           <Wrapper className='z-[2] mb-10 mt-32 flex flex-col items-center justify-center gap-10'>
             <h3 className='text-4xl'>What is pair programming?</h3>
             <div className='flex max-w-3xl flex-col gap-5 text-justify'>
-              <p>Pair programming is a common software development technique where two developers work on the same code, together, at the same computer. </p>
-              <p>
+              <p className='text-grey-300'>
+                Pair programming is a common software development technique where two developers work on the same code, together, at the same computer.{' '}
+              </p>
+              <p className='tracking-wide text-grey-300'>
                 One developer takes the role of 'driver' – this person takes ownership of the keyboard and mouse and physically writes the code. Meanwhile, the
                 other developer – the 'navigator' – concentrates on the 'big picture' and the direction the code is going, reviewing and revising the code the
                 driver is writing.
               </p>
             </div>
           </Wrapper>
-          <Wrapper className='flex flex-col gap-5'>
+          <Wrapper className='flex flex-col gap-6'>
             <h3 className='text-center text-4xl'>Advantages of pair programming</h3>
             <section className='flex gap-5 text-center'>
               <div className='h-64 w-4/12 rounded-lg border border-gray-600'>
                 <h4>Knowledge sharing</h4>
-                <p>Pair programming can ensure that one or two people aren’t holding all the knowledge critical to a project.</p>
+                <p className='text-grey-300'>Pair programming can ensure that one or two people aren’t holding all the knowledge critical to a project.</p>
               </div>
-              <div className='h-64 w-4/12 rounded-lg border border-gray-600'>
+              <div className='h-64 w-4/12 rounded-lg border border-gray-700'>
                 <h4>Thinking</h4>
-                <p>Just having someone to talk through a problem with can be key to coming up with a solution.</p>
+                <p className='text-grey-300'>Just having someone to talk through a problem with can be key to coming up with a solution.</p>
               </div>
-              <div className='h-64 w-4/12 rounded-lg border border-gray-600'>
+              <div className='h-64 w-4/12 rounded-lg border border-gray-700'>
                 <h4>Focus</h4>
-                <p>Having another person with you and changing roles often can help keep you fresh and focused.</p>
+                <p className='text-grey-300'>Having another person with you and changing roles often can help keep you fresh and focused.</p>
               </div>
-              <div className='h-64 w-4/12 rounded-lg border border-gray-600'>
+              <div className='h-64 w-4/12 rounded-lg border border-gray-700'>
                 <h3>Accuracy</h3>
-                <p>Having someone quality checking the code as it’s being written will improve accuracy.</p>
+                <p className='text-grey-300'>Having someone quality checking the code as it’s being written will improve accuracy.</p>
               </div>
             </section>
           </Wrapper>
