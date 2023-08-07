@@ -28,25 +28,28 @@ export default function Home() {
             </div>
           </Wrapper>
           <Wrapper className='flex flex-col gap-5'>
-            <h3 className='text-center text-4xl py-5'>Advantages of pair programming</h3>
+            <h3 className='py-5 text-center text-4xl'>Advantages of pair programming</h3>
             <section className='flex gap-5 text-center'>
-              <div className='h-64 w-4/12 rounded-lg border border-gray-600 shadow-teal hover:scale-110'>
-                <h4 className='text-decoration-line: underline text-lg py-3'>Knowledge sharing</h4>
+              <div className='shadow-teal h-64 w-4/12 rounded-lg border border-gray-600 hover:scale-110'>
+                <h4 className='text-decoration-line: py-3 text-lg underline'>Knowledge sharing</h4>
                 <p className='px-3'>Pair programming can ensure that one or two people aren’t holding all the knowledge critical to a project.</p>
               </div>
-              <div className='h-64 w-4/12 rounded-lg border border-gray-600 shadow-teal hover:scale-110'>
-                <h4 className='text-decoration-line: underline text-lg py-3'>Thinking</h4>
+              <div className='shadow-teal h-64 w-4/12 rounded-lg border border-gray-600 hover:scale-110'>
+                <h4 className='text-decoration-line: py-3 text-lg underline'>Thinking</h4>
                 <p className='px-3'>Just having someone to talk through a problem with can be key to coming up with a solution.</p>
               </div>
-              <div className='h-64 w-4/12 rounded-lg border border-gray-600 shadow-teal hover:scale-110'>
-                <h4 className='text-decoration-line: underline text-lg py-3'>Focus</h4>
+              <div className='shadow-teal h-64 w-4/12 rounded-lg border border-gray-600 hover:scale-110'>
+                <h4 className='text-decoration-line: py-3 text-lg underline'>Focus</h4>
                 <p className='px-3'>Having another person with you and changing roles often can help keep you fresh and focused.</p>
               </div>
-              <div className='h-64 w-4/12 rounded-lg border border-gray-600 shadow-teal hover:scale-110'>
-                <h4 className='text-decoration-line: underline text-lg py-3'>Accuracy</h4>
+              <div className='shadow-teal h-64 w-4/12 rounded-lg border border-gray-600 hover:scale-110'>
+                <h4 className='text-decoration-line: py-3 text-lg underline'>Accuracy</h4>
                 <p className='px-3'>Having someone quality checking the code as it’s being written will improve accuracy.</p>
               </div>
             </section>
+            <footer className='py-8 text-center text-white'>
+              <p>© {new Date().getFullYear()} CodeClan. All rights reserved.</p>
+            </footer>
           </Wrapper>
         </section>
       </div>
