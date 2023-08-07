@@ -139,3 +139,7 @@ main {
 .gradients-left {
   @apply -left-56 bg-gradient-to-r from-purple-400 to-primary;
 }
+
+.shadow-teal {
+	box-shadow: 0 0 20px rgba(0, 128, 128, 0.7); /* Adjust the alpha value as needed */
+}

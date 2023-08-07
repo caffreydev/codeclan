@@ -16,7 +16,7 @@ export default function Home() {
           <span className='gradients-right gradients-left opacity-30'></span>
           <span className='gradients-right gradients-right opacity-30 '></span>
 
-          <Wrapper className='z-[2] mb-10 mt-32 flex flex-col items-center justify-center gap-10'>
+          <Wrapper className='z-[2] mb-10 mt-32 flex flex-col items-center justify-center gap-10 pb-10'>
             <h3 className='text-4xl'>What is pair programming?</h3>
             <div className='flex max-w-3xl flex-col gap-5 text-justify'>
               <p>Pair programming is a common software development technique where two developers work on the same code, together, at the same computer. </p>
@@ -28,23 +28,23 @@ export default function Home() {
             </div>
           </Wrapper>
           <Wrapper className='flex flex-col gap-5'>
-            <h3 className='text-center text-4xl'>Advantages of pair programming</h3>
+            <h3 className='text-center text-4xl py-5'>Advantages of pair programming</h3>
             <section className='flex gap-5 text-center'>
-              <div className='h-64 w-4/12 rounded-lg border border-gray-600'>
-                <h4>Knowledge sharing</h4>
-                <p>Pair programming can ensure that one or two people aren’t holding all the knowledge critical to a project.</p>
+              <div className='h-64 w-4/12 rounded-lg border border-gray-600 shadow-teal hover:scale-110'>
+                <h4 className='text-decoration-line: underline text-lg py-3'>Knowledge sharing</h4>
+                <p className='px-3'>Pair programming can ensure that one or two people aren’t holding all the knowledge critical to a project.</p>
               </div>
-              <div className='h-64 w-4/12 rounded-lg border border-gray-600'>
-                <h4>Thinking</h4>
-                <p>Just having someone to talk through a problem with can be key to coming up with a solution.</p>
+              <div className='h-64 w-4/12 rounded-lg border border-gray-600 shadow-teal hover:scale-110'>
+                <h4 className='text-decoration-line: underline text-lg py-3'>Thinking</h4>
+                <p className='px-3'>Just having someone to talk through a problem with can be key to coming up with a solution.</p>
               </div>
-              <div className='h-64 w-4/12 rounded-lg border border-gray-600'>
-                <h4>Focus</h4>
-                <p>Having another person with you and changing roles often can help keep you fresh and focused.</p>
+              <div className='h-64 w-4/12 rounded-lg border border-gray-600 shadow-teal hover:scale-110'>
+                <h4 className='text-decoration-line: underline text-lg py-3'>Focus</h4>
+                <p className='px-3'>Having another person with you and changing roles often can help keep you fresh and focused.</p>
               </div>
-              <div className='h-64 w-4/12 rounded-lg border border-gray-600'>
-                <h3>Accuracy</h3>
-                <p>Having someone quality checking the code as it’s being written will improve accuracy.</p>
+              <div className='h-64 w-4/12 rounded-lg border border-gray-600 shadow-teal hover:scale-110'>
+                <h4 className='text-decoration-line: underline text-lg py-3'>Accuracy</h4>
+                <p className='px-3'>Having someone quality checking the code as it’s being written will improve accuracy.</p>
               </div>
             </section>
           </Wrapper>
