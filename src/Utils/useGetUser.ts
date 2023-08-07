@@ -20,9 +20,7 @@ export function useGetUser(userId: string, setUserRetrieved: React.Dispatch<Reac
           setUserRetrieved(true);
           setUser(docSnap.data() as User);
         }
-      } catch {
-        toast.error('Failed to load messages, please try again');
-      }
+      } catch {}
     };
 
     getUser();
