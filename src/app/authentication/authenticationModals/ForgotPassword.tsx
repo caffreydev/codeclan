@@ -30,9 +30,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
         dispatch(changePage('login'));
       }
     } catch (error: any) {
-      // alert(error.message.replace('Firebase: Error ', ' '));
-
-      toast.error('Reset password failed!', {
+      toast.error(error.message.replace('Firebase: Error ', ' '), {
         position: 'top-right',
         autoClose: 5000,
         theme: 'dark',
@@ -41,9 +39,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
   };
   useEffect(() => {
     if (error) {
-      // if (error) alert(error.message.replace('Firebase: Error ', 'Reset password failed! '));
-
-      toast.error('Reset password failed!', {
+      toast.error(error.message.replace('Firebase: Error ', 'Reset password failed! '), {
         position: 'top-right',
         autoClose: 5000,
         theme: 'dark',

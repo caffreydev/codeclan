@@ -2,12 +2,13 @@
 
 import React, { useEffect, useState } from 'react';
 import { useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
-import { auth } from '@/firebase/firebase';
+import { auth, firestore } from '@/firebase/firebase';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/redux/Store';
 import { changePage, closeAuth } from '@/redux/features/auth-slice';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
+import { Timestamp, doc, setDoc } from 'firebase/firestore';
 
 type CreateAccountProps = {};
 
@@ -36,7 +37,6 @@ const CreateAccount: React.FC<CreateAccountProps> = () => {
     e.preventDefault();
 
     if (inputs.password !== inputs.confirmPassword) {
-      // alert('Your passwords do not match, please fix!');
       return toast.error('Your passwords do not match, please fix!', {
         position: 'top-right',
         autoClose: 5000,
@@ -62,9 +62,18 @@ const CreateAccount: React.FC<CreateAccountProps> = () => {
       } else {
         updateProfile({ displayName: inputs.username });
       }
+
+      const userTableEntry = {
+        userId: login.user.uid,
+        displayName: inputs.username,
+        photoURL: inputs.profileURL,
+        completedKatas: [],
+        joinTime: new Timestamp(Math.floor(new Date().getTime() / 1000), 0),
+      };
+      const ref = await setDoc(doc(firestore, 'users', userTableEntry.userId), userTableEntry);
+      dispatch(closeAuth());
       push('/dashboard');
     } catch (error: any) {
-      // alert(error.message.replace('Firebase: Error ', 'Failed signup! '));
       toast.error(error.message.replace('Firebase: Error ', 'Failed signup! '), {
         position: 'top-right',
         autoClose: 5000,
@@ -75,7 +84,6 @@ const CreateAccount: React.FC<CreateAccountProps> = () => {
 
   useEffect(() => {
     if (error) {
-      // alert(error.message.replace('Firebase: Error ', 'Failed signup! ').replace('Firebase: ', 'Failed signup! '));
       toast.error(error.message.replace('Firebase: Error ', 'Failed signup! ').replace('Firebase: ', 'Failed signup! '), {
         position: 'top-right',
         autoClose: 5000,

@@ -1,18 +1,24 @@
 'use client';
-import { useUpdateProfile } from 'react-firebase-hooks/auth';
-import { auth } from '@/firebase/firebase';
+import { useAuthState, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { auth, firestore } from '@/firebase/firebase';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import Wrapper from '../components/Wrapper';
+import { User } from '@/types/firestoreTypes';
+import { doc, setDoc } from 'firebase/firestore';
+import { useGetUser } from '@/Utils/useGetUser';
 
 export default function editProfile() {
-  const { push } = useRouter();
   const [updateProfile, profileUpdating, profileUpdateError] = useUpdateProfile(auth);
+  const [user] = useAuthState(auth);
+
   const [inputs, setInputs] = useState({
     username: '',
     profileURL: '',
   });
+  const [userRetrieved, setUserRetrieved] = useState(false);
+  const currUserTableEntry = useGetUser(user?.uid as string, setUserRetrieved) as User;
 
   const handleChangeInputs = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -21,17 +27,27 @@ export default function editProfile() {
   const handleEditProfile = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const userTableEntry: User = {
+      ...currUserTableEntry,
+    };
+
     try {
       if (inputs.username && !inputs.profileURL) {
         updateProfile({ displayName: inputs.username });
+        userTableEntry.displayName = inputs.username;
       } else if (inputs.profileURL && !inputs.username) {
         updateProfile({ photoURL: inputs.profileURL });
+        userTableEntry.photoUrl = inputs.profileURL;
       } else {
         updateProfile({
           displayName: inputs.username,
           photoURL: inputs.profileURL,
         });
+        userTableEntry.displayName = inputs.username;
+        userTableEntry.photoUrl = inputs.profileURL;
       }
+      const ref = await setDoc(doc(firestore, 'users', userTableEntry.userId), userTableEntry);
+
       setInputs({
         username: '',
         profileURL: '',
@@ -42,14 +58,15 @@ export default function editProfile() {
         theme: 'dark',
       });
     } catch (error: any) {
-      // alert(error.message.replace('Firebase: Error ', 'Failed signup! '));
-      toast.error(error.message.replace('Firebase: Error ', 'Failed sign up! '), {
+      toast.error('Failed to edit account, maybe try again later!', {
         position: 'bottom-center',
         autoClose: 5000,
         theme: 'dark',
       });
     }
   };
+
+  if (!userRetrieved) return <h1 className='text-2xl'>Loading ...</h1>;
 
   return (
     <form onSubmit={handleEditProfile}>

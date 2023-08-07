@@ -32,7 +32,6 @@ const Login: React.FC<LoginProps> = () => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!inputs.email || !inputs.password) {
-      // alert('You must fill in all fields!');
       return toast.error('You must fill in all fields!', {
         position: 'top-right',
         autoClose: 5000,
@@ -44,9 +43,9 @@ const Login: React.FC<LoginProps> = () => {
       if (!login) {
         return;
       }
+      dispatch(closeAuth());
       push('/dashboard');
     } catch (error: any) {
-      // alert(error?.message.replace('Firebase: Error ', 'Failed login! '));
       toast.error('Failed login!', {
         position: 'top-right',
         autoClose: 5000,
@@ -57,8 +56,7 @@ const Login: React.FC<LoginProps> = () => {
 
   useEffect(() => {
     if (error) {
-      // alert(error.message.replace('Firebase: Error ', 'Failed login! ').replace('Firebase: ', 'Failed login! '));
-      toast.error('Failed login!', {
+      toast.error(error.message.replace('Firebase: Error ', 'Failed login! ').replace('Firebase: ', 'Failed login! '), {
         position: 'top-right',
         autoClose: 5000,
         theme: 'dark',
