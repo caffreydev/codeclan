@@ -31,29 +31,29 @@ const ProfileDd: React.FC<ProfileDdProps> = () => {
         onClick={handleToggleMenu}
         onMouseLeave={() => setIsOpen(false)}
         className={`${isOpen ? 'top-0 opacity-100' : 'pointer-events-none -top-4 opacity-0'} absolute right-0 z-50 pt-10 transition-all`}>
-        <div className={`list-none divide-y divide-grey-400 rounded-lg bg-grey-300 text-base shadow-xl`} id='user-dropdown'>
+        <div className='list-none divide-y divide-grey-500 rounded-lg border border-grey-600 bg-grey-700 text-base shadow-xl' id='user-dropdown'>
           <div className='px-4 py-3'>
             <span className='block text-sm text-primary'>{user?.displayName}</span>
             <span className='block truncate text-sm text-grey-200'>{user?.email}</span>
           </div>
           <ul className='py-2'>
             <li>
-              <Link href='/profile' className='block px-4 py-2 text-sm transition hover:bg-grey-400 hover:text-primary'>
+              <Link href='/profile' className='block px-4 py-2 text-sm transition hover:bg-grey-600 hover:text-primary'>
                 Profile
               </Link>
             </li>
             <li>
-              <Link href='/dashboard' className='block px-4 py-2 text-sm transition hover:bg-grey-400 hover:text-primary'>
+              <Link href='/dashboard' className='block px-4 py-2 text-sm transition hover:bg-grey-600 hover:text-primary'>
                 Dashboard
               </Link>
             </li>
             <li>
-              <Link href='#' className='block px-4 py-2 text-sm transition hover:bg-grey-400 hover:text-primary'>
+              <Link href='/editProfile' className='block px-4 py-2 text-sm transition hover:bg-grey-600 hover:text-primary'>
                 Manage Profile
               </Link>
             </li>
             <li>
-              <Link href='/authentication' onClick={() => signOut()} className='block px-4 py-2 text-sm transition hover:bg-grey-400 hover:text-primary'>
+              <Link href='/authentication' onClick={() => signOut()} className='block px-4 py-2 text-sm transition hover:bg-grey-600 hover:text-primary'>
                 Sign out
               </Link>
             </li>

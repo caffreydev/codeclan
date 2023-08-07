@@ -35,7 +35,7 @@ const SendRequest: React.FC<SendRequestProps> = () => {
           return null;
         }
         return (
-          <li className='col-span-1 rounded-2xl border-0 bg-grey-400 p-4' key={pair[0]}>
+          <li className='col-span-1 rounded-xl border border-grey-600 bg-grey-800 p-4' key={pair[0]}>
             <h4 className='mb-2 text-xl font-bold'>{pair[0]}</h4>
             <ul>
               {pair[1].map((requestObj: Request, i: number) => {

@@ -22,21 +22,23 @@ const AuthenticationModal: React.FC<AuthenticationModalProps> = () => {
   return (
     isOpen && (
       <>
-        <div className='Modal'>
-          <header className='relative rounded-t-lg bg-grey-400'>
+        <div className='Modal rounded-t-lg'>
+          <header className='relative rounded-t-lg bg-grey-800'>
             <div className='flex p-4 pb-0'>
               <button
                 onClick={() => {
                   dispatch(changePage('login'));
                 }}
-                className={`rounded-t-md border-b-2 border-transparent p-2 px-4 ${page === 'login' ? 'bg-grey-300' : 'hover:border-b-primary'}`}>
+                className={`-mb-[1px] rounded-t-md border-2 border-transparent p-2 px-4 ${page === 'login' ? 'bg-grey-700' : 'hover:border-b-primary'}`}>
                 Login
               </button>
               <button
                 onClick={() => {
                   dispatch(changePage('createAccount'));
                 }}
-                className={`rounded-t-md border-b-2 border-transparent p-2 px-4 ${page === 'createAccount' ? 'bg-grey-300' : 'hover:border-b-primary'}`}>
+                className={`-mb-[1px] rounded-t-md border-2 border-transparent p-2 px-4 ${
+                  page === 'createAccount' ? 'bg-grey-700' : 'hover:border-b-primary'
+                }`}>
                 Sign Up
               </button>
             </div>
@@ -44,7 +46,7 @@ const AuthenticationModal: React.FC<AuthenticationModalProps> = () => {
               <IoClose />
             </button>
           </header>
-          <div className='rounded-b-lg bg-grey-300'>
+          <div className='rounded-b-lg border border-grey-600 bg-grey-700'>
             {page === 'forgotPassword' ? <ForgotPassword /> : page === 'createAccount' ? <CreateAccount /> : <Login />}
           </div>
         </div>

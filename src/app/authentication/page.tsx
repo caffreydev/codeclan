@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import AuthenticationModal from './authenticationModals/AuthenticationModal';
 import { auth } from '@/firebase/firebase';
 import { changePage, closeAuth, openAuth } from '@/redux/features/auth-slice';
 import { useDispatch } from 'react-redux';
@@ -32,7 +31,6 @@ const page: React.FC<pageProps> = () => {
 
   return (
     <div className='relative'>
-      <AuthenticationModal />
       <div className='mx-auto max-w-7xl'>
         <div className='flex h-[calc(100vh-5rem)] flex-col items-center justify-center'>
           <h3 className='text-2xl'>Create an account or press the Demo Login button to start exploring</h3>
