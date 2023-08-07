@@ -20,10 +20,10 @@ const KataList: React.FC<KataListProps> = ({ difficulty, category }) => {
   }
 
   return filterLib.map((kata: Kata) => (
-    <li key={kata.id} className={`relative w-full rounded-lg bg-grey-400 p-4 text-grey-100 transition hover:opacity-75`}>
+    <li key={kata.id} className={`relative w-full rounded-lg border border-grey-600 bg-grey-700 p-4 text-grey-100 transition hover:border-primary`}>
       <Link href={`/playground?kata_id=${kata.id}`}>
         <div className='collapse-title'>
-          <h3 className='text-lg text-grey-150 hover:text-primary'>{kata.title}</h3>
+          <h3 className='text-lg text-grey-150 transition hover:text-primary'>{kata.title}</h3>
         </div>
       </Link>
       <details className={`[&_details ::-webkit-details-marker]:hidden group`}>
@@ -31,7 +31,7 @@ const KataList: React.FC<KataListProps> = ({ difficulty, category }) => {
           <span className='select-none pl-1	text-xs'>Description</span>
         </summary>
         <p className='mt-2 leading-relaxed'> {kata.problemStatement} </p>
-        <div className=' mt-2 flex flex-row gap-2'>
+        <div className=' mt-2 flex flex-row flex-wrap gap-2'>
           <p>
             <span className='py-1.3 inline-flex items-center justify-center gap-1 rounded-full bg-primary px-2.5 text-sm  text-teal-950'>
               <FaCode />
