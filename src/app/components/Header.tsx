@@ -7,14 +7,22 @@ import { auth } from '@/firebase/firebase';
 import { PiSignOutBold } from 'react-icons/pi';
 import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
 import { useSelectedLayoutSegment } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Header() {
   const [user] = useAuthState(auth);
   const [signOut] = useSignOut(auth);
   const segment = useSelectedLayoutSegment();
 
+  const bodyClasses = () => {
+    const padding = segment == 'playground' ? '6rem' : '3.5rem';
+    document.body.style.paddingTop = padding;
+  };
+
+  useEffect(() => bodyClasses(), [segment]);
+
   return (
-    <nav className='fixed inset-x-0 top-0 z-50 bg-grey-400'>
+    <nav className='Header bg-blur fixed inset-x-0 top-0 z-50 border-b border-grey-600 bg-grey-800 bg-opacity-60'>
       <div className='flex flex-wrap items-center justify-between'>
         <Link href='/' className='flex items-center'>
           <span className='self-center whitespace-nowrap px-4 py-3 text-2xl font-semibold text-grey-100 hover:text-primary'>CodeClan</span>
@@ -30,11 +38,6 @@ export default function Header() {
               <li>
                 <Link href={'/katas'} data-active={segment == 'katas'} className='Header-Link'>
                   Katas
-                </Link>
-              </li>
-              <li>
-                <Link href={'/profile'} data-active={segment == 'profile'} className='Header-Link'>
-                  Profile
                 </Link>
               </li>
               <li>

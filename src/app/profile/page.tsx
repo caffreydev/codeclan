@@ -14,10 +14,10 @@ const page: React.FC<pageProps> = () => {
       <Wrapper>
         <h2 className='my-7 text-3xl font-bold'>Profile</h2>
         <div className='mt-6 grid grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-4'>
-          <div className='flex h-auto items-center justify-center rounded-lg bg-grey-300 p-4'>
+          <div className='flex h-auto items-center justify-center rounded-lg border border-b-0 border-grey-600 bg-grey-800 p-4'>
             <UserObj userDetail='profileImg' />
           </div>
-          <div className='h-auto rounded-lg bg-grey-300 p-4 lg:col-span-2'>
+          <div className='h-auto rounded-lg border border-b-0 border-grey-600 bg-grey-800 p-4 lg:col-span-2'>
             <UserObj userDetail='displayName' />
             <div className='flex items-center justify-between'>
               <div>
@@ -38,7 +38,7 @@ const page: React.FC<pageProps> = () => {
                 </Link>
               </div>
             </div>
-            <hr className='border-grey-200' />
+            <hr className='border-grey-600' />
             <p className='mb-2 mt-4 text-xl font-bold'>Bio</p>
             <p className='text-grey-100'>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus est vitae tortor ullamcorper, ut vestibulum velit convallis. Aenean posuere
@@ -48,15 +48,15 @@ const page: React.FC<pageProps> = () => {
         </div>
       </Wrapper>
       <Wrapper>
-        <section className='mt-3 grid grid-cols-1 rounded-lg bg-grey-300 lg:grid-cols-2'>
-          <div className='rounded-lg bg-grey-300 p-4'>
+        <section className='mt-3 grid grid-cols-1 gap-6 rounded-lg border border-b-0 border-grey-600 bg-grey-800 p-4 md:grid-cols-2'>
+          <div className='rounded-lg border border-grey-600 bg-grey-700 p-4'>
             <div className='flex items-center'>
               <CgCheckO className='mr-1 text-xl' />
               <h3 className='p-2 text-xl text-primary '>Completed Katas</h3>
             </div>
             <UserListKatas />
           </div>
-          <div className='rounded-lg bg-grey-300 p-4 '>
+          <div className='rounded-lg border border-grey-600 bg-grey-700 p-4'>
             <div className='flex items-center'>
               <TbProgress className='mr-1 text-xl' />
               <h3 className='p-2 text-xl text-primary'> Katas in progress</h3>

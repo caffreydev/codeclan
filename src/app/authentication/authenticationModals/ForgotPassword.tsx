@@ -56,17 +56,10 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
       <h3 className='Modal-heading'>Forgotten your password? :(</h3>
 
       <div className='flex flex-col gap-5'>
-        <h4 className='text-sm text-grey-150'>Don't worry, it happens to the best of us... enter your email to get a reset link</h4>
-        <label className='relative block w-full rounded-md border border-grey-200 focus-within:border-grey-100'>
-          <input
-            onChange={handleChange}
-            type='email'
-            name='email'
-            id='email'
-            className='peer w-full border-none bg-transparent p-3 text-sm text-grey-100 outline-none placeholder:text-transparent'
-            placeholder='nevillelongbottom@rememberall.com'
-          />
-          <span className='pointer-events-none absolute start-2 top-0 -translate-y-1/2 rounded bg-grey-300 px-1 text-xs text-grey-200 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-100'>
+        <h4 className='text-sm text-grey-200'>Don't worry, it happens to the best of us... enter your email to get a reset link</h4>
+        <label className='label-Modal'>
+          <input onChange={handleChange} type='email' name='email' id='email' className='input-Modal peer' placeholder='nevillelongbottom@rememberall.com' />
+          <span className='span-Modal text-grey-400 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-300'>
             Your Email
           </span>
         </label>

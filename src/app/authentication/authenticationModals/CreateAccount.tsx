@@ -88,72 +88,58 @@ const CreateAccount: React.FC<CreateAccountProps> = () => {
     <form className='Modal-body' onSubmit={handleSignup}>
       <h3 className='Modal-heading'>Join the Code Clan</h3>
       <div className='flex flex-col gap-5'>
-        <label className='relative block w-full rounded-md border border-grey-200 focus-within:border-grey-100'>
-          <input
-            type='email'
-            name='email'
-            id='email'
-            onChange={handleChangeInputs}
-            className='peer w-full border-none bg-transparent p-3 text-sm text-grey-100 outline-none placeholder:text-transparent'
-            placeholder='name@company.com'
-          />
-          <span className='pointer-events-none absolute start-2 top-0 -translate-y-1/2 rounded bg-grey-300 px-1 text-xs text-grey-200 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-100'>
+        <label className='label-Modal'>
+          <input type='email' name='email' id='email' onChange={handleChangeInputs} className='input-Modal peer' placeholder='name@company.com' />
+          <span className='span-Modal text-grey-400 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-300'>
             Your Email
           </span>
         </label>
 
-        <label className='relative block w-full rounded-md border border-grey-200 focus-within:border-grey-100'>
-          <input
-            type='text'
-            name='username'
-            id='username'
-            className='peer w-full border-none bg-transparent p-3 text-sm text-grey-100 outline-none placeholder:text-transparent'
-            placeholder='Joe Codes'
-            onChange={handleChangeInputs}
-          />
-          <span className='pointer-events-none absolute start-2 top-0 -translate-y-1/2 rounded bg-grey-300 px-1 text-xs text-grey-200 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-100'>
+        <label className='label-Modal'>
+          <input type='text' name='username' id='username' className='input-Modal peer' placeholder='Joe Codes' onChange={handleChangeInputs} />
+          <span className='span-Modal text-grey-400 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-300'>
             Your Username
           </span>
         </label>
 
-        <label className='relative block w-full rounded-md border border-grey-200 focus-within:border-grey-100'>
+        <label className='label-Modal'>
           <input
             type='url'
             name='profileURL'
             id='profileURL'
-            className='peer w-full border-none bg-transparent p-3 text-sm text-grey-100 outline-none placeholder:text-transparent'
+            className='input-Modal peer'
             placeholder='https://photobucket.com/myface.jpg'
             onChange={handleChangeInputs}
           />
-          <span className='pointer-events-none absolute start-2 top-0 -translate-y-1/2 rounded bg-grey-300 px-1 text-xs text-grey-200 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-100'>
+          <span className='span-Modal text-grey-400 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-300'>
             Your ProfileURL (optional)
           </span>
         </label>
 
-        <label className='relative block w-full rounded-md border border-grey-200 focus-within:border-grey-100'>
+        <label className='label-Modal'>
           <input
             type='password'
             name='password'
             id='password'
-            className='peer w-full border-none bg-transparent p-3 text-sm text-grey-100 outline-none placeholder:text-transparent'
+            className='input-Modal peer'
             placeholder='Harder-toguess_thanthis1234'
             onChange={handleChangeInputs}
           />
-          <span className='pointer-events-none absolute start-2 top-0 -translate-y-1/2 rounded bg-grey-300 px-1 text-xs text-grey-200 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-100'>
+          <span className='span-Modal text-grey-400 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-300'>
             Your Password
           </span>
         </label>
 
-        <label className='relative block w-full rounded-md border border-grey-200 focus-within:border-grey-100'>
+        <label className='label-Modal'>
           <input
             type='password'
             name='confirmPassword'
             id='confirm-password'
-            className='peer w-full border-none bg-transparent p-3 text-sm text-grey-100 outline-none placeholder:text-transparent'
+            className='input-Modal peer'
             placeholder='Harder-toguess_thanthis1234'
             onChange={handleChangeInputs}
           />
-          <span className='pointer-events-none absolute start-2 top-0 -translate-y-1/2 rounded bg-grey-300 px-1 text-xs text-grey-200 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-100'>
+          <span className='span-Modal text-grey-400 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-300'>
             Confirm Password
           </span>
         </label>
