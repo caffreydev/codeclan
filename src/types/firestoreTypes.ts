@@ -28,6 +28,8 @@ export interface KataFirestore {
   id: number;
   likes: number;
   title: string;
+  likedBy: Array<string>;
+  dislikedBy: Array<string>;
 }
 
 export interface FeedbackFirestore {
