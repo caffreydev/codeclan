@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../function/button';
 import RequestList from './RequestList';
-import JoinList from './SendRequest';
+// import JoinList from './SendRequest';
 import Link from 'next/link';
 import Wrapper from '../components/Wrapper';
 
@@ -24,7 +24,7 @@ const page: React.FC<pageProps> = () => {
           <div>
             <h3 className='mb-3 text-2xl font-bold'>Looking for pairs</h3>
             <hr className='border border-grey-600' />
-            <JoinList />
+            {/* <JoinList /> */}
           </div>
         </div>
       </Wrapper>

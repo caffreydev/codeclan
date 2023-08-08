@@ -9,11 +9,12 @@ const ControlPanel: React.FC<ControlPanelProps> = () => {
   const kataId = Number(useSearchParams().get('kata_id'));
 
   return (
-    <nav className='fixed inset-x-0 top-14 z-30 flex h-10 items-center justify-between gap-5 bg-grey-600 px-4 py-1'>
+    <nav className='fixed inset-x-0 top-14 z-30 flex h-11 items-center justify-between gap-5 bg-grey-600 px-4 py-1'>
       <div className='flex items-center'>
         <h3 className='text-lg text-primary'>{`${kataId} - ${kataLibrary[kataId].title}`}</h3>
       </div>
       <div className='absolute inset-0 m-auto flex w-40 items-center justify-center gap-2'>
+			<span className='rounded-lg bg-grey-300 px-2 py-1 text-xs text-grey-150'>JavaScript</span>
         <Link href={`/playground?kata_id=${kataId > 0 ? kataId - 1 : kataId}`} className='block rounded bg-grey-300 text-xl hover:bg-grey-200'>
           <span>
             <FaAngleLeft />
@@ -31,7 +32,10 @@ const ControlPanel: React.FC<ControlPanelProps> = () => {
           </span>
         </Link>
       </div>
-      <span className='rounded-lg bg-grey-300 px-2 py-1 text-xs text-grey-150'>JavaScript</span>
+      
+			<Link href='https://zoom.us/start/videomeeting' target="_blank" className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-opacity-60'>
+                  Open a Meeting
+                </Link>
     </nav>
   );
 };
