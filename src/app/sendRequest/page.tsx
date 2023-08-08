@@ -6,7 +6,8 @@ import PairRequest from "@/app/components/PairRequest"
 export default function sendRequest () {
 const [inputDetails, setInputDetails] = useState({
     'message':'',
-    'kata_name':'',
+    'title':'',
+    
     
 
 })

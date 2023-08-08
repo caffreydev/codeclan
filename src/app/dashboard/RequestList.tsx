@@ -1,8 +1,8 @@
 'use client';
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 import group from '../function/groupByKata';
-import requests from '../components/Requests';
-import kataRequests from '@/sample-data/requests';
+import { requestPairRequests } from '@/Utils/retrievePairRequests'; 
+
 import Link from 'next/link';
 
 
@@ -23,11 +23,11 @@ type GroupedRequests = {
 type RequestListProps = {};
 
 const RequestList: React.FC<RequestListProps> = () => {
+  const [loadState, setLoadState] = useState(false)
+const requests: Request[] = requestPairRequests(setLoadState)
 
-console.log(requests())
 
-
-  const [grouped, setGrouped] = useState<GroupedRequests>(group(kataRequests));
+  const [grouped, setGrouped] = useState<GroupedRequests>();
   const [acceptedRequests, setAcceptedRequests] = useState<AcceptedRequest[]>([]);
 
   const handleDelete = (sender: string, title: string) => {
@@ -43,7 +43,10 @@ console.log(requests())
   const handleAccept = (sender: string, title: string) => {
     setAcceptedRequests([...acceptedRequests, { sender, title }]);
   };
-
+  if (!loadState) return <h1>Loading Dashboard</h1>
+  else {
+     setGrouped(group(requests))
+     console.log(grouped)
   return (
     <ul className='my-5 grid auto-rows-auto gap-5'>
       {Object.entries(grouped).map((pair) => {
@@ -94,6 +97,6 @@ console.log(requests())
       })}
     </ul>
   );
-};
-
+}
+}
 export default RequestList;
