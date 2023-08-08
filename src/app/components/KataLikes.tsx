@@ -24,30 +24,42 @@ const KataLikes: React.FC<KataLikesProps> = ({ kataId, likesOnClick }) => {
   const kata = useGetKata(kataId, setLoading);
 
   const useLikesOnClick = async () => {
+    if (disliked) {
+      return toast.warning('You already liked this one!');
+    }
+
     if (likesOnClick) {
       setLiked(true);
-      const newKataObj = {
-        ...kata,
-      };
-      newKataObj.likes = newKataObj.likes + 1;
 
-      try {
-        const ref = await setDoc(doc(firestore, 'problems', String(newKataObj.id)), newKataObj);
-        const feedbackTitle = `${user?.uid as string} liked kata ${kataId}`;
-        const feedbackEntry = {
-          userId: user?.uid,
-          kataId: kataId,
-          feedBackType: 'like',
-        };
-        const ref2 = await setDoc(doc(firestore, 'feedbacks', feedbackTitle), feedbackEntry);
-        toast.success('Thanks for the feedback!');
-      } catch (e: any) {
-        toast.error("Your feedback wasn't logged, please try again");
-      }
+      useChangeLikes(kataId, 'like', kata);
+
+      //   const newKataObj = {
+      //     ...kata,
+      //   };
+      //   newKataObj.likes = newKataObj.likes + 1;
+
+      //   try {
+      //     const ref = await setDoc(doc(firestore, 'problems', String(newKataObj.id)), newKataObj);
+      //     const feedbackTitle = `${user?.uid as string} liked kata ${kataId}`;
+      //     const feedbackEntry = {
+      //       userId: user?.uid,
+      //       kataId: kataId,
+      //       feedBackType: 'like',
+      //     };
+      //     const ref2 = await setDoc(doc(firestore, 'feedbacks', feedbackTitle), feedbackEntry);
+      //     toast.success('Thanks for the feedback!');
+      //   } catch (e: any) {
+      //     toast.error("Your feedback wasn't logged, please try again");
+      //   }
+      // }
     }
   };
 
   const useDislikesOnClick = async () => {
+    if (disliked) {
+      return toast.warning('You already disliked this one!');
+    }
+
     if (likesOnClick) {
       setDisliked(true);
       const newKataObj = {
