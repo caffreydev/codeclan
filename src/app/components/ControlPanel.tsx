@@ -33,7 +33,7 @@ const ControlPanel: React.FC<ControlPanelProps> = () => {
         </Link>
       </div>
       
-			<Link href='https://zoom.us/start/videomeeting' target="_blank" className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
+			<Link href='https://zoom.us/start/videomeeting' target="_blank" className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-opacity-60'>
                   Open a Meeting
                 </Link>
     </nav>
