@@ -20,3 +20,18 @@ export interface User {
   Bio: string;
   Github: string;
 }
+
+export interface KataFirestore {
+  category: string;
+  difficulty: string;
+  dislikes: number;
+  id: number;
+  likes: number;
+  title: string;
+}
+
+export interface FeedbackFirestore {
+  userId: string;
+  kataId: number;
+  feedbackType: 'like' | 'dislike';
+}

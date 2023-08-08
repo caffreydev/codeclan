@@ -44,7 +44,7 @@ const KataList: React.FC<KataListProps> = ({ difficulty, category }) => {
               {kata.difficulty}
             </span>
           </p>
-          <KataLikes kataTitle={kata.title} />
+          <KataLikes kataId={kata.id} likesOnClick={false} />
         </div>
       </details>
     </li>
