@@ -20,19 +20,21 @@ export function useGetMessages(
     const getMessages = async () => {
       try {
         let q = query(collection(firestore, 'messages'), where('toId', '==', userId));
-
         if (boxType === 'Outbox') {
           q = query(collection(firestore, 'messages'), where('fromId', '==', userId));
         } else if (boxType === 'Chat View') {
-          q = query(
-            collection(firestore, 'messages'),
-            or((where('toId', '==', userId), where('fromId', '==', friendId)), (where('fromId', '==', userId), where('toId', '==', friendId))),
-          );
+          q = query(collection(firestore, 'messages'), where('toId', '==', userId), where('fromId', '==', friendId));
         }
 
         const querySnapshot = await getDocs(q);
         const messagesArray: Message[] = [];
         querySnapshot.forEach((doc) => messagesArray.push(doc.data() as Message));
+
+        if (boxType === 'Chat View') {
+          const q2 = query(collection(firestore, 'messages'), where('toId', '==', friendId), where('fromId', '==', userId));
+          const querySnapshot2 = await getDocs(q2);
+          querySnapshot.forEach((doc) => messagesArray.push(doc.data() as Message));
+        }
 
         setMessages(() => {
           return messagesArray.sort((a, b) => b.timeStamp.seconds - a.timeStamp.seconds);
