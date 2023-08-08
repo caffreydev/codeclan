@@ -1,8 +1,10 @@
 'use client';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import group from '../function/groupByKata';
+import requests from '../components/Requests';
 import kataRequests from '@/sample-data/requests';
 import Link from 'next/link';
+
 
 interface Request {
   sender: string;
@@ -21,6 +23,10 @@ type GroupedRequests = {
 type RequestListProps = {};
 
 const RequestList: React.FC<RequestListProps> = () => {
+
+console.log(requests())
+
+
   const [grouped, setGrouped] = useState<GroupedRequests>(group(kataRequests));
   const [acceptedRequests, setAcceptedRequests] = useState<AcceptedRequest[]>([]);
 

@@ -17,13 +17,13 @@ export default function PairRequest ({requestDetails}) {
 const {message, kata_name} = requestDetails
 
 // const docRef = async function request() {
-//     await deleteDoc(doc(db, "pairRequests", `undefined`));
+//     await deleteDoc(doc(db, "pairRequests", "demoUser"));
 // }
 
 const docRef = async function request() { await setDoc(doc(db, "pairRequests", `${user.displayName}`), {
     
     message:  message,
-    kata_name: kata_name
+    title: kata_name
   }, );
 
 }
