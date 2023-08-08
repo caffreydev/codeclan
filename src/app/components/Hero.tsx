@@ -8,6 +8,7 @@ import { auth } from '@/firebase/firebase';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { openAuth } from '@/redux/features/auth-slice';
+import { AppDispatch } from '@/redux/Store';
 
 type HeroProps = {};
 
@@ -32,9 +33,9 @@ const Hero: React.FC<HeroProps> = () => {
   };
 
   return (
-    <div className='Hero -mt-14 h-full'>
-      <div className='Hero-wrapper h-full overflow-hidden'>
-        <Wrapper className='relative flex h-full flex-col justify-center gap-6 text-center'>
+    <div className='relative z-[1] -mt-14'>
+      <div className='Hero'>
+        <Wrapper className='relative flex min-h-[40rem] flex-col justify-center gap-6 text-center'>
           <div>
             <span className='bg-grey-t rounded-2xl border border-grey-600 bg-grey-900 px-3 py-1 text-[11px] uppercase tracking-normal text-grey-300'>
               Unlock the Power of Pairing
@@ -76,8 +77,8 @@ const Hero: React.FC<HeroProps> = () => {
           </div>
         </Wrapper>
       </div>
-      <img src='/bg-right.svg' alt='' className='bg-right' />
-      <img src='/bg-left.svg' alt='' className='bg-left' />
+      <img src='/bg-right.svg' alt='' className='top-0 bg-right' />
+      <img src='/bg-left.svg' alt='' className='top-0 bg-left' />
     </div>
   );
 };
