@@ -1,6 +1,6 @@
-const plugin = require('tailwindcss/plugin');
+// const plugin = require('tailwindcss/plugin');
 
-/** @type {import('tailwindcss').Config} */
+// /** @type {import('tailwindcss').Config} **/
 module.exports = {
   content: ['./src/pages/**/*.{js,ts,jsx,tsx,mdx}', './src/components/**/*.{js,ts,jsx,tsx,mdx}', './src/app/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
@@ -12,24 +12,20 @@ module.exports = {
       colors: {
         primary: '#00ADB5',
         grey: {
-          100: '#EEEEEE',
-          150: '#D4D4D8',
-          200: '#7a797a',
-          300: '#424244',
-          400: '#2e2e30',
-          500: '#1e1f21',
-          600: '#222222',
+          100: '#f5f5f5',
+          150: '#EEEEEE',
+          200: '#bebebe',
+          300: '#7a797a',
+          400: '#4f4f4f',
+          500: '#393939',
+          600: '#2f2f2f', // lines/borders
+          700: '#252525', // boxes highlights
+          800: '#1d1d1d', // boxes
+          900: '#0e0f11', // bg
         },
         decline: '#c70000',
         accept: '#028f00',
       },
     },
   },
-  plugins: [
-    plugin(function ({ addBase }) {
-      addBase({
-        html: { fontSize: '14px' },
-      });
-    }),
-  ],
 };

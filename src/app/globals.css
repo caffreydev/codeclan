@@ -9,7 +9,6 @@
   select {
     @apply outline-primary;
   }
-
   .animate-ease {
     animation-timing-function: cubic-bezier(0.87, 0.07, 0, 1.01);
   }
@@ -38,7 +37,7 @@
 }
 
 .Modal {
-  @apply animate-ease absolute left-0 right-0 top-12 z-50 mx-auto mb-10 w-[36rem] animate-[fadeInUp_400ms];
+  @apply animate-ease absolute left-0 right-0 top-28 z-50 mx-auto mb-10 w-[36rem] animate-[fadeInUp_400ms];
 }
 
 .Modal-heading {
@@ -56,16 +55,30 @@
 .Header-Link {
   @apply border-b-2 border-b-transparent py-4 transition hover:border-b-primary hover:text-primary data-[active=true]:border-b-primary;
 }
-
+.label-Modal {
+  @apply relative block w-full rounded-md border border-grey-500 focus-within:border-grey-300;
+}
+.span-Modal {
+  @apply pointer-events-none absolute start-2 top-0 -translate-y-1/2 rounded bg-grey-700 px-1 text-xs transition-all;
+}
+.input-Modal {
+  @apply w-full border-none bg-transparent p-3 text-sm text-grey-300 outline-none placeholder:text-transparent;
+}
 .split {
   display: flex;
   flex-direction: row;
 }
 
-body,
 html,
-main {
+body {
   @apply h-full;
+}
+main {
+  @apply min-h-full;
+}
+
+img {
+  @apply block;
 }
 
 .gutter {
@@ -82,4 +95,81 @@ main {
 .gutter.gutter-vertical {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=');
   cursor: row-resize;
+}
+
+.Header {
+  backdrop-filter: blur(12px);
+}
+
+.Hero:before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-size: 28px 28px;
+  background-image: linear-gradient(to right, #191919 1px, transparent 1px), linear-gradient(to bottom, #191919 1px, transparent 1px);
+  background-position: top center;
+  image-rendering: pixelated;
+}
+
+.bg-left {
+  @apply pointer-events-none absolute left-0 w-1/2;
+  filter: grayscale(100%);
+}
+
+.bg-right {
+  @apply pointer-events-none absolute bottom-auto left-auto right-0 w-1/2 blur-3xl;
+  filter: grayscale(100%);
+}
+
+.Divider {
+  @apply overflow-hidden;
+}
+
+.Divider:before,
+.Divider:after {
+  @apply absolute h-64 w-[60vw] rounded-full opacity-30 mix-blend-normal blur-3xl content-[''];
+}
+.Divider:before {
+  @apply -left-56 bg-gradient-to-r from-purple-400 to-primary;
+}
+.Divider:after {
+  @apply -right-56 bg-gradient-to-r from-purple-400 to-primary;
+}
+
+.Divider-line {
+  @apply absolute h-[1px] w-full bg-gradient-to-r from-purple-400 to-primary opacity-40;
+}
+
+.Divider:not(.reverse):before,
+.Divider:not(.reverse):after {
+  @apply -top-32;
+}
+.Divider:not(.reverse) .Divider-line {
+  @apply top-0;
+}
+
+.Divider.reverse:before,
+.Divider.reverse:after {
+  @apply -bottom-32;
+}
+.Divider.reverse .Divider-line {
+  @apply bottom-0;
+}
+
+.gradients_top-l {
+  background: conic-gradient(from 180deg at 50% 50%, #2a8af6 0deg, #a853ba 180deg, #e92a67 1turn);
+
+  /* @apply bg-gradient-to-r from-purple-400 to-primary; */
+}
+.gradients-top-r {
+  @apply rounded-full mix-blend-normal blur-3xl;
+  filter: blur(75px);
+  will-change: filter;
+}
+
+.shadow-teal {
+	box-shadow: 0 0 20px rgba(0, 128, 128, 0.7); /* Adjust the alpha value as needed */
 }

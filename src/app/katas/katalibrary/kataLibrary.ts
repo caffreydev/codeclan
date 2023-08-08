@@ -16,7 +16,7 @@ export const kataLibrary: Kata[] = [
     id: 0,
     title: 'Fibbonaci Funtime',
     problemStatement: `Create a function that will take a parameter, n >= 0, and generator the nth Fibbonaci number.
-        Just in case you forgot what you learned in maths classes ... Fn(1) = 1, Fn(2) = 1, Fn(3) = 2, Fn(4) = 3, Fn(5) = 5, ... Fn(n + 2) = Fn(n) + Fn(n + 1)`,
+        Just in case you forgot what you learned in maths classes ... Fn (1) = 1, Fn (2) = 1, Fn (3) = 2, Fn (4) = 3, Fn (5) = 5, ... Fn (n + 2) = Fn (n) + Fn (n + 1)`,
     starterCode: `//Do not edit function name
 function fibonnaciFunTime(n) {
 // Write your code here

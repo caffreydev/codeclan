@@ -32,7 +32,6 @@ const Login: React.FC<LoginProps> = () => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!inputs.email || !inputs.password) {
-      // alert('You must fill in all fields!');
       return toast.error('You must fill in all fields!', {
         position: 'top-right',
         autoClose: 5000,
@@ -44,9 +43,9 @@ const Login: React.FC<LoginProps> = () => {
       if (!login) {
         return;
       }
+      dispatch(closeAuth());
       push('/dashboard');
     } catch (error: any) {
-      // alert(error?.message.replace('Firebase: Error ', 'Failed login! '));
       toast.error('Failed login!', {
         position: 'top-right',
         autoClose: 5000,
@@ -57,8 +56,7 @@ const Login: React.FC<LoginProps> = () => {
 
   useEffect(() => {
     if (error) {
-      // alert(error.message.replace('Firebase: Error ', 'Failed login! ').replace('Firebase: ', 'Failed login! '));
-      toast.error('Failed login!', {
+      toast.error(error.message.replace('Firebase: Error ', 'Failed login! ').replace('Firebase: ', 'Failed login! '), {
         position: 'top-right',
         autoClose: 5000,
         theme: 'dark',
@@ -70,29 +68,15 @@ const Login: React.FC<LoginProps> = () => {
     <form className='Modal-body' onSubmit={handleLogin}>
       <h3 className='Modal-heading'>Authentication</h3>
       <div className='mb-6 flex gap-5'>
-        <label className='relative block w-full rounded-md border border-grey-200 focus-within:border-grey-100'>
-          <input
-            type='email'
-            name='email'
-            id='email'
-            onChange={handleChange}
-            className='peer w-full border-none bg-transparent p-3 text-sm text-grey-100 outline-none placeholder:text-transparent'
-            placeholder='email'
-          />
-          <span className='pointer-events-none absolute start-2 top-0 -translate-y-1/2 rounded bg-grey-300 px-1 text-xs text-grey-200 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-100'>
+        <label className='label-Modal'>
+          <input type='email' name='email' id='email' onChange={handleChange} className='input-Modal peer' placeholder='email' />
+          <span className='span-Modal text-grey-400 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-300'>
             Email
           </span>
         </label>
-        <label htmlFor='password' className='relative block w-full rounded-md border border-grey-200 focus-within:border-grey-100'>
-          <input
-            onChange={handleChange}
-            type='password'
-            name='password'
-            id='password'
-            className='peer w-full border-none bg-transparent p-3 text-sm text-grey-100 outline-none placeholder:text-transparent'
-            placeholder='password'
-          />
-          <span className='pointer-events-none absolute start-2 top-0 -translate-y-1/2 rounded bg-grey-300 px-1 text-xs text-grey-200 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-100'>
+        <label htmlFor='password' className='label-Modal'>
+          <input onChange={handleChange} type='password' name='password' id='password' className='input-Modal peer' placeholder='password' />
+          <span className='span-Modal text-grey-400 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-300'>
             Password
           </span>
         </label>
