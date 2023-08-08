@@ -1,17 +1,3 @@
-// [
-//   {
-//     title: 'easiest kata',
-//     sender: 'asadboy'
-//   },{
-//     title: 'easiest kata',
-//     sender: 'jesst'
-//   },
-//   {
-//     title: 'easiest kata',
-//     sender: 'joemama'
-//   }
-// ]
-
 const group = (requests) => {
   let groupObj = {};
   const titles = requests.map((request) => request.title);
