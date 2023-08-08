@@ -41,8 +41,13 @@ export default function Header() {
                 </Link>
               </li>
               <li>
-                <Link href={'/profile'} data-active={!segment} className='Header-Link'>
+                <Link href={'/profile'} data-active={segment == 'profile'} className='Header-Link'>
                   Profile
+                </Link>
+              </li>
+              <li>
+                <Link href={'/users'} data-active={segment == 'users'} className='Header-Link'>
+                  Users
                 </Link>
               </li>
             </ul>
