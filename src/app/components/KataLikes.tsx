@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { collection, doc, getDoc, getDocs, query, setDoc } from 'firebase/firestore';
 import { auth, firestore } from '@/firebase/firebase';
 import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
-import { useChangeLikes } from '@/Utils/useChangeLikes';
 import { KataFirestore } from '@/types/firestoreTypes';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
@@ -24,12 +23,23 @@ const KataLikes: React.FC<KataLikesProps> = ({ kataId, likesOnClick }) => {
   const kata = useGetKata(kataId, setLoading);
 
   const useLikesOnClick = async () => {
+    if (!likesOnClick) return;
+
+    if (liked || kata.likedBy.includes(user?.uid as string)) {
+      return toast.warning('You already liked this one!');
+    }
+
     if (likesOnClick) {
       setLiked(true);
+
       const newKataObj = {
         ...kata,
       };
       newKataObj.likes = newKataObj.likes + 1;
+      newKataObj.dislikes = newKataObj.dislikes += disliked ? 1 : 0;
+      const likedBy = [...newKataObj.likedBy];
+      likedBy.push(user?.uid as string);
+      newKataObj.likedBy = likedBy;
 
       try {
         const ref = await setDoc(doc(firestore, 'problems', String(newKataObj.id)), newKataObj);
@@ -48,12 +58,22 @@ const KataLikes: React.FC<KataLikesProps> = ({ kataId, likesOnClick }) => {
   };
 
   const useDislikesOnClick = async () => {
+    if (!likesOnClick) return;
+
+    if (disliked || kata.dislikedBy.includes(user?.uid as string)) {
+      return toast.warning('You already disliked this one!');
+    }
+
     if (likesOnClick) {
       setDisliked(true);
       const newKataObj = {
         ...kata,
       };
       newKataObj.dislikes = newKataObj.dislikes + 1;
+      newKataObj.likes = newKataObj.likes += liked ? 1 : 0;
+      const dislikedBy = [...newKataObj.dislikedBy];
+      dislikedBy.push(user?.uid as string);
+      newKataObj.dislikedBy = dislikedBy;
 
       try {
         const ref = await setDoc(doc(firestore, 'problems', String(newKataObj.id)), newKataObj);
@@ -102,13 +122,15 @@ export default KataLikes;
 
 // custom hook to retrieve from database
 function useGetKata(kataId: number, setLoading: React.Dispatch<React.SetStateAction<boolean>>) {
-  const [kata, setKata] = useState({
+  const [kata, setKata] = useState<KataFirestore>({
     category: '',
     difficulty: '',
     dislikes: 0,
     id: -1,
     likes: 0,
     title: '',
+    likedBy: [],
+    dislikedBy: [],
   });
 
   useEffect(() => {
