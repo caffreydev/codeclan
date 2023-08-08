@@ -23,8 +23,8 @@ const page: React.FC<pageProps> = () => {
   const [newMessageSubject, setNewMessageSubject] = useState('');
   const [sentMessages, setSentMessages] = useState<Message[]>([]);
 
-  const messagesArray: Message[] = useGetMessages(user?.uid as string, 'Chat View', setMessagesRetrieved, friendId);
   const friendUser: User = useGetUser(friendId, setFriendUserRetrieved) as User;
+  const messagesArray: Message[] = useGetMessages(user?.uid as string, 'Chat View', setMessagesRetrieved, friendId);
 
   //form controllers
   const handleSendMessage = async (e: React.FormEvent<HTMLFormElement>) => {

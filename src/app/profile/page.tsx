@@ -17,34 +17,29 @@ type pageProps = {};
 export default function page() {
   const userId = useSearchParams().get('user_id'); //view another user profile
   const [user] = useAuthState(auth);
-  const [currentUser, setCurrentUser] = useState({});
-  const { userData } = useGetUser(userId || (user?.uid as string));
+  const [userRetrieved, setUserRetrieved] = useState(false);
+  const userData = useGetUser(userId || (user?.uid as string), setUserRetrieved);
 
-  useEffect(() => {
-    if (userData && userId) setCurrentUser(userData);
-  }, [userData]);
-
-  useEffect(() => {
-    if (user && !userId) setCurrentUser(user);
-  }, [user]);
+  if (!userRetrieved) {
+    return <p>loading....</p>;
+  }
 
   return (
     <div className='mx-auto max-w-screen-xl'>
       <Wrapper>
-        {JSON.stringify(currentUser)}
         <h2 className='my-7 text-3xl font-bold'>Profile</h2>
         <div className='mt-6 grid grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-4'>
           <div className='flex h-auto items-center justify-center rounded-lg border border-b-0 border-grey-600 bg-grey-800 p-4'>
-            <UserObj user={currentUser} userKey='profileImg' />
+            <UserObj user={userData} userKey='profileImg' />
           </div>
           <div className='h-auto rounded-lg border border-b-0 border-grey-600 bg-grey-800 p-4 lg:col-span-2'>
-            <UserObj user={currentUser} userKey='displayName' />
+            <UserObj user={userData} userKey='displayName' />
             <div className='flex items-center justify-between'>
               <div>
-                <UserObj user={currentUser} userKey='github' />
+                <UserObj user={userData} userKey='github' />
                 <p className='text-sm text-grey-200'>
                   {' '}
-                  <UserObj user={currentUser} userKey='joinTime' />
+                  <UserObj user={userData} userKey='joinTime' />
                 </p>
               </div>
               <div className='mb-4 mt-6 flex flex-wrap justify-center gap-4'>
@@ -54,14 +49,14 @@ export default function page() {
                 <Link href='/inbox' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
                   Inbox
                 </Link>
-                <Link href='#' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
+                <Link href='/sendRequest' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
                   Pair up!
                 </Link>
               </div>
             </div>
             <hr className='border-grey-600' />
             <p className='mb-2 mt-4 text-xl font-bold'>Bio</p>
-            <UserObj user={currentUser} userKey='bio' />
+            <UserObj user={userData} userKey='bio' />
           </div>
         </div>
       </Wrapper>

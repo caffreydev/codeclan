@@ -2,11 +2,12 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { User } from 'firebase/auth';
-import { User as UserGeneral } from '@/types/firestoreTypes';
+import { User } from '@/types/firestoreTypes';
+import { User as fireBaseAuthUser } from '@/firebase/firebase';
+import { dateFromFirebaseTimestamp } from '@/Utils/dateFromFirebaseTimestamp';
 
 type UserObjProps = {
-  user: User | UserGeneral | null;
+  user: User | fireBaseAuthUser;
   userKey: 'displayName' | 'github' | 'profileImg' | 'profileImgNavbar' | 'bio' | 'joinTime';
 };
 
@@ -42,7 +43,7 @@ const UserObj: React.FC<UserObjProps> = ({ user, userKey }) => {
     case 'bio':
       return <p className='text-grey-100'>{user?.Bio}</p>;
     case 'joinTime':
-      return <span className='text-grey-100'>Member Since: {user?.joinTime}</span>;
+      return <span className='text-grey-100'>Member Since: {dateFromFirebaseTimestamp(user?.joinTime)}</span>;
     default:
       return;
   }

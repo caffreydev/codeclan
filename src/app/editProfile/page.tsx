@@ -13,15 +13,21 @@ export default function editProfile() {
   const [updateProfile, profileUpdating, profileUpdateError] = useUpdateProfile(auth);
   const [user] = useAuthState(auth);
 
+  const [userRetrieved, setUserRetrieved] = useState(false);
+  const currUserTableEntry = useGetUser(user?.uid as string, setUserRetrieved) as User;
   const [inputs, setInputs] = useState({
     username: '',
     profileURL: '',
+    Github: '',
+    Bio: '',
   });
-  const [userRetrieved, setUserRetrieved] = useState(false);
-  const currUserTableEntry = useGetUser(user?.uid as string, setUserRetrieved) as User;
 
   const handleChangeInputs = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleChangeBio = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInputs((prev) => ({ ...prev, Bio: e.target.value }));
   };
 
   const handleEditProfile = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -38,7 +44,7 @@ export default function editProfile() {
       } else if (inputs.profileURL && !inputs.username) {
         updateProfile({ photoURL: inputs.profileURL });
         userTableEntry.photoUrl = inputs.profileURL;
-      } else {
+      } else if (inputs.username && inputs.profileURL) {
         updateProfile({
           displayName: inputs.username,
           photoURL: inputs.profileURL,
@@ -46,12 +52,16 @@ export default function editProfile() {
         userTableEntry.displayName = inputs.username;
         userTableEntry.photoUrl = inputs.profileURL;
       }
+
+      if (inputs.Bio) {
+        userTableEntry.Bio = inputs.Bio;
+      }
+      if (inputs.Github) {
+        userTableEntry.Github = inputs.Github;
+      }
+
       const ref = await setDoc(doc(firestore, 'users', userTableEntry.userId), userTableEntry);
 
-      setInputs({
-        username: '',
-        profileURL: '',
-      });
       return toast.success('Your account has been edited!', {
         position: 'top-right',
         autoClose: 5000,
@@ -75,12 +85,12 @@ export default function editProfile() {
         <div className='flex flex-col gap-5 rounded-lg border border-grey-600 bg-grey-700 p-4'>
           <label className='label-Modal'>
             <input
+              value={inputs.username}
               type='text'
               name='username'
               id='username'
               className='input-Modal peer'
               placeholder='Joe Codes'
-              value={inputs.username}
               onChange={handleChangeInputs}
             />
             <span className='span-Modal text-grey-400 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-300'>
@@ -90,16 +100,30 @@ export default function editProfile() {
 
           <label className='label-Modal'>
             <input
+              value={inputs.profileURL}
               type='url'
               name='profileURL'
               id='profileURL'
               className='input-Modal peer'
-              placeholder='https://photobucket.com/myface.jpg'
-              value={inputs.profileURL}
               onChange={handleChangeInputs}
+              placeholder='imgbucket.com/demo.jpg'
             />
             <span className='span-Modal text-grey-400 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-300'>
-              Your ProfileURL
+              URL path for your profile picture
+            </span>
+          </label>
+
+          <label className='label-Modal'>
+            <input value={inputs.Github} type='text' name='Github' id='Github' className='input-Modal peer' placeholder='' onChange={handleChangeInputs} />
+            <span className='span-Modal text-grey-400 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-300'>
+              Your Github Username
+            </span>
+          </label>
+
+          <label className='label-Modal'>
+            <textarea rows={4} name='Github' id='Github' value={inputs.Bio} className='input-Modal peer' placeholder='Your Bio:' onChange={handleChangeBio} />
+            <span className='span-Modal peer-placeholder-shown:top text-grey-400 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs peer-focus:text-gray-300'>
+              Your Bio
             </span>
           </label>
 

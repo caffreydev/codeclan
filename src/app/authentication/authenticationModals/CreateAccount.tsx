@@ -69,6 +69,8 @@ const CreateAccount: React.FC<CreateAccountProps> = () => {
         photoURL: inputs.profileURL,
         completedKatas: [],
         joinTime: new Timestamp(Math.floor(new Date().getTime() / 1000), 0),
+        Bio: '',
+        Github: '',
       };
       const ref = await setDoc(doc(firestore, 'users', userTableEntry.userId), userTableEntry);
       dispatch(closeAuth());
