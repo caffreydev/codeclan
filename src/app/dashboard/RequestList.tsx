@@ -1,8 +1,10 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import group from '../function/groupByKata';
-import kataRequests from '@/sample-data/requests';
+import { requestPairRequests } from '@/Utils/retrievePairRequests'; 
+
 import Link from 'next/link';
+
 
 interface Request {
   sender: string;
@@ -21,8 +23,14 @@ type GroupedRequests = {
 type RequestListProps = {};
 
 const RequestList: React.FC<RequestListProps> = () => {
-  const [grouped, setGrouped] = useState<GroupedRequests>(group(kataRequests));
+  const [loadState, setLoadState] = useState(false)
+  const requests: Request[] = requestPairRequests(setLoadState)
+  const [grouped, setGrouped] = useState<GroupedRequests>({});
   const [acceptedRequests, setAcceptedRequests] = useState<AcceptedRequest[]>([]);
+
+  useEffect(() => {
+    setGrouped(group(requests))
+  }, [loadState])
 
   const handleDelete = (sender: string, title: string) => {
     setGrouped((curr) => {
@@ -37,8 +45,9 @@ const RequestList: React.FC<RequestListProps> = () => {
   const handleAccept = (sender: string, title: string) => {
     setAcceptedRequests([...acceptedRequests, { sender, title }]);
   };
-
-  return (
+  if (!loadState) return <h1>Loading Dashboard</h1>
+  else {
+    return (
     <ul className='my-5 grid auto-rows-auto gap-5'>
       {Object.entries(grouped).map((pair) => {
         if (pair[1].length === 0) {
@@ -88,6 +97,6 @@ const RequestList: React.FC<RequestListProps> = () => {
       })}
     </ul>
   );
-};
-
+}
+}
 export default RequestList;
