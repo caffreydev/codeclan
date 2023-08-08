@@ -13,14 +13,14 @@ export default function editProfile() {
   const [updateProfile, profileUpdating, profileUpdateError] = useUpdateProfile(auth);
   const [user] = useAuthState(auth);
 
+  const [userRetrieved, setUserRetrieved] = useState(false);
+  const currUserTableEntry = useGetUser(user?.uid as string, setUserRetrieved) as User;
   const [inputs, setInputs] = useState({
     username: '',
     profileURL: '',
     Github: '',
     Bio: '',
   });
-  const [userRetrieved, setUserRetrieved] = useState(false);
-  const currUserTableEntry = useGetUser(user?.uid as string, setUserRetrieved) as User;
 
   const handleChangeInputs = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -77,10 +77,6 @@ export default function editProfile() {
   };
 
   if (!userRetrieved) return <h1 className='text-2xl'>Loading ...</h1>;
-
-  if (currUserTableEntry.Bio) {
-    setInputs((prev) => ({ ...prev, Bio: currUserTableEntry.Bio }));
-  }
 
   return (
     <form onSubmit={handleEditProfile}>
