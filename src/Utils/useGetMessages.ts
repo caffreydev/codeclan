@@ -2,7 +2,7 @@
 
 import { Message } from '@/app/components';
 import { firestore } from '@/firebase/firebase';
-import { QueryCompositeFilterConstraint, collection, getDocs, or, query, where } from 'firebase/firestore';
+import { Query, QueryCompositeFilterConstraint, QueryConstraint, QueryFieldFilterConstraint, collection, getDocs, or, query, where } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
@@ -14,25 +14,22 @@ export function useGetMessages(
   friendId: string = '',
 ) {
   const [messages, setMessages] = useState<Message[]>([]);
-  let whereClause: QueryCompositeFilterConstraint;
-  switch (boxType) {
-    case 'Inbox':
-      where('toId', '==', userId);
-      break;
-    case 'Outbox':
-      where('fromId', '==', userId);
-      break;
-    case 'Chat View':
-      or((where('toId', '==', userId), where('fromId', '==', friendId)), (where('fromId', '==', userId), where('toId', '==', friendId)));
-      break;
-    default:
-      break;
-  }
+  let whereClause: QueryCompositeFilterConstraint | QueryFieldFilterConstraint;
 
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const q = query(collection(firestore, 'messages'), whereClause);
+        let q = query(collection(firestore, 'messages'), where('toId', '==', userId));
+
+        if (boxType === 'Outbox') {
+          q = query(collection(firestore, 'messages'), where('fromId', '==', userId));
+        } else if (boxType === 'Chat View') {
+          q = query(
+            collection(firestore, 'messages'),
+            or((where('toId', '==', userId), where('fromId', '==', friendId)), (where('fromId', '==', userId), where('toId', '==', friendId))),
+          );
+        }
+
         const querySnapshot = await getDocs(q);
         const messagesArray: Message[] = [];
         querySnapshot.forEach((doc) => messagesArray.push(doc.data() as Message));
