@@ -4,11 +4,13 @@ import { badgeColour } from '.';
 import KataLikes from './KataLikes';
 import { kataLibrary } from '../katas/katalibrary/kataLibrary';
 import { useSearchParams } from 'next/navigation';
+import { useChangeLikes } from '@/Utils/useChangeLikes';
 
 type InstructionPanelProps = {};
 
 const InstructionPanel: React.FC<InstructionPanelProps> = () => {
   const kataId = Number(useSearchParams().get('kata_id'));
+
   return (
     <section className='flex flex-col gap-1 overflow-auto p-4'>
       <div className='mb-2 flex gap-2'>
@@ -26,7 +28,7 @@ const InstructionPanel: React.FC<InstructionPanelProps> = () => {
           )}
           {kataLibrary[kataId].difficulty}
         </span>
-        {/* <KataLikes /> */}
+        <KataLikes kataId={kataLibrary[kataId].id} likesOnClick={true} />
       </div>
       <h2 className='text-lg'>Description:</h2>
       <p className='text-base'>{kataLibrary[kataId].problemStatement}</p>
