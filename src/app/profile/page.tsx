@@ -1,29 +1,50 @@
+'use client';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Wrapper from '../components/Wrapper';
 import UserListKatas from '../components/UserListKatas';
 import { TbProgress } from 'react-icons/tb';
 import { CgCheckO } from 'react-icons/cg';
 import UserObj from '../components/UserObj';
+import { useGetUser } from '@/Utils/useGetUser';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '@/firebase/firebase';
+import { User } from 'firebase/auth';
+import { useSearchParams } from 'next/navigation';
 
 type pageProps = {};
 
-const page: React.FC<pageProps> = () => {
+export default function page() {
+  const userId = useSearchParams().get('user_id'); //view another user profile
+  const [user] = useAuthState(auth);
+  const [currentUser, setCurrentUser] = useState({});
+  const { userData } = useGetUser(userId || (user?.uid as string));
+
+  useEffect(() => {
+    if (userData && userId) setCurrentUser(userData);
+  }, [userData]);
+
+  useEffect(() => {
+    if (user && !userId) setCurrentUser(user);
+  }, [user]);
+
   return (
     <div className='mx-auto max-w-screen-xl'>
       <Wrapper>
+        {JSON.stringify(currentUser)}
         <h2 className='my-7 text-3xl font-bold'>Profile</h2>
         <div className='mt-6 grid grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-4'>
           <div className='flex h-auto items-center justify-center rounded-lg border border-b-0 border-grey-600 bg-grey-800 p-4'>
-            <UserObj userDetail='profileImg' />
+            <UserObj user={currentUser} userKey='profileImg' />
           </div>
           <div className='h-auto rounded-lg border border-b-0 border-grey-600 bg-grey-800 p-4 lg:col-span-2'>
-            <UserObj userDetail='displayName' />
+            <UserObj user={currentUser} userKey='displayName' />
             <div className='flex items-center justify-between'>
               <div>
-                <UserObj userDetail='email' />
+                <UserObj user={currentUser} userKey='github' />
                 <p className='text-sm text-grey-200'>
-                  <span className='text-grey-100'>Member Since: </span> 01-08-2023
+                  {' '}
+                  <UserObj user={currentUser} userKey='joinTime' />
                 </p>
               </div>
               <div className='mb-4 mt-6 flex flex-wrap justify-center gap-4'>
@@ -40,10 +61,7 @@ const page: React.FC<pageProps> = () => {
             </div>
             <hr className='border-grey-600' />
             <p className='mb-2 mt-4 text-xl font-bold'>Bio</p>
-            <p className='text-grey-100'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus est vitae tortor ullamcorper, ut vestibulum velit convallis. Aenean posuere
-              risus non velit egestas suscipit.
-            </p>
+            <UserObj user={currentUser} userKey='bio' />
           </div>
         </div>
       </Wrapper>
@@ -67,5 +85,6 @@ const page: React.FC<pageProps> = () => {
       </Wrapper>
     </div>
   );
-};
-export default page;
+}
+
+// export default page;

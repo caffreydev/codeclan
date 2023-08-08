@@ -12,9 +12,11 @@ export interface Message {
 }
 
 export interface User {
+  Bio: string;
+  Github: string;
   userId: string;
   displayName: string;
-  photoUrl: string;
+  photoURL: string;
   joinTime: Timestamp;
   completedKatas: number[];
 }
