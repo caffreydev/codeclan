@@ -33,9 +33,12 @@ const page: React.FC<pageProps> = () => {
   const [success, setSuccess] = useState<boolean>(false);
   const [kata, setKata] = useState<any>(kataLibrary[kataId]);
   const [isLoading, setIsLoading] = useState(false);
-  const w = window.innerWidth;
-  const h = window.innerHeight;
 
+  try {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+  } catch {}
+  
   const handleChangeValue = (value: string) => {
     setCodeText(value);
   };

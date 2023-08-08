@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import { Lato } from 'next/font/google';
 import Header from './components/Header';
 import AuthenticationModal from './authentication/authenticationModals/AuthenticationModal';
+import ProfilePair from './components/ProfilePair';
 
 // const abel = Abel({ weight: '400', subsets: ['latin'] });
 const lato = Lato({ weight: ['300', '400', '700'], subsets: ['latin'] });
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
           <ToastContainer />
           <AuthenticationModal />
+          <ProfilePair />
         </body>
       </html>
     </ReduxProvider>
