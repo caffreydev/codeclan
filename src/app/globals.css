@@ -69,10 +69,16 @@
   flex-direction: row;
 }
 
-body,
 html,
-main {
+body {
   @apply h-full;
+}
+main {
+  @apply min-h-full;
+}
+
+img {
+  @apply block;
 }
 
 .gutter {
@@ -95,12 +101,7 @@ main {
   backdrop-filter: blur(12px);
 }
 
-.Hero {
-  background: url(/bg.jpg) 50% 50% no-repeat;
-  @apply relative z-[1] bg-cover;
-}
-
-.Hero-wrapper:before {
+.Hero:before {
   content: '';
   position: absolute;
   z-index: 0;
@@ -114,30 +115,59 @@ main {
 }
 
 .bg-left {
-  @apply pointer-events-none absolute left-0 top-20 w-1/2;
+  @apply pointer-events-none absolute left-0 w-1/2;
   filter: grayscale(100%);
 }
 
 .bg-right {
-  @apply pointer-events-none absolute bottom-auto left-auto right-0 top-0 w-1/2 blur-3xl;
+  @apply pointer-events-none absolute bottom-auto left-auto right-0 w-1/2 blur-3xl;
   filter: grayscale(100%);
 }
 
 .Divider {
   @apply overflow-hidden;
 }
-.Divider-line {
-  @apply bg-gradient-to-r from-purple-400 to-primary;
+
+.Divider:before,
+.Divider:after {
+  @apply absolute h-64 w-[60vw] rounded-full opacity-30 mix-blend-normal blur-3xl content-[''];
 }
-.gradients-left,
-.gradients-right {
-  @apply absolute -top-32 h-64 w-[60vw] rounded-full mix-blend-normal blur-3xl;
+.Divider:before {
+  @apply -left-56 bg-gradient-to-r from-purple-400 to-primary;
 }
-.gradients-right {
+.Divider:after {
   @apply -right-56 bg-gradient-to-r from-purple-400 to-primary;
 }
-.gradients-left {
-  @apply -left-56 bg-gradient-to-r from-purple-400 to-primary;
+
+.Divider-line {
+  @apply absolute h-[1px] w-full bg-gradient-to-r from-purple-400 to-primary opacity-40;
+}
+
+.Divider:not(.reverse):before,
+.Divider:not(.reverse):after {
+  @apply -top-32;
+}
+.Divider:not(.reverse) .Divider-line {
+  @apply top-0;
+}
+
+.Divider.reverse:before,
+.Divider.reverse:after {
+  @apply -bottom-32;
+}
+.Divider.reverse .Divider-line {
+  @apply bottom-0;
+}
+
+.gradients_top-l {
+  background: conic-gradient(from 180deg at 50% 50%, #2a8af6 0deg, #a853ba 180deg, #e92a67 1turn);
+
+  /* @apply bg-gradient-to-r from-purple-400 to-primary; */
+}
+.gradients-top-r {
+  @apply rounded-full mix-blend-normal blur-3xl;
+  filter: blur(75px);
+  will-change: filter;
 }
 
 .shadow-teal {

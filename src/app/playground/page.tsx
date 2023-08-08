@@ -86,7 +86,7 @@ const page: React.FC<pageProps> = () => {
   return (
     <>
       <ControlPanel kata={kata} />
-      <main>
+      <main className='h-full'>
         {success && <Confetti gravity={0.3} tweenDuration={4000} width={w - 25} height={h - 1} />}
         <Split minSize={0} className='split h-full'>
           <InstructionPanel kata={kata} />
