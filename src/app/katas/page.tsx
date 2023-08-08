@@ -27,11 +27,11 @@ export default function katas() {
       <div className='mx-auto max-w-screen-xl'>
         <Wrapper>
           <h1 className='my-7 text-3xl font-bold'>List of Katas</h1>
-          <div className='flex flex-row gap-3 rounded-t-lg bg-grey-300 px-4 pt-4'>
+          <div className='flex flex-row gap-3 rounded-t-lg border border-b-0 border-grey-600 bg-grey-800 px-4 pt-4'>
             <label className='flex flex-col'>
               <span className='mb-1 text-xs text-grey-150'>Difficulty</span>
               <select
-                className='cursor-pointer rounded-lg border border-grey-200 bg-transparent p-2 text-sm hover:bg-grey-200'
+                className='rounded-lg border border-grey-600 bg-transparent p-2 text-sm outline-none transition hover:border-grey-500 focus:border-grey-300'
                 name='difficulty'
                 id='difficulty'
                 onChange={(e) => {
@@ -48,7 +48,7 @@ export default function katas() {
             <label className='flex flex-col'>
               <span className='mb-1 text-xs text-grey-150'>Category</span>
               <select
-                className='cursor-pointer rounded-lg border border-grey-200 bg-transparent p-2 text-sm hover:bg-grey-200'
+                className='rounded-lg border border-grey-600 bg-transparent p-2 text-sm outline-none transition hover:border-grey-500 focus:border-grey-300'
                 name='category'
                 id='category'
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -62,7 +62,7 @@ export default function katas() {
               </select>
             </label>
           </div>
-          <ul className='flex flex-col gap-3 rounded-b-lg bg-grey-300 p-5'>
+          <ul className='flex flex-col gap-3 rounded-b-lg border border-t-0 border-grey-600 bg-grey-800 p-5 '>
             <KataList difficulty={difficulty} category={category} />
           </ul>
         </Wrapper>

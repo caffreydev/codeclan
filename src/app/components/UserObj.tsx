@@ -29,7 +29,7 @@ const UserObj: React.FC<UserObjProps> = ({ userDetail }) => {
           src={user?.photoURL ? user.photoURL : '/profile-avatar.png'}
           width={300}
           height={300}
-          className='h-52 w-52 shrink-0 self-center rounded-full bg-gray-300'></Image>
+          className='h-40 w-40 shrink-0 self-center rounded-full bg-gray-300 md:h-52 md:w-52'></Image>
       );
     case 'profileImgNavbar':
       return (
