@@ -10,6 +10,11 @@ import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import { javascript } from '@codemirror/lang-javascript';
 import { useSearchParams } from 'next/navigation';
 import ControlPanel from '../components/ControlPanel';
+import { useGetUser } from '@/Utils/useGetUser';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, firestore } from '@/firebase/firebase';
+import { User } from '@/types/firestoreTypes';
+import { doc, setDoc } from 'firebase/firestore';
 
 type pageProps = {};
 
@@ -36,9 +41,16 @@ const page: React.FC<pageProps> = () => {
   const [kata, setKata] = useState<any>(kataLibrary[kataId]);
   const [isLoading, setIsLoading] = useState(false);
 
+  //retrieves user details
+  const [user, setUser] = useAuthState(auth);
+  const [userRetrieved, setUserRetrieved] = useState(false);
+  const currUser = useGetUser(user?.uid as string, setUserRetrieved) as User;
+
   useEffect(() => {
     setCodeText(kataLibrary[kataId].starterCode);
     setKata(kataLibrary[kataId]);
+    setSuccess(false);
+
     setMessage('Build your code and hit run!');
   }, [kataId]);
 
@@ -46,7 +58,7 @@ const page: React.FC<pageProps> = () => {
     setCodeText(value);
   };
 
-  const handleTestCase = () => {
+  const handleTestCase = async () => {
     setMessage('');
     setIsLoading(true);
     try {
@@ -61,6 +73,14 @@ const page: React.FC<pageProps> = () => {
           autoClose: 2000,
           theme: 'dark',
         });
+        if (!currUser?.completedKatas.includes(kataId)) {
+          const newUserTableEntry = { ...currUser };
+          const completedKatas = [...newUserTableEntry.completedKatas];
+          completedKatas.push(kataId);
+          newUserTableEntry.completedKatas = completedKatas;
+
+          const ref = await setDoc(doc(firestore, 'users', newUserTableEntry.userId), newUserTableEntry);
+        }
       } else {
         setIsLoading(false);
         let failedTests = ' ';
