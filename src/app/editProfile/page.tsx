@@ -43,14 +43,14 @@ export default function editProfile() {
         userTableEntry.displayName = inputs.username;
       } else if (inputs.profileURL && !inputs.username) {
         updateProfile({ photoURL: inputs.profileURL });
-        userTableEntry.photoUrl = inputs.profileURL;
+        userTableEntry.photoURL = inputs.profileURL;
       } else if (inputs.username && inputs.profileURL) {
         updateProfile({
           displayName: inputs.username,
           photoURL: inputs.profileURL,
         });
         userTableEntry.displayName = inputs.username;
-        userTableEntry.photoUrl = inputs.profileURL;
+        userTableEntry.photoURL = inputs.profileURL;
       }
 
       if (inputs.Bio) {
