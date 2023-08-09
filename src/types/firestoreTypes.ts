@@ -14,7 +14,7 @@ export interface Message {
 export interface User {
   userId: string;
   displayName: string;
-  photoUrl: string;
+  photoURL: string;
   joinTime: Timestamp;
   completedKatas: string[];
   Bio: string;
