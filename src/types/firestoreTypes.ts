@@ -16,7 +16,7 @@ export interface User {
   displayName: string;
   photoUrl: string;
   joinTime: Timestamp;
-  completedKatas: number[];
+  completedKatas: string[];
   Bio: string;
   Github: string;
 }

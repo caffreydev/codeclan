@@ -40,6 +40,7 @@ const page: React.FC<pageProps> = () => {
   const [success, setSuccess] = useState<boolean>(false);
   const [kata, setKata] = useState<any>(kataLibrary[kataId]);
   const [isLoading, setIsLoading] = useState(false);
+  const [completedKatasSession, setCompletedKatasSession] = useState<string[]>([]);
 
   //retrieves user details
   const [user, setUser] = useAuthState(auth);
@@ -73,16 +74,21 @@ const page: React.FC<pageProps> = () => {
           autoClose: 2000,
           theme: 'dark',
         });
-        if (!currUser?.completedKatas.includes(kataId)) {
-          console.log(kata);
+        if (!currUser?.completedKatas.includes(kata.title) && !completedKatasSession.includes(kata.title)) {
           const newUserTableEntry = { ...currUser };
           const completedKatas = [...newUserTableEntry.completedKatas];
 
           completedKatas.push(kata.title);
+          completedKatasSession.forEach((title) => {
+            if (!completedKatas.includes(title)) {
+              completedKatas.push(title);
+            }
+          });
           newUserTableEntry.completedKatas = completedKatas;
 
           const ref = await setDoc(doc(firestore, 'users', newUserTableEntry.userId), newUserTableEntry);
         }
+        setCompletedKatasSession((prev) => [...prev, kata.title].filter((title, index, array) => array.indexOf(title) === index));
       } else {
         setIsLoading(false);
         let failedTests = ' ';
