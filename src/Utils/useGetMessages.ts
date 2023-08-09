@@ -14,7 +14,6 @@ export function useGetMessages(
   friendId: string = '',
 ) {
   const [messages, setMessages] = useState<Message[]>([]);
-  let whereClause: QueryCompositeFilterConstraint | QueryFieldFilterConstraint;
 
   useEffect(() => {
     const getMessages = async () => {

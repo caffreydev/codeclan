@@ -44,6 +44,7 @@ export default function page() {
                 <Link href='/editProfile' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
                   Edit
                 </Link>
+<<<<<<< HEAD
               )}
               <Link href='/inbox' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
                 {userId ? 'Message' : 'Inbox'}
@@ -51,6 +52,13 @@ export default function page() {
               <Link href='/sendRequest' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
                 Pair up!
               </Link>
+=======
+                <Link href='/inbox' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
+                  Inbox
+                </Link>
+                
+              </div>
+>>>>>>> main
             </div>
           </div>
           <hr className='border-grey-600' />
