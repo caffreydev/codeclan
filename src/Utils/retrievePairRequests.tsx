@@ -11,10 +11,10 @@ const db = firestore
 
 export function requestPairRequests (setLoadState: React.Dispatch<React.SetStateAction<boolean>>) {
 
-    const [requests, setRequests ] = useState([])
+    const [requests, setRequests ] = useState<any[] | undefined>(undefined);
    
         useEffect(()=> {
-            const array = []
+            const array: any[] = []
             const res =  async () => {
             
              const querySnapshot =  await getDocs(collection(db, 'requests'))

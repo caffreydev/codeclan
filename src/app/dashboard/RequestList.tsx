@@ -29,7 +29,7 @@ const RequestList: React.FC<RequestListProps> = () => {
   const [acceptedRequests, setAcceptedRequests] = useState<AcceptedRequest[]>([]);
 
   useEffect(() => {
-    setGrouped(group(requests))
+    if (loadState) setGrouped(group(requests))
   }, [loadState])
 
   const handleDelete = (sender: string, title: string) => {

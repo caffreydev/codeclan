@@ -10,6 +10,9 @@ import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import { javascript } from '@codemirror/lang-javascript';
 import { useSearchParams } from 'next/navigation';
 import ControlPanel from '../components/ControlPanel';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/redux/Store';
+import { setCurrentKata } from '@/redux/features/currentKata-slice';
 
 type pageProps = {};
 
@@ -28,11 +31,14 @@ switch (n) {
 
 const page: React.FC<pageProps> = () => {
   const kataId = useSearchParams().get('kata_id');
+  const dispatch = useDispatch<AppDispatch>()
   const [codeText, setCodeText] = useState<string>(kataLibrary[kataId].starterCode);
   const [message, setMessage] = useState<string>('Build your code and hit run!');
   const [success, setSuccess] = useState<boolean>(false);
   const [kata, setKata] = useState<any>(kataLibrary[kataId]);
   const [isLoading, setIsLoading] = useState(false);
+  
+  dispatch(setCurrentKata(kata))
 
   try {
     const w = window.innerWidth;
