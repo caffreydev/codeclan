@@ -77,8 +77,8 @@ const Hero: React.FC<HeroProps> = () => {
           </div>
         </Wrapper>
       </div>
-      <img src='/bg-right.svg' alt='' className='top-0 bg-right' />
-      <img src='/bg-left.svg' alt='' className='top-0 bg-left' />
+      <img src='/bg-right.svg' alt='smoke effect right side' className='top-0 bg-right' />
+      <img src='/bg-left.svg' alt='smoke effect left side' className='top-0 bg-left' />
     </div>
   );
 };

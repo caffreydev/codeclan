@@ -67,10 +67,13 @@
 .split {
   display: flex;
   flex-direction: row;
+  height: 100%;
 }
 
 html,
-body {
+body,
+.cm-theme,
+.cm-editor {
   @apply h-full;
 }
 main {
@@ -159,17 +162,6 @@ img {
   @apply bottom-0;
 }
 
-.gradients_top-l {
-  background: conic-gradient(from 180deg at 50% 50%, #2a8af6 0deg, #a853ba 180deg, #e92a67 1turn);
-
-  /* @apply bg-gradient-to-r from-purple-400 to-primary; */
-}
-.gradients-top-r {
-  @apply rounded-full mix-blend-normal blur-3xl;
-  filter: blur(75px);
-  will-change: filter;
-}
-
 .shadow-teal {
-	box-shadow: 0 0 20px rgba(0, 128, 128, 0.7); /* Adjust the alpha value as needed */
+  box-shadow: 0 0 20px rgba(0, 128, 128, 0.7); /* Adjust the alpha value as needed */
 }
