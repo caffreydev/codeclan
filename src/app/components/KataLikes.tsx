@@ -26,7 +26,11 @@ const KataLikes: React.FC<KataLikesProps> = ({ kataId, likesOnClick }) => {
     if (!likesOnClick) return;
 
     if (liked || kata.likedBy.includes(user?.uid as string)) {
-      return toast.warning('You already liked this one!');
+      return toast.warning('You already liked this one!', {
+        position: 'top-right',
+        autoClose: 5000,
+        theme: 'dark',
+      });
     }
 
     if (likesOnClick) {
@@ -53,9 +57,17 @@ const KataLikes: React.FC<KataLikesProps> = ({ kataId, likesOnClick }) => {
           feedBackType: 'like',
         };
         const ref2 = await setDoc(doc(firestore, 'feedbacks', feedbackTitle), feedbackEntry);
-        toast.success('Thanks for the feedback!');
+        toast.success('Thanks for the feedback!', {
+          position: 'top-right',
+          autoClose: 5000,
+          theme: 'dark',
+        });
       } catch (e: any) {
-        toast.error("Your feedback wasn't logged, please try again");
+        toast.error("Your feedback wasn't logged, please try again", {
+          position: 'top-right',
+          autoClose: 5000,
+          theme: 'dark',
+        });
       }
     }
   };
@@ -64,7 +76,11 @@ const KataLikes: React.FC<KataLikesProps> = ({ kataId, likesOnClick }) => {
     if (!likesOnClick) return;
 
     if (disliked || kata.dislikedBy.includes(user?.uid as string)) {
-      return toast.warning('You already disliked this one!');
+      return toast.warning('You already disliked this one!', {
+        position: 'top-right',
+        autoClose: 5000,
+        theme: 'dark',
+      });
     }
 
     if (likesOnClick) {
@@ -90,9 +106,17 @@ const KataLikes: React.FC<KataLikesProps> = ({ kataId, likesOnClick }) => {
           feedBackType: 'dislike',
         };
         const ref2 = await setDoc(doc(firestore, 'feedbacks', feedbackTitle), feedbackEntry);
-        toast.success('Thanks for the feedback!');
+        toast.success('Thanks for the feedback!', {
+          position: 'top-right',
+          autoClose: 5000,
+          theme: 'dark',
+        });
       } catch (e: any) {
-        toast.error("Your feedback wasn't logged, please try again");
+        toast.error("Your feedback wasn't logged, please try again", {
+          position: 'top-right',
+          autoClose: 5000,
+          theme: 'dark',
+        });
       }
     }
   };
@@ -103,22 +127,22 @@ const KataLikes: React.FC<KataLikesProps> = ({ kataId, likesOnClick }) => {
     <>
       <p>
         <span
-          onClick={useLikesOnClick}
-          className={`py-1.3 inline-flex items-center justify-center gap-1 rounded-full bg-green-500 px-2.5 text-sm text-white ${
-            likesOnClick ? 'hover:cursor-pointer' : ''
-          } ${liked ? 'border-4 border-green-700' : ''}`}>
-          <FaThumbsUp />
-          {kata.likes + (liked ? 1 : 0)}
+          onClick={useDislikesOnClick}
+          className={`py-1.3 inline-flex items-center justify-center gap-1 rounded-full bg-red-500 px-2.5 text-sm text-white ${
+            likesOnClick ? 'cursor-pointer transition ease-in-out hover:scale-110 hover:opacity-80' : ''
+          } ${disliked ? 'border-4 border-red-800' : ''}`}>
+          <FaThumbsDown />
+          {kata.dislikes + (disliked ? 1 : 0)}
         </span>
       </p>
       <p>
         <span
-          onClick={useDislikesOnClick}
-          className={`py-1.3 inline-flex items-center justify-center gap-1 rounded-full bg-red-500 px-2.5 text-sm text-white ${
-            likesOnClick ? 'hover:cursor-pointer' : ''
-          } ${disliked ? 'border-4 border-red-700' : ''}`}>
-          <FaThumbsDown />
-          {kata.dislikes + (disliked ? 1 : 0)}
+          onClick={useLikesOnClick}
+          className={`py-1.3 inline-flex items-center justify-center gap-1 rounded-full bg-green-500 px-2.5 text-sm text-white ${
+            likesOnClick ? 'cursor-pointer transition ease-in-out hover:scale-110' : ''
+          } ${liked ? 'border-4 border-green-700' : ''}`}>
+          <FaThumbsUp />
+          {kata.likes + (liked ? 1 : 0)}
         </span>
       </p>
     </>

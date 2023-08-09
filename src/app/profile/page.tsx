@@ -10,7 +10,6 @@ import { useGetUser } from '@/Utils/useGetUser';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase/firebase';
 import { useSearchParams } from 'next/navigation';
-import { Loader } from '../components/Loader';
 import KataPair from '../components/pairing components/KataPair';
 
 type pageProps = {};
@@ -65,23 +64,22 @@ export default function page() {
           </div>
         </div>
 
-        <section className='mt-3 grid grid-cols-1 gap-6 rounded-lg border border-b-0 border-grey-600 bg-grey-800 p-4 md:grid-cols-2'>
-          <div className='rounded-lg border border-grey-600 bg-grey-700 p-4'>
-            <div className='flex items-center'>
-              <CgCheckO className='mr-1 text-xl' />
-              <h3 className='p-2 text-xl text-primary'>Completed Katas</h3>
-            </div>
-            <UserListKatas userData={userData} />
+      <section className='mt-3 grid grid-cols-1 gap-6 rounded-lg border border-b-0 border-grey-600 bg-grey-800 p-4 md:grid-cols-2'>
+        <div className='rounded-lg border border-grey-600 bg-grey-700 p-4'>
+          <div className='flex items-center'>
+            <CgCheckO className='mr-1 text-xl' />
+            <h3 className='p-2 text-xl text-primary'>Completed Katas</h3>
           </div>
-          <div className='rounded-lg border border-grey-600 bg-grey-700 p-4'>
-            <div className='flex items-center'>
-              <TbProgress className='mr-1 text-xl' />
-              <h3 className='p-2 text-xl text-primary'> Katas in progress</h3>
-            </div>
-            <UserListKatas />
+          {userData && <UserListKatas userData={userData} />}
+        </div>
+        <div className='rounded-lg border border-grey-600 bg-grey-700 p-4'>
+          <div className='flex items-center'>
+            <TbProgress className='mr-1 text-xl' />
+            <h3 className='p-2 text-xl text-primary'> Katas in progress</h3>
           </div>
-        </section>
-      </Wrapper>
-    </>
+          {/* <UserListKatas /> */}
+        </div>
+      </section>
+    </Wrapper>
   );
 }

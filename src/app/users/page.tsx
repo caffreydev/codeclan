@@ -1,11 +1,13 @@
 'use client';
 import { useGetUsers } from '@/Utils/useGetUsers';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { User } from '@/types/firestoreTypes';
 import UsersListItem from '../components/UsersListItem';
 import Wrapper from '../components/Wrapper';
 import { Loader } from '../components/Loader';
 import { BiSearch } from 'react-icons/bi';
+
+type pageProps = {};
 
 const page: React.FC<pageProps> = () => {
   const [loading, setLoading] = useState(false);
@@ -45,7 +47,7 @@ const page: React.FC<pageProps> = () => {
             return <UsersListItem key={user.userId} user={user} />;
           })}
         </ul>
-        <div>{!filteredUsers().length && <>User not found :( </>}</div>
+        <div>{!filteredUsers().length && <>User not found :\ </>}</div>
       </div>
     </Wrapper>
   );

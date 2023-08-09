@@ -4,7 +4,7 @@ import { collection, getDocs, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
 export function useGetUsers(setLoading: React.Dispatch<React.SetStateAction<boolean>>) {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
     const getUsers = async () => {

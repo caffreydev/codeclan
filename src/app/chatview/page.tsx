@@ -31,7 +31,11 @@ const page: React.FC<pageProps> = () => {
     e.preventDefault();
 
     if (!newMessageSubject || !newMessageText) {
-      return toast.error('You must include a subject and message text to send a message!');
+      return toast.error('You must include a subject and message text to send a message!', {
+        position: 'top-center',
+        autoClose: 5000,
+        theme: 'dark',
+      });
     }
 
     const timeStamp = new Timestamp(Math.floor(new Date().getTime() / 1000), 0);
@@ -53,7 +57,13 @@ const page: React.FC<pageProps> = () => {
         updatedArray.push(newMessage);
         return updatedArray;
       });
-      toast.success('Great! Message sent');
+      toast.success('Great! Message sent', {
+        position: 'top-right',
+        autoClose: 5000,
+        theme: 'dark',
+      });
+      setNewMessageSubject('');
+      setNewMessageText('');
     } catch (e: any) {
       alert(e?.message);
     }
@@ -71,6 +81,7 @@ const page: React.FC<pageProps> = () => {
     return (
       <div className='border-1px mx-auto w-5/6 max-w-screen-xl px-2 py-10'>
         <h2 className='mb-6 text-4xl font-bold'>Your Chat With</h2>
+        <p>Loading messages...</p>
       </div>
     );
 
@@ -84,6 +95,7 @@ const page: React.FC<pageProps> = () => {
           onChange={handleNewMessageSubjectChange}
           type='text'
           name='messageSubject'
+          value={newMessageSubject}
           placeholder='Enter your message subject here...'
         />
         <label htmlFor='messageText' />
@@ -91,12 +103,14 @@ const page: React.FC<pageProps> = () => {
           className='mb-2 block w-full rounded-2xl border border-gray-300 bg-gray-100 p-2.5 pb-2 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
           rows={4}
           placeholder='Enter your insightful message here...'
+          value={newMessageText}
           onChange={handleMessageTextChange}
         />
         <button type='submit' className='rounded-lg bg-blue-200 p-3 text-black hover:bg-blue-500 hover:text-white'>
           Send Message
         </button>
       </form>
+      {messagesArray.length === 0 && sentMessages.length === 0 ? <h1>Wow, so much empty!... why not send the first message?</h1> : ''}
       {sentMessages.map((message: Message) => {
         return <ChatViewItem message={message} userId={user?.uid as string} />;
       })}

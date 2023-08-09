@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import Confetti from 'react-confetti';
 import { toast } from 'react-toastify';
 import ReactCodeMirror from '@uiw/react-codemirror';
-import { kataLibrary } from '../katas/katalibrary/kataLibrary';
+import { Kata, kataLibrary } from '../katas/katalibrary/kataLibrary';
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import { javascript } from '@codemirror/lang-javascript';
 import { useSearchParams } from 'next/navigation';
@@ -35,12 +35,12 @@ function fibonnaciFunTime(n) {
 
 const page: React.FC<pageProps> = () => {
   const params = useSearchParams();
-  const kataId = parseInt(params.get('kata_id') as string);
-  const dispatch = useDispatch<AppDispatch>();
+  const kataId = parseInt(params.get('kata_id') as string) || 0;
+
   const [codeText, setCodeText] = useState<string>(kataLibrary[kataId].starterCode);
   const [message, setMessage] = useState<string>('Build your code and hit run!');
   const [success, setSuccess] = useState<boolean>(false);
-  const [kata, setKata] = useState<any>(kataLibrary[kataId]);
+  const [kata, setKata] = useState<Kata>(kataLibrary[kataId]);
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false)
 
@@ -81,6 +81,11 @@ const page: React.FC<pageProps> = () => {
           autoClose: 2000,
           theme: 'dark',
         });
+        if (!user) {
+          setTimeout(() => setSuccess(false), 5000);
+          return;
+        }
+
         if (!currUser?.completedKatas.includes(kata.title) && !completedKatasSession.includes(kata.title)) {
           const newUserTableEntry = { ...currUser };
           const completedKatas = [...newUserTableEntry.completedKatas];
@@ -106,22 +111,28 @@ const page: React.FC<pageProps> = () => {
 
         setMessage('You failed the following tests:' + failedTests.slice(0, failedTests.length - 2));
         toast.error('You failed, please try again!', {
-          position: 'bottom-right',
+          position: 'top-right',
           autoClose: 2000,
           theme: 'dark',
         });
       }
     } catch (e: any) {
       setIsLoading(false);
-      setMessage(e.message);
+      setMessage(String(e));
+
       toast.error(`There's a bug in your code!`, {
-        position: 'bottom-right',
+        position: 'top-right',
         autoClose: 2000,
         theme: 'dark',
       });
     }
 
     setTimeout(() => setSuccess(false), 5000);
+  };
+
+  const handleResetCode = () => {
+    setCodeText(kata.starterCode);
+    setMessage('Build your code and hit run!');
   };
 
   return (
@@ -150,11 +161,13 @@ const page: React.FC<pageProps> = () => {
                   <button
                     disabled={isLoading}
                     data-disabled={isLoading}
-                    className='w-full rounded-lg bg-grey-300 px-3 py-2 hover:bg-opacity-60 data-[disabled=true]:cursor-not-allowed'
-                    onClick={() => handleTestCase()}>
+                    className='w-full rounded-lg bg-primary px-3 py-2 hover:bg-opacity-60 data-[disabled=true]:cursor-not-allowed'
+                    onClick={handleTestCase}>
                     Run
                   </button>
-                  <button className='w-full rounded-lg bg-primary px-3 py-2 hover:bg-opacity-60'>Submit</button>
+                  <button onClick={handleResetCode} className='w-full rounded-lg bg-gray-500 px-3 py-2 hover:bg-opacity-60'>
+                    Reset to Starter Code
+                  </button>
                 </footer>
               </div>
             </Split>

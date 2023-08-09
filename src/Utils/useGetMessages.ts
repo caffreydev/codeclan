@@ -32,7 +32,7 @@ export function useGetMessages(
         if (boxType === 'Chat View') {
           const q2 = query(collection(firestore, 'messages'), where('toId', '==', friendId), where('fromId', '==', userId));
           const querySnapshot2 = await getDocs(q2);
-          querySnapshot.forEach((doc) => messagesArray.push(doc.data() as Message));
+          querySnapshot2.forEach((doc) => messagesArray.push(doc.data() as Message));
         }
 
         setMessages(() => {
@@ -40,7 +40,11 @@ export function useGetMessages(
         });
         setMessagesRetrieved(true);
       } catch {
-        toast.error('Failed to get messages, please try again');
+        toast.error('Failed to get messages, please try again', {
+          position: 'top-right',
+          autoClose: 5000,
+          theme: 'dark',
+        });
       }
     };
 

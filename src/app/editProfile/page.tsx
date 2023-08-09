@@ -2,7 +2,6 @@
 import { useAuthState, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { auth, firestore } from '@/firebase/firebase';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import Wrapper from '../components/Wrapper';
 import { User } from '@/types/firestoreTypes';
@@ -43,14 +42,14 @@ export default function editProfile() {
         userTableEntry.displayName = inputs.username;
       } else if (inputs.profileURL && !inputs.username) {
         updateProfile({ photoURL: inputs.profileURL });
-        userTableEntry.photoUrl = inputs.profileURL;
+        userTableEntry.photoURL = inputs.profileURL;
       } else if (inputs.username && inputs.profileURL) {
         updateProfile({
           displayName: inputs.username,
           photoURL: inputs.profileURL,
         });
         userTableEntry.displayName = inputs.username;
-        userTableEntry.photoUrl = inputs.profileURL;
+        userTableEntry.photoURL = inputs.profileURL;
       }
 
       if (inputs.Bio) {

@@ -3,6 +3,7 @@ import { useState , useEffect} from 'react';
 import group from '../function/groupByKata';
 import Link from 'next/link';
 import { requestPairRequests } from '@/Utils/retrievePairRequests';
+import groupByEmptyReceiever from '../function/groupByEmptyReceiver';
 interface Request {
   sender: string;
   reqId: number;
@@ -29,14 +30,15 @@ const SendRequest: React.FC<SendRequestProps> = () => {
   };
 
 
-  useEffect(()=> {
-    if (loadState) setGrouped(requests?.length ? group(requests) : {})
-  }, [loadState])
+    useEffect(()=> {
+      const emptyReceiverArray = groupByEmptyReceiever(requests)
+      setGrouped(group(emptyReceiverArray))
+    }, [loadState])
 
 
 
-if (!loadState) {return <h1>'is loading'</h1>}
-else if (requests?.length === 0) {return <p>No requests at the moment :(</p>}
+if (!loadState) {return <h1>'Open requests still loading'</h1>}
+
 else {
   return (
     <ul className='mt-5 grid auto-rows-auto gap-5'>
