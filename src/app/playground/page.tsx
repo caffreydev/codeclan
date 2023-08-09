@@ -1,7 +1,7 @@
 'use client';
 import Split from 'react-split';
 import InstructionPanel from '../components/InstructionPanel';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Confetti from 'react-confetti';
 import { toast } from 'react-toastify';
 import ReactCodeMirror from '@uiw/react-codemirror';
@@ -10,6 +10,11 @@ import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import { javascript } from '@codemirror/lang-javascript';
 import { useSearchParams } from 'next/navigation';
 import ControlPanel from '../components/ControlPanel';
+import { useGetUser } from '@/Utils/useGetUser';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, firestore } from '@/firebase/firebase';
+import { User } from '@/types/firestoreTypes';
+import { doc, setDoc } from 'firebase/firestore';
 
 type pageProps = {};
 
@@ -27,20 +32,33 @@ switch (n) {
 */
 
 const page: React.FC<pageProps> = () => {
-  const kataId = useSearchParams().get('kata_id');
+  const params = useSearchParams();
+  const kataId = parseInt(params.get('kata_id') as string);
+
   const [codeText, setCodeText] = useState<string>(kataLibrary[kataId].starterCode);
   const [message, setMessage] = useState<string>('Build your code and hit run!');
   const [success, setSuccess] = useState<boolean>(false);
   const [kata, setKata] = useState<any>(kataLibrary[kataId]);
   const [isLoading, setIsLoading] = useState(false);
-  const w = window.innerWidth;
-  const h = window.innerHeight;
+
+  //retrieves user details
+  const [user, setUser] = useAuthState(auth);
+  const [userRetrieved, setUserRetrieved] = useState(false);
+  const currUser = useGetUser(user?.uid as string, setUserRetrieved) as User;
+
+  useEffect(() => {
+    setCodeText(kataLibrary[kataId].starterCode);
+    setKata(kataLibrary[kataId]);
+    setSuccess(false);
+
+    setMessage('Build your code and hit run!');
+  }, [kataId]);
 
   const handleChangeValue = (value: string) => {
     setCodeText(value);
   };
 
-  const handleTestCase = () => {
+  const handleTestCase = async () => {
     setMessage('');
     setIsLoading(true);
     try {
@@ -55,6 +73,14 @@ const page: React.FC<pageProps> = () => {
           autoClose: 2000,
           theme: 'dark',
         });
+        if (!currUser?.completedKatas.includes(kataId)) {
+          const newUserTableEntry = { ...currUser };
+          const completedKatas = [...newUserTableEntry.completedKatas];
+          completedKatas.push(kataId);
+          newUserTableEntry.completedKatas = completedKatas;
+
+          const ref = await setDoc(doc(firestore, 'users', newUserTableEntry.userId), newUserTableEntry);
+        }
       } else {
         setIsLoading(false);
         let failedTests = ' ';
@@ -87,7 +113,7 @@ const page: React.FC<pageProps> = () => {
     <>
       <ControlPanel kata={kata} />
       <main className='h-full'>
-        {success && <Confetti gravity={0.3} tweenDuration={4000} width={w - 25} height={h - 1} />}
+        {success && <Confetti gravity={0.3} tweenDuration={4000} width={window.innerWidth - 25} height={window.innerHeight - 1} />}
         <Split minSize={0} className='split h-full'>
           <InstructionPanel kata={kata} />
           <section>
