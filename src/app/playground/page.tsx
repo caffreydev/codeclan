@@ -123,6 +123,11 @@ const page: React.FC<pageProps> = () => {
     setTimeout(() => setSuccess(false), 5000);
   };
 
+  const handleResetCode = () => {
+    setCodeText(kata.starterCode);
+    setMessage('Build your code and hit run!');
+  };
+
   return (
     <>
       <ControlPanel />
@@ -148,11 +153,13 @@ const page: React.FC<pageProps> = () => {
                   <button
                     disabled={isLoading}
                     data-disabled={isLoading}
-                    className='w-full rounded-lg bg-grey-300 px-3 py-2 hover:bg-opacity-60 data-[disabled=true]:cursor-not-allowed'
+                    className='w-full rounded-lg bg-primary px-3 py-2 hover:bg-opacity-60 data-[disabled=true]:cursor-not-allowed'
                     onClick={handleTestCase}>
                     Run
                   </button>
-                  <button className='w-full rounded-lg bg-primary px-3 py-2 hover:bg-opacity-60'>Submit</button>
+                  <button onClick={handleResetCode} className='w-full rounded-lg bg-gray-500 px-3 py-2 hover:bg-opacity-60'>
+                    Reset to Starter Code
+                  </button>
                 </footer>
               </div>
             </Split>
