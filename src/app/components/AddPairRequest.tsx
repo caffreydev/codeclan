@@ -17,8 +17,8 @@ export default function PairRequest ({requestDetails}) {
 const {message, kata_name} = requestDetails
 
 // const docRef = async function request() {
-//     await deleteDoc(doc(db, "requests", "fKqpbpjH4tqdU8mOklRz"));
-// }
+//     await deleteDoc(doc(db, "requests", "v4jjdZrAOzAlbH5vBVPR"));
+//}
 
 const docRef = async function request() { await addDoc(collection(db, "requests", ), {
     
