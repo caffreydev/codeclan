@@ -23,7 +23,7 @@ const ProfileDd: React.FC<ProfileDdProps> = () => {
         className='mr-3 flex rounded-full bg-grey-300 text-sm hover:opacity-80 focus:ring-2 focus:ring-primary md:mr-0'
         id='user-menu-button'>
         <span className='sr-only'>Open user menu</span>
-        <UserObj userDetail='profileImgNavbar' />
+        <UserObj user={user} userDetail='profileImgNavbar' />
       </button>
 
       {/* <!-- Dropdown content --> */}
