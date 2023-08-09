@@ -2,11 +2,10 @@
 
 import Image from 'next/image';
 import { User } from '@/types/firestoreTypes';
-import { User as fireBaseAuthUser } from '@/firebase/firebase';
 import { dateFromFirebaseTimestamp } from '@/Utils/dateFromFirebaseTimestamp';
 
 type UserObjProps = {
-  user: User | fireBaseAuthUser;
+  user: User;
   userDetail: 'displayName' | 'github' | 'profileImg' | 'profileImgNavbar' | 'bio' | 'joinTime';
 };
 
