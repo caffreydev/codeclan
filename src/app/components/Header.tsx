@@ -50,6 +50,16 @@ export default function Header() {
                   Users
                 </Link>
               </li>
+              <li>
+                <Link href={'/inbox'} data-active={segment == 'inbox'} className='Header-Link'>
+                  Inbox
+                </Link>
+              </li>
+              <li>
+                <Link href={'/outbox'} data-active={segment == 'outbox'} className='Header-Link'>
+                  Outbox
+                </Link>
+              </li>
             </ul>
           )}
         </div>
