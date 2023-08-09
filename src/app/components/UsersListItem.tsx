@@ -20,10 +20,12 @@ const UsersListItem: React.FC<UsersListItemProps> = ({ user }) => {
           <h2 className='text-center text-xl font-semibold sm:text-2xl'>{user?.displayName}</h2>
           <p className='px-5 text-xs text-grey-300 sm:text-base'>
             Member Since: <span className='tex-grey-200'>{dateFromFirebaseTimestamp(user?.joinTime).slice(6, 10)}</span>
-            <span className='flex items-center justify-center gap-1 text-grey-150'>
-              <DiGithubBadge className='text-xl' />
-              {user?.Github}
-            </span>
+            {user?.Github && (
+              <span className='flex items-center justify-center gap-1 text-grey-150'>
+                <DiGithubBadge className='text-xl' />
+                {user?.Github}
+              </span>
+            )}
           </p>
         </div>
       </Link>
