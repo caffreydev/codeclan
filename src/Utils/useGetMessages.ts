@@ -40,7 +40,11 @@ export function useGetMessages(
         });
         setMessagesRetrieved(true);
       } catch {
-        toast.error('Failed to get messages, please try again');
+        toast.error('Failed to get messages, please try again', {
+          position: 'top-right',
+          autoClose: 5000,
+          theme: 'dark',
+        });
       }
     };
 

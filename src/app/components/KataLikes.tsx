@@ -26,7 +26,11 @@ const KataLikes: React.FC<KataLikesProps> = ({ kataId, likesOnClick }) => {
     if (!likesOnClick) return;
 
     if (liked || kata.likedBy.includes(user?.uid as string)) {
-      return toast.warning('You already liked this one!');
+      return toast.warning('You already liked this one!', {
+        position: 'top-right',
+        autoClose: 5000,
+        theme: 'dark',
+      });
     }
 
     if (likesOnClick) {
@@ -53,9 +57,17 @@ const KataLikes: React.FC<KataLikesProps> = ({ kataId, likesOnClick }) => {
           feedBackType: 'like',
         };
         const ref2 = await setDoc(doc(firestore, 'feedbacks', feedbackTitle), feedbackEntry);
-        toast.success('Thanks for the feedback!');
+        toast.success('Thanks for the feedback!', {
+          position: 'top-right',
+          autoClose: 5000,
+          theme: 'dark',
+        });
       } catch (e: any) {
-        toast.error("Your feedback wasn't logged, please try again");
+        toast.error("Your feedback wasn't logged, please try again", {
+          position: 'top-right',
+          autoClose: 5000,
+          theme: 'dark',
+        });
       }
     }
   };
@@ -64,7 +76,11 @@ const KataLikes: React.FC<KataLikesProps> = ({ kataId, likesOnClick }) => {
     if (!likesOnClick) return;
 
     if (disliked || kata.dislikedBy.includes(user?.uid as string)) {
-      return toast.warning('You already disliked this one!');
+      return toast.warning('You already disliked this one!', {
+        position: 'top-right',
+        autoClose: 5000,
+        theme: 'dark',
+      });
     }
 
     if (likesOnClick) {
@@ -90,9 +106,17 @@ const KataLikes: React.FC<KataLikesProps> = ({ kataId, likesOnClick }) => {
           feedBackType: 'dislike',
         };
         const ref2 = await setDoc(doc(firestore, 'feedbacks', feedbackTitle), feedbackEntry);
-        toast.success('Thanks for the feedback!');
+        toast.success('Thanks for the feedback!', {
+          position: 'top-right',
+          autoClose: 5000,
+          theme: 'dark',
+        });
       } catch (e: any) {
-        toast.error("Your feedback wasn't logged, please try again");
+        toast.error("Your feedback wasn't logged, please try again", {
+          position: 'top-right',
+          autoClose: 5000,
+          theme: 'dark',
+        });
       }
     }
   };

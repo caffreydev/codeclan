@@ -1,6 +1,6 @@
 'use client';
 import { useGetUsers } from '@/Utils/useGetUsers';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { User } from '@/types/firestoreTypes';
 import UsersListItem from '../components/UsersListItem';
 import Wrapper from '../components/Wrapper';

@@ -41,15 +41,15 @@ export default function page() {
             </div>
             <div className='mb-4 mt-6 flex flex-wrap justify-center gap-4'>
               {!userId && (
-                <Link href='/editProfile' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
+                <Link href='/editProfile' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:opacity-60'>
                   Edit
                 </Link>
               )}
-              <Link href='/inbox' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
+              <Link href='/inbox' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:opacity-60'>
                 {userId ? 'Message' : 'Inbox'}
               </Link>
               {userId && (
-                <Link href='/sendRequest' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
+                <Link href='/sendRequest' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:opacity-60'>
                   Pair up!
                 </Link>
               )}
@@ -74,7 +74,7 @@ export default function page() {
             <TbProgress className='mr-1 text-xl' />
             <h3 className='p-2 text-xl text-primary'> Katas in progress</h3>
           </div>
-          <UserListKatas />
+          {/* <UserListKatas /> */}
         </div>
       </section>
     </Wrapper>
