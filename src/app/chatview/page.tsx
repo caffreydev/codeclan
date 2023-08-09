@@ -31,7 +31,11 @@ const page: React.FC<pageProps> = () => {
     e.preventDefault();
 
     if (!newMessageSubject || !newMessageText) {
-      return toast.error('You must include a subject and message text to send a message!');
+      return toast.error('You must include a subject and message text to send a message!', {
+        position: 'top-center',
+        autoClose: 5000,
+        theme: 'dark',
+      });
     }
 
     const timeStamp = new Timestamp(Math.floor(new Date().getTime() / 1000), 0);
@@ -53,7 +57,11 @@ const page: React.FC<pageProps> = () => {
         updatedArray.push(newMessage);
         return updatedArray;
       });
-      toast.success('Great! Message sent');
+      toast.success('Great! Message sent', {
+        position: 'top-right',
+        autoClose: 5000,
+        theme: 'dark',
+      });
     } catch (e: any) {
       alert(e?.message);
     }
