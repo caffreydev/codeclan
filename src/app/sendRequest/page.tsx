@@ -1,7 +1,7 @@
 'use client'
 import { kataLibrary } from "@/app/katas/katalibrary/kataLibrary"
 import { useState } from "react"
-import PairRequest from "@/app/components/PairRequest"
+import PairRequest from "@/app/components/AddPairRequest"
 
 export default function sendRequest () {
 const [inputDetails, setInputDetails] = useState({
