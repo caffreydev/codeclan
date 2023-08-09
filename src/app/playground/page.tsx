@@ -33,7 +33,7 @@ switch (n) {
 
 const page: React.FC<pageProps> = () => {
   const params = useSearchParams();
-  const kataId = parseInt(params.get('kata_id') as string);
+  const kataId = parseInt(params.get('kata_id') as string) || 0;
 
   const [codeText, setCodeText] = useState<string>(kataLibrary[kataId].starterCode);
   const [message, setMessage] = useState<string>('Build your code and hit run!');
