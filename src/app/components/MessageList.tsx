@@ -21,6 +21,7 @@ const MessageList: React.FC<MessageListProps> = ({ boxType }) => {
     return (
       <div className='border-1px mx-auto w-5/6 max-w-screen-xl px-2 py-10'>
         <h2 className='mb-6 text-4xl font-bold'>{boxType}</h2>
+        <p>Loading Messages</p>
       </div>
     );
   }
@@ -29,9 +30,11 @@ const MessageList: React.FC<MessageListProps> = ({ boxType }) => {
     <div className='border-1px mx-auto w-5/6 max-w-screen-xl px-2 py-10'>
       <h2 className='mb-6 text-4xl font-bold'>{boxType}</h2>
       <hr className='border' />
-      {messagesArray.map((message) => (
-        <MessageListItem messageType={boxType === 'Inbox' ? 'from' : 'to'} message={message} />
-      ))}
+      {messagesArray.length === 0 ? (
+        <h1>Wow, so much empty!...</h1>
+      ) : (
+        messagesArray.map((message) => <MessageListItem messageType={boxType === 'Inbox' ? 'from' : 'to'} message={message} />)
+      )}
     </div>
   );
 };
