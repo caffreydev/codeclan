@@ -36,16 +36,12 @@ function fibonnaciFunTime(n) {
 const page: React.FC<pageProps> = () => {
   const params = useSearchParams();
   const kataId = parseInt(params.get('kata_id') as string) || 0;
-
   const [codeText, setCodeText] = useState<string>(kataLibrary[kataId].starterCode);
   const [message, setMessage] = useState<string>('Build your code and hit run!');
   const [success, setSuccess] = useState<boolean>(false);
-  const [kata, setKata] = useState<Kata>(kataLibrary[kataId]);
+  const [kata, setKata] = useState<Kata>();
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false)
-
-  
-  dispatch(setCurrentKata(kata))
 
   const [completedKatasSession, setCompletedKatasSession] = useState<string[]>([]);
 
@@ -134,7 +130,8 @@ const page: React.FC<pageProps> = () => {
     setCodeText(kata.starterCode);
     setMessage('Build your code and hit run!');
   };
-
+  
+  if (!kataId) return (<p>Loading kata details...</p>)
   return (
     <>
       <ProfilePair kata={kata} isOpen={isOpen} setIsOpen={setIsOpen} />
