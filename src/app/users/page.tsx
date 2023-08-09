@@ -1,6 +1,6 @@
 'use client';
 import { useGetUsers } from '@/Utils/useGetUsers';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { User } from '@/types/firestoreTypes';
 import UsersListItem from '../components/UsersListItem';
 import Wrapper from '../components/Wrapper';
@@ -9,6 +9,7 @@ import { BiSearch } from 'react-icons/bi';
 
 const page: React.FC<pageProps> = () => {
   const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState('');
   let allUsers: User[] = [];
 
   try {
@@ -17,8 +18,9 @@ const page: React.FC<pageProps> = () => {
     throw new Error('Failed to fetch data');
   }
 
-  if (loading) <></>;
+  const filteredUsers = (): User[] => (search.toLowerCase() !== '' ? allUsers.filter((user) => user.displayName.toLowerCase().includes(search)) : allUsers);
 
+  if (loading) <></>;
   return (
     <Wrapper className='pb-4 sm:pb-6 md:pb-8'>
       <h2 className='my-7 text-3xl font-bold'>Users</h2>
@@ -29,6 +31,7 @@ const page: React.FC<pageProps> = () => {
             <input
               type='text'
               id='Search'
+              onChange={(e) => setSearch(e.target.value)}
               placeholder='username'
               className='w-full rounded-lg  border border-grey-600  bg-grey-600 bg-transparent p-2 py-2.5 pe-10 text-sm text-grey-200 shadow-sm outline-none transition hover:border-grey-500 focus:border-grey-300 sm:text-sm'
             />
@@ -38,7 +41,7 @@ const page: React.FC<pageProps> = () => {
           </div>
         </label>
         <ul className='grid gap-4 sm:gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3'>
-          {allUsers.map((user) => {
+          {filteredUsers().map((user) => {
             return <UsersListItem key={user.userId} user={user} />;
           })}
         </ul>
