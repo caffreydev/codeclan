@@ -147,7 +147,7 @@ const page: React.FC<pageProps> = () => {
                     onClick={handleTestCase}>
                     Run
                   </button>
-                  <button className='w-full rounded-lg bg-primary px-3 py-2 hover:bg-opacity-60'>Reset back</button>
+                  <button className='w-full rounded-lg bg-primary px-3 py-2 hover:bg-opacity-60'>Submit</button>
                 </footer>
               </div>
             </Split>
