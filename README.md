@@ -17,9 +17,9 @@ You can try it out by visiting the website and exploring its features.
 
 - **Personal Messaging System**: Communicate with other users through a built-in messaging system. Share code snippets, discuss solutions, and collaborate effectively.
 
-- **Variety of Katas**: Explore a diverse range of coding katas catering to different skill levels and programming languages. Challenge yourself and expand your coding horizons.
+- **Variety of Katas**: Explore a diverse range of coding katas catering to different skill levels. Challenge yourself and expand your coding horizons.
 
-- **Detailed User Profiles**: Create and customize your user profile with a display name, profile image, and bio. Showcase your coding accomplishments and skills.
+- **Detailed User Profiles**: Create and customise your user profile with a display name, profile image, and bio. Showcase your coding accomplishments and skills.
 
 - **Solo or Pair Programming**: Choose your preferred mode of practice – work on katas independently to sharpen your skills, or team up with others for a collaborative coding experience.
 
