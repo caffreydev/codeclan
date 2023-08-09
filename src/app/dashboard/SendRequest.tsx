@@ -1,7 +1,6 @@
 'use client';
 import { useState , useEffect} from 'react';
 import group from '../function/groupByKata';
-import lfp from '@/sample-data/LfP';
 import Link from 'next/link';
 import { requestPairRequests } from '@/Utils/retrievePairRequests';
 interface Request {
@@ -14,32 +13,30 @@ interface AcceptedRequest {
   title: string;
 }
 
-type GroupedRequests = {
+type Grouped = {
   [key: string]: Request[];
-};
+}
 
 type SendRequestProps = {};
 
 const SendRequest: React.FC<SendRequestProps> = () => {
-    const [loadState, setLoadState] = useState(false);
-    const requests: Request[] = requestPairRequests(setLoadState);
+  const [loadState, setLoadState] = useState(false);
+  const requests: Request[] | undefined= requestPairRequests(setLoadState);
   const [acceptedRequests, setAcceptedRequests] = useState<AcceptedRequest[]>([]);
-  const [grouped, setGrouped] = useState<GroupedRequests>();
+  const [grouped, setGrouped] = useState<Grouped>({});
   const handleAccept = (sender: string, title: string) => {
     setAcceptedRequests([...acceptedRequests, { sender, title }]);
   };
 
 
-    useEffect(()=> {
-        
-           setGrouped(group(requests))
-
-    }, [loadState])
+  useEffect(()=> {
+    if (loadState) setGrouped(requests?.length ? group(requests) : {})
+  }, [loadState])
 
 
 
 if (!loadState) {return <h1>'is loading'</h1>}
-
+else if (requests?.length === 0) {return <p>No requests at the moment :(</p>}
 else {
   return (
     <ul className='mt-5 grid auto-rows-auto gap-5'>

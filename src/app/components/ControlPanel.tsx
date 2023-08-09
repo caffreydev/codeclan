@@ -3,6 +3,7 @@ import React from 'react';
 import { FaAngleRight, FaAngleLeft, FaBars } from 'react-icons/fa6';
 import { kataLibrary } from '../katas/katalibrary/kataLibrary';
 import { useSearchParams } from 'next/navigation';
+
 type ControlPanelProps = {};
 
 const ControlPanel: React.FC<ControlPanelProps> = () => {

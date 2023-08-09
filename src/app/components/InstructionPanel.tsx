@@ -9,50 +9,40 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/redux/Store';
 import { openPairModal, openProfilePair } from '@/redux/features/pair-slice';
 import { useAppSelector } from '@/redux/Store';
+import { Kata } from '../katas/katalibrary/kataLibrary';
 
-type InstructionPanelProps = {};
+type InstructionPanelProps = {
+  kata: Kata;
+  setIsOpen: any;
+};
 
-const InstructionPanel: React.FC<InstructionPanelProps> = () => {
-  const kataId = Number(useSearchParams().get('kata_id'));
-  const dispatch = useDispatch<AppDispatch>();
-  const isOpen = useAppSelector((state) => state.pairModalStateReducer.value.isOpen);
-
-  const handleClick = () => {
-    dispatch(openProfilePair());
-  };
-
+const InstructionPanel: React.FC<InstructionPanelProps> = ({kata, setIsOpen}) => {
   return (
     <>
       <section className='flex flex-col gap-1 overflow-auto p-4'>
         <div className='mb-2 flex gap-2'>
           <span className='py-1.3 inline-flex items-center justify-center gap-1 rounded-full bg-primary px-2.5 text-sm  text-teal-950'>
             <FaCode />
-            {kataLibrary[kataId].category}
+            {kata.category}
           </span>
-          <span className={`${badgeColour[kataLibrary[kataId].difficulty]} py-1.3 inline-flex items-center justify-center gap-1 rounded-full px-2.5 text-sm`}>
-            {kataLibrary[kataId].difficulty === 'Easy' ? (
+          <span className={`${badgeColour[kata.difficulty]} py-1.3 inline-flex items-center justify-center gap-1 rounded-full px-2.5 text-sm`}>
+            {kata.difficulty === 'Easy' ? (
               <FaRegFaceLaughWink />
-            ) : kataLibrary[kataId].difficulty === 'Moderate' ? (
+            ) : kata.difficulty === 'Moderate' ? (
               <FaRegFaceMeh />
             ) : (
               <FaRegFaceFlushed />
             )}
-            {kataLibrary[kataId].difficulty}
+            {kata.difficulty}
           </span>
-          <KataLikes kataId={kataLibrary[kataId].id} likesOnClick={true} />
+          <KataLikes kataId={kata.id} likesOnClick={true} />
         </div>
         <h2 className='text-lg'>Description:</h2>
-        <p className='text-base'>{kataLibrary[kataId].problemStatement}</p>
-        <button onClick={handleClick} className='w-max border px-2 '>
+        <p className='text-base'>{kata.problemStatement}</p>
+        <button onClick={() => setIsOpen(true)} className='w-max border px-2 '>
           Pair up with someone!
         </button>
       </section>
-      {/* <button type="button" popovertarget="modal" popovertargetaction="show"> Sign up!</button>
-    <dialog id="modal" popover>
-      <button popovertarget="modal" popovertargetaction="hide" class="btn btn-primary">
-          Close Modal
-      </button>
-    </dialog> */}
     </>
   );
 };

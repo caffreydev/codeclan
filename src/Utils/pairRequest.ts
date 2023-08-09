@@ -1,16 +1,17 @@
 import { User } from 'firebase/auth';
-import { firestore } from '../../../firebase/firebase';
+import { firestore } from '../firebase/firebase';
 import { collection, setDoc, doc, deleteDoc, addDoc } from 'firebase/firestore';
 
 const db = firestore;
 
-type Request = {
+export type Request = {
   message: string;
   title: string;
-  receiver: string | undefined;
+  receiver: string;
+  sender?: string;
 };
 
-export default function PairRequest(requestDetails: Request, user: User) {
+export default function pairRequest(requestDetails: Request, user: User, setRequestSent: React.Dispatch<React.SetStateAction<boolean>>) {
   const { message, title, receiver } = requestDetails;
 
   // const docRef = async function request() {
@@ -18,12 +19,15 @@ export default function PairRequest(requestDetails: Request, user: User) {
   // }
 
   const docRef = async function request() {
-    await addDoc(collection(db, 'requests'), {
+    const docSnap = await addDoc(collection(db, 'requests'), {
       message,
       title,
       receiver,
       sender: `${user?.displayName}`,
     });
+    if (docSnap) {
+      setRequestSent(true)
+    }
   };
 
   docRef();

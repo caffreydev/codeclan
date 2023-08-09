@@ -28,10 +28,11 @@ const RequestList: React.FC<RequestListProps> = () => {
   const [acceptedRequests, setAcceptedRequests] = useState<AcceptedRequest[]>([]);
 
   useEffect(() => {
-  //   if (loadState) setGrouped(group(requests))
-  // }, [loadState])
-    setGrouped(group(requests));
-  }, [loadState]);
+    // if (loadState) console.log(requests.length)
+    if (loadState) setGrouped(requests.length ? group(requests) : {})
+  }, [loadState])
+  //   setGrouped(group(requests));
+  // }, [loadState]);
 
   const handleDelete = (sender: string, title: string) => {
     setGrouped((curr) => {
@@ -47,6 +48,7 @@ const RequestList: React.FC<RequestListProps> = () => {
     setAcceptedRequests([...acceptedRequests, { sender, title }]);
   };
   if (!loadState) return <h1>Loading Dashboard</h1>;
+  else if (requests.length === 0) {return <p>No requests at the moment :(</p>}
   else {
     return (
       <ul className='mt-5 grid auto-rows-auto gap-5'>

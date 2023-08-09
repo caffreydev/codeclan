@@ -17,12 +17,11 @@ export function requestPairRequests (setLoadState: React.Dispatch<React.SetState
             const array: any[] = []
             const res =  async () => {
             
-             const querySnapshot =  await getDocs(collection(db, 'requests'))
-
-              
-               querySnapshot.forEach((doc) => array.push(doc.data()))
-               setRequests(array)
-               setLoadState(true)
+            const querySnapshot =  await getDocs(collection(db, 'requests'))
+            
+            querySnapshot.forEach((doc) => array.push(doc.data()))
+            setRequests(array)
+            setLoadState(true)
                
         }
       
