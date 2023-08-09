@@ -10,7 +10,6 @@ import { useGetUser } from '@/Utils/useGetUser';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase/firebase';
 import { useSearchParams } from 'next/navigation';
-import { Loader } from '../components/Loader';
 
 type pageProps = {};
 
@@ -45,7 +44,7 @@ export default function page() {
                   Edit
                 </Link>
               )}
-              <Link href='/inbox' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:opacity-60'>
+              <Link href={userId ? `chatview?friendId=` + userId : '/inbox'} className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:opacity-60'>
                 {userId ? 'Message' : 'Inbox'}
               </Link>
               {userId && (
@@ -67,7 +66,7 @@ export default function page() {
             <CgCheckO className='mr-1 text-xl' />
             <h3 className='p-2 text-xl text-primary'>Completed Katas</h3>
           </div>
-          <UserListKatas userData={userData} />
+          {userData && <UserListKatas userData={userData} />}
         </div>
         <div className='rounded-lg border border-grey-600 bg-grey-700 p-4'>
           <div className='flex items-center'>

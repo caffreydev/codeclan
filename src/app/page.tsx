@@ -6,6 +6,7 @@ import { RiCheckDoubleLine } from 'react-icons/ri';
 import { SlPeople, SlBulb } from 'react-icons/sl';
 import { FaArrowRight } from 'react-icons/fa';
 import Footer from './components/Footer';
+import Link from 'next/link';
 export default function Home() {
   return (
     <>
@@ -72,16 +73,18 @@ export default function Home() {
 
           <div className='flex flex-col items-center justify-center'>
             <h3 className='text-xl'>Getting started with pair programming, join the Code Clan!</h3>
-            <button className='group relative mt-4 inline-flex items-center justify-start overflow-hidden rounded-md border border-grey-500 bg-grey-900 py-3 pl-4 pr-12 tracking-normal text-white transition-all duration-150 ease-in-out hover:border-primary hover:border-transparent hover:pl-10 hover:pr-6'>
-              <span className='absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-purple-400 to-primary transition-all duration-150 ease-in-out group-hover:h-full'></span>
-              <span className='absolute right-1 pr-4 text-sm duration-200 ease-out group-hover:translate-x-10'>
-                <FaArrowRight />
-              </span>
-              <span className='absolute left-1 -translate-x-10  pl-2.5 text-sm text-white duration-200 ease-out group-hover:translate-x-0'>
-                <FaArrowRight />
-              </span>
-              <span className='relative w-full transition-colors duration-200 ease-in-out group-hover:text-white'>Login/ Sign up</span>
-            </button>
+            <Link href='/authentication'>
+              <button className='group relative mt-4 inline-flex items-center justify-start overflow-hidden rounded-md border border-grey-500 bg-grey-900 py-3 pl-4 pr-12 tracking-normal text-white transition-all duration-150 ease-in-out hover:border-primary hover:border-transparent hover:pl-10 hover:pr-6'>
+                <span className='absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-purple-400 to-primary transition-all duration-150 ease-in-out group-hover:h-full'></span>
+                <span className='absolute right-1 pr-4 text-sm duration-200 ease-out group-hover:translate-x-10'>
+                  <FaArrowRight />
+                </span>
+                <span className='absolute left-1 -translate-x-10  pl-2.5 text-sm text-white duration-200 ease-out group-hover:translate-x-0'>
+                  <FaArrowRight />
+                </span>
+                <span className='relative w-full transition-colors duration-200 ease-in-out group-hover:text-white'>Login/ Sign up</span>
+              </button>
+            </Link>
           </div>
         </section>
       </main>
