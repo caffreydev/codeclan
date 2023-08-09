@@ -26,6 +26,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
         toast.success('Password reset email sent! Check inbox for instructions', {
           position: 'top-center',
           autoClose: 2000,
+          theme: 'dark',
         });
         dispatch(changePage('login'));
       }

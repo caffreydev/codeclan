@@ -99,16 +99,17 @@ const page: React.FC<pageProps> = () => {
 
         setMessage('You failed the following tests:' + failedTests.slice(0, failedTests.length - 2));
         toast.error('You failed, please try again!', {
-          position: 'bottom-right',
+          position: 'top-right',
           autoClose: 2000,
           theme: 'dark',
         });
       }
     } catch (e: any) {
       setIsLoading(false);
-      setMessage(e.message);
+      setMessage(String(e));
+      console.log(typeof message, '< message state, error catch>', typeof String(e));
       toast.error(`There's a bug in your code!`, {
-        position: 'bottom-right',
+        position: 'top-right',
         autoClose: 2000,
         theme: 'dark',
       });

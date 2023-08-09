@@ -19,7 +19,8 @@ export const kataLibrary: Kata[] = [
     problemStatement: kataProblemStatements[0],
     starterCode: `function fibonnaciFunTime(n) {
 	//Do not edit function name or first line
-	//Write all your code here between the curly braces or you will fail the tests!
+	//Write all your code here between the curly braces
+	//or you will fail the tests!
 };`,
     starterFunctionName: 'fibonnaciFunTime',
     handlerFunction: fibonnaciFunTimeHandler,
@@ -32,7 +33,8 @@ export const kataLibrary: Kata[] = [
     problemStatement: kataProblemStatements[1],
     starterCode: `function friendFilter(friends) {
 	//Do not edit function name or first line
-	//Write all your code here between the curly braces or you will fail the tests!
+	//Write all your code here between the curly braces
+	//or you will fail the tests!
 };`,
     starterFunctionName: 'friendFilter',
     handlerFunction: friendFilterHandler,
@@ -45,7 +47,8 @@ export const kataLibrary: Kata[] = [
     problemStatement: kataProblemStatements[2],
     starterCode: `function tiedInKnots(str) {
 	//Do not edit function name or first line
-	//Write all your code here between the curly braces or you will fail the tests!		
+	//Write all your code here between the curly braces
+	//or you will fail the tests!		
 };`,
     starterFunctionName: 'tiedInKnots',
     handlerFunction: tiedInKnotsHandler,
