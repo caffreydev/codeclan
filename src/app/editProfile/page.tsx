@@ -2,7 +2,6 @@
 import { useAuthState, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { auth, firestore } from '@/firebase/firebase';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import Wrapper from '../components/Wrapper';
 import { User } from '@/types/firestoreTypes';
