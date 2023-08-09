@@ -45,6 +45,7 @@ const page: React.FC<pageProps> = () => {
             return <UsersListItem key={user.userId} user={user} />;
           })}
         </ul>
+        <div>{!filteredUsers().length && <>User not found :( </>}</div>
       </div>
     </Wrapper>
   );

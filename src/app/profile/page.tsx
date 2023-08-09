@@ -48,9 +48,11 @@ export default function page() {
               <Link href='/inbox' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
                 {userId ? 'Message' : 'Inbox'}
               </Link>
-              <Link href='/sendRequest' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
-                Pair up!
-              </Link>
+              {userId && (
+                <Link href='/sendRequest' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
+                  Pair up!
+                </Link>
+              )}
             </div>
           </div>
           <hr className='border-grey-600' />
