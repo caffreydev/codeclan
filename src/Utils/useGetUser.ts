@@ -9,7 +9,6 @@ import { toast } from 'react-toastify';
 // custom hook to retrieve from database
 export function useGetUser(userId: string, setUserRetrieved: React.Dispatch<React.SetStateAction<boolean>>) {
   const [user, setUser] = useState<User | undefined>(undefined);
-
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -25,6 +24,5 @@ export function useGetUser(userId: string, setUserRetrieved: React.Dispatch<Reac
 
     getUser();
   }, [userId, setUserRetrieved]);
-
   return user;
 }

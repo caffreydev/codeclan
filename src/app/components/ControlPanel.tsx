@@ -14,8 +14,8 @@ const ControlPanel: React.FC<ControlPanelProps> = () => {
         <h3 className='text-lg text-primary'>{`${kataId} - ${kataLibrary[kataId].title}`}</h3>
       </div>
       <div className='absolute inset-0 m-auto flex w-40 items-center justify-center gap-2'>
-			<span className='rounded-lg bg-grey-300 px-2 py-1 text-xs text-grey-150'>JavaScript</span>
-        <Link href={`/playground?kata_id=${kataId > 0 ? kataId - 1 : kataId}`} className='block rounded bg-grey-300 text-xl hover:bg-grey-200'>
+        <span className='rounded-lg bg-grey-300 px-2 py-1 text-xs text-grey-150'>JavaScript</span>
+        <Link href={`/playground?kata_id=${kataId > 0 ? kataId - 1 : kataLibrary.length - 1}`} className='block rounded bg-grey-300 text-xl hover:bg-grey-200'>
           <span>
             <FaAngleLeft />
           </span>
@@ -24,18 +24,16 @@ const ControlPanel: React.FC<ControlPanelProps> = () => {
           {' '}
           <FaBars className='text-base text-grey-200' /> Katas
         </Link>
-        <Link
-          href={`/playground?kata_id=${kataId < kataLibrary.length - 1 ? kataId + 1 : kataId}`}
-          className='block rounded bg-grey-300 text-xl hover:bg-grey-200'>
+        <Link href={`/playground?kata_id=${kataId < kataLibrary.length - 1 ? kataId + 1 : 0}`} className='block rounded bg-grey-300 text-xl hover:bg-grey-200'>
           <span>
             <FaAngleRight />
           </span>
         </Link>
       </div>
-      
-			<Link href='https://zoom.us/start/videomeeting' target="_blank" className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-opacity-60'>
-                  Open a Meeting
-                </Link>
+
+      <Link href='https://zoom.us/start/videomeeting' target='_blank' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-opacity-60'>
+        Open a Meeting
+      </Link>
     </nav>
   );
 };
