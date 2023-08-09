@@ -4,7 +4,6 @@ import { badgeColour } from '.';
 import KataLikes from './KataLikes';
 import { kataLibrary } from '../katas/katalibrary/kataLibrary';
 import { useSearchParams } from 'next/navigation';
-import { useChangeLikes } from '@/Utils/useChangeLikes';
 import { kataTestsAsText } from '../katas/katalibrary/kataTestsAsText';
 
 type InstructionPanelProps = {};

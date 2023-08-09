@@ -4,7 +4,6 @@ import { User } from '@/types/firestoreTypes';
 import { firestore } from '@/firebase/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 
 // custom hook to retrieve from database
 export function useGetUser(userId: string, setUserRetrieved: React.Dispatch<React.SetStateAction<boolean>>) {

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import Confetti from 'react-confetti';
 import { toast } from 'react-toastify';
 import ReactCodeMirror from '@uiw/react-codemirror';
-import { kataLibrary } from '../katas/katalibrary/kataLibrary';
+import { Kata, kataLibrary } from '../katas/katalibrary/kataLibrary';
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import { javascript } from '@codemirror/lang-javascript';
 import { useSearchParams } from 'next/navigation';
@@ -38,7 +38,7 @@ const page: React.FC<pageProps> = () => {
   const [codeText, setCodeText] = useState<string>(kataLibrary[kataId].starterCode);
   const [message, setMessage] = useState<string>('Build your code and hit run!');
   const [success, setSuccess] = useState<boolean>(false);
-  const [kata, setKata] = useState<any>(kataLibrary[kataId]);
+  const [kata, setKata] = useState<Kata>(kataLibrary[kataId]);
   const [isLoading, setIsLoading] = useState(false);
   const [completedKatasSession, setCompletedKatasSession] = useState<string[]>([]);
 
@@ -119,11 +119,11 @@ const page: React.FC<pageProps> = () => {
 
   return (
     <>
-      <ControlPanel kata={kata} />
+      <ControlPanel />
       <main className='h-full'>
         {success && <Confetti gravity={0.3} tweenDuration={4000} width={window.innerWidth - 25} height={window.innerHeight - 1} />}
         <Split minSize={0} className='split h-full'>
-          <InstructionPanel kata={kata} />
+          <InstructionPanel />
           <section>
             <Split minSize={0} direction='vertical' className='h-full'>
               <div className='w-full overflow-auto bg-[#1e1e1e]'>
