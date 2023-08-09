@@ -144,7 +144,7 @@ const page: React.FC<pageProps> = () => {
                     disabled={isLoading}
                     data-disabled={isLoading}
                     className='w-full rounded-lg bg-grey-300 px-3 py-2 hover:bg-opacity-60 data-[disabled=true]:cursor-not-allowed'
-                    onClick={() => handleTestCase()}>
+                    onClick={handleTestCase}>
                     Run
                   </button>
                   <button className='w-full rounded-lg bg-primary px-3 py-2 hover:bg-opacity-60'>Submit</button>
