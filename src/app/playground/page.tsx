@@ -1,7 +1,7 @@
 'use client';
 import Split from 'react-split';
 import InstructionPanel from '../components/InstructionPanel';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Confetti from 'react-confetti';
 import { toast } from 'react-toastify';
 import ReactCodeMirror from '@uiw/react-codemirror';
@@ -27,12 +27,20 @@ switch (n) {
 */
 
 const page: React.FC<pageProps> = () => {
-  const kataId = useSearchParams().get('kata_id');
+  const params = useSearchParams();
+  const kataId = parseInt(params.get('kata_id') as string);
+
   const [codeText, setCodeText] = useState<string>(kataLibrary[kataId].starterCode);
   const [message, setMessage] = useState<string>('Build your code and hit run!');
   const [success, setSuccess] = useState<boolean>(false);
   const [kata, setKata] = useState<any>(kataLibrary[kataId]);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setCodeText(kataLibrary[kataId].starterCode);
+    setKata(kataLibrary[kataId]);
+    setMessage('Build your code and hit run!');
+  }, [kataId]);
 
   const handleChangeValue = (value: string) => {
     setCodeText(value);
