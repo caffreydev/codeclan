@@ -74,6 +74,11 @@ const page: React.FC<pageProps> = () => {
           autoClose: 2000,
           theme: 'dark',
         });
+        if (!user) {
+          setTimeout(() => setSuccess(false), 5000);
+          return;
+        }
+
         if (!currUser?.completedKatas.includes(kata.title) && !completedKatasSession.includes(kata.title)) {
           const newUserTableEntry = { ...currUser };
           const completedKatas = [...newUserTableEntry.completedKatas];
@@ -107,7 +112,7 @@ const page: React.FC<pageProps> = () => {
     } catch (e: any) {
       setIsLoading(false);
       setMessage(String(e));
-      console.log(typeof message, '< message state, error catch>', typeof String(e));
+
       toast.error(`There's a bug in your code!`, {
         position: 'top-right',
         autoClose: 2000,
