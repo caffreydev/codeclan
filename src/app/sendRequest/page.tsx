@@ -1,24 +1,27 @@
 'use client'
 import { kataLibrary } from "@/app/katas/katalibrary/kataLibrary"
 import { useState } from "react"
-import PairRequest from "@/app/components/AddPairRequest"
+import PairRequest from "@/app/components/PairRequest"
+import { useSearchParams } from 'next/navigation';
+
+
+
 
 export default function sendRequest () {
 const [inputDetails, setInputDetails] = useState({
     'message':'',
     'title':'',
-    
-    
-
 })
 
 const [requestDetails, setRequestDetails] = useState({})
-
+const userId = useSearchParams().get('user_id');
 
 const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputDetails((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 };
- const handleSubmit = (e) => {
+
+const handleSubmit = (e) => {
+    
     e.preventDefault()
     setRequestDetails(inputDetails)
     
@@ -44,7 +47,7 @@ return (
 
 
 
-<PairRequest requestDetails={requestDetails}/>
+<PairRequest requestDetails={requestDetails} userId={userId}/>
 </form>
    
 

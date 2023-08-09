@@ -49,7 +49,9 @@ export default function page() {
                 {userId ? 'Message' : 'Inbox'}
               </Link>
               {userId && (
-                <Link href='/sendRequest' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:opacity-60'>
+
+                <Link href={`/sendRequest?user_id=${userId}`} className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
+
                   Pair up!
                 </Link>
               )}

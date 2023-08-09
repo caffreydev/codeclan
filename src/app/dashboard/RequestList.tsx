@@ -1,7 +1,11 @@
 'use client';
 import { useEffect, useState } from 'react';
 import group from '../function/groupByKata';
+import {auth, firestore } from "../../firebase/firebase"
 import { requestPairRequests } from '@/Utils/retrievePairRequests';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import groupByReceiver from '../function/groupByReceiever';
+
 
 import Link from 'next/link';
 
@@ -26,9 +30,10 @@ const RequestList: React.FC<RequestListProps> = () => {
   const requests: Request[] = requestPairRequests(setLoadState);
   const [grouped, setGrouped] = useState<GroupedRequests>({});
   const [acceptedRequests, setAcceptedRequests] = useState<AcceptedRequest[]>([]);
-
+  const [user] = useAuthState(auth);
   useEffect(() => {
-    setGrouped(group(requests));
+             const filter = groupByReceiver(user?.displayName, requests)
+    setGrouped(group(filter));
   }, [loadState]);
 
   const handleDelete = (sender: string, title: string) => {
