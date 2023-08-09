@@ -4,6 +4,7 @@ import group from '../function/groupByKata';
 import lfp from '@/sample-data/LfP';
 import Link from 'next/link';
 import { requestPairRequests } from '@/Utils/retrievePairRequests';
+import groupByEmptyReceiever from '../function/groupByEmptyReceiver';
 interface Request {
   sender: string;
   reqId: number;
@@ -31,14 +32,14 @@ const SendRequest: React.FC<SendRequestProps> = () => {
 
 
     useEffect(()=> {
-        
-           setGrouped(group(requests))
+      const emptyReceiverArray = groupByEmptyReceiever(requests)
+           setGrouped(group(emptyReceiverArray))
 
     }, [loadState])
 
 
 
-if (!loadState) {return <h1>'is loading'</h1>}
+if (!loadState) {return <h1>'Open requests still loading'</h1>}
 
 else {
   return (

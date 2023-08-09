@@ -3,12 +3,12 @@ const groupByReceiver = (title, requests) => {
 const filteredReceiver = [...requests]
  const arr = filteredReceiver.filter((eachRequest) => {
 
-    if (eachRequest.sender !== title) {
+    if (eachRequest.receiver === title) {
          return eachRequest
     }
     
  })
- console.log(arr, '<<<<<<<<<<<<<<<<<<<<,,,,filtered')
+
 return arr 
 }
 
