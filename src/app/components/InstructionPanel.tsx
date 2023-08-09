@@ -5,6 +5,7 @@ import KataLikes from './KataLikes';
 import { kataLibrary } from '../katas/katalibrary/kataLibrary';
 import { useSearchParams } from 'next/navigation';
 import { useChangeLikes } from '@/Utils/useChangeLikes';
+import { kataTestsAsText } from '../katas/katalibrary/kataTestsAsText';
 
 type InstructionPanelProps = {};
 
@@ -32,6 +33,13 @@ const InstructionPanel: React.FC<InstructionPanelProps> = () => {
       </div>
       <h2 className='text-lg'>Description:</h2>
       <p className='text-base'>{kataLibrary[kataId].problemStatement}</p>
+      <br />
+      <h2 className='text-lg'>Tests</h2>
+      <ol className='list-inside list-decimal'>
+        {kataTestsAsText[kataId].map((testStr, index) => (
+          <li key={`test ${index} of kata ${kataId}`}>{testStr}</li>
+        ))}
+      </ol>
     </section>
   );
 };
