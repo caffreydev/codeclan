@@ -3,10 +3,13 @@ import React from 'react';
 import { FaAngleRight, FaAngleLeft, FaBars } from 'react-icons/fa6';
 import { Kata, kataLibrary } from '../katas/katalibrary/kataLibrary';
 import { useSearchParams } from 'next/navigation';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '@/firebase/firebase';
 type ControlPanelProps = {};
 
 const ControlPanel: React.FC<ControlPanelProps> = () => {
   const kataId = Number(useSearchParams().get('kata_id'));
+  const [user] = useAuthState(auth);
 
   return (
     <nav className='fixed inset-x-0 top-14 z-30 flex h-11 items-center justify-end gap-5 bg-grey-600 px-4 py-1'>
@@ -29,12 +32,14 @@ const ControlPanel: React.FC<ControlPanelProps> = () => {
           </span>
         </Link>
       </div>
-      <Link
-        href='https://zoom.us/start/videomeeting'
-        target='_blank'
-        className='z-[1] cursor-pointer rounded-lg bg-primary px-3 py-1 text-grey-100 transition hover:bg-opacity-60 hover:text-grey-200'>
-        Open a Meeting
-      </Link>
+      {user && (
+        <Link
+          href='https://zoom.us/start/videomeeting'
+          target='_blank'
+          className='z-[1] cursor-pointer rounded-lg bg-primary px-3 py-1 text-grey-100 transition hover:bg-opacity-60 hover:text-grey-200'>
+          Open a Meeting
+        </Link>
+      )}
     </nav>
   );
 };
