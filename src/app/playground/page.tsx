@@ -74,9 +74,11 @@ const page: React.FC<pageProps> = () => {
           theme: 'dark',
         });
         if (!currUser?.completedKatas.includes(kataId)) {
+          console.log(kata);
           const newUserTableEntry = { ...currUser };
           const completedKatas = [...newUserTableEntry.completedKatas];
-          completedKatas.push(kataId);
+
+          completedKatas.push(kata.title);
           newUserTableEntry.completedKatas = completedKatas;
 
           const ref = await setDoc(doc(firestore, 'users', newUserTableEntry.userId), newUserTableEntry);
@@ -98,7 +100,7 @@ const page: React.FC<pageProps> = () => {
       }
     } catch (e: any) {
       setIsLoading(false);
-      setMessage(e);
+      setMessage(e.message);
       toast.error(`There's a bug in your code!`, {
         position: 'bottom-right',
         autoClose: 2000,
