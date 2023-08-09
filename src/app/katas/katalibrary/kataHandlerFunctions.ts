@@ -208,7 +208,7 @@ export const tiedInKnotsHandler = (userFunc: Function) => {
   const article2 = `When tieing your shoelace, we recommend a double bow.  This is a simple yet effective knot,
     that is great at maintaining stability`;
 
-  if (userFunc(article2) !== 14) {
+  if (userFunc(article2) !== 19) {
     failedTests.push(2);
   }
 
