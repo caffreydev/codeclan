@@ -12,8 +12,8 @@ type PairModalProps = {};
 
 const PairModal: React.FC<PairModalProps> = () => {
   const isOpen = useAppSelector(state => state.pairModalStateReducer.value.isOpen);
-  // const page = useAppSelector(state => state.pairModalStateReducer.value.page)
-  const page = 'kata'
+  const page = useAppSelector(state => state.pairModalStateReducer.value.page)
+  // const page = 'kata'
   const dispatch = useDispatch<AppDispatch>();
   return (
     isOpen && (
