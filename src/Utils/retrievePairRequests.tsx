@@ -14,7 +14,7 @@ export function requestPairRequests (setLoadState: React.Dispatch<React.SetState
     const [requests, setRequests ] = useState([])
    
         useEffect(()=> {
-            const array = []
+            const array: any = []
             const res =  async () => {
             
              const querySnapshot =  await getDocs(collection(db, 'requests'))
