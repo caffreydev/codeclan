@@ -38,6 +38,9 @@ const KataLikes: React.FC<KataLikesProps> = ({ kataId, likesOnClick }) => {
       newKataObj.likes = newKataObj.likes + 1;
       newKataObj.dislikes = newKataObj.dislikes += disliked ? 1 : 0;
       const likedBy = [...newKataObj.likedBy];
+      const dislikedBy = [...newKataObj.dislikedBy];
+      if (disliked) dislikedBy.push(user?.uid as string);
+      newKataObj.dislikedBy = dislikedBy;
       likedBy.push(user?.uid as string);
       newKataObj.likedBy = likedBy;
 
@@ -72,6 +75,9 @@ const KataLikes: React.FC<KataLikesProps> = ({ kataId, likesOnClick }) => {
       newKataObj.dislikes = newKataObj.dislikes + 1;
       newKataObj.likes = newKataObj.likes += liked ? 1 : 0;
       const dislikedBy = [...newKataObj.dislikedBy];
+      const likedBy = [...newKataObj.likedBy];
+      if (liked) likedBy.push(user?.uid as string);
+      newKataObj.likedBy = likedBy;
       dislikedBy.push(user?.uid as string);
       newKataObj.dislikedBy = dislikedBy;
 
