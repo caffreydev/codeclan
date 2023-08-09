@@ -33,8 +33,6 @@ const page: React.FC<pageProps> = () => {
   const [success, setSuccess] = useState<boolean>(false);
   const [kata, setKata] = useState<any>(kataLibrary[kataId]);
   const [isLoading, setIsLoading] = useState(false);
-  const w = window.innerWidth;
-  const h = window.innerHeight;
 
   const handleChangeValue = (value: string) => {
     setCodeText(value);
@@ -87,7 +85,7 @@ const page: React.FC<pageProps> = () => {
     <>
       <ControlPanel kata={kata} />
       <main className='h-full'>
-        {success && <Confetti gravity={0.3} tweenDuration={4000} width={w - 25} height={h - 1} />}
+        {success && <Confetti gravity={0.3} tweenDuration={4000} width={window.innerWidth - 25} height={window.innerHeight - 1} />}
         <Split minSize={0} className='split h-full'>
           <InstructionPanel kata={kata} />
           <section>
