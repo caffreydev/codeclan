@@ -1,7 +1,7 @@
 # CodeClan
 
 
-## Project Overview:
+# Project Overview:
 
 Welcome to CodeClan! This full-stack application provides a collaborative coding environment where developers can hone their skills through various coding katas. Whether you're looking to tackle challenges individually or pair up with fellow developers, CodeClan offers a platform for growth and collaboration. With a personal messaging system, a variety of katas, detailed user profiles, Firebase authentication, and the option to work solo or pair program, you have the tools you need to enhance your coding journey.
 
@@ -35,9 +35,7 @@ You can try it out by visiting the website and exploring its features.
 - Tailwind CSS
 
 
-# Setup & Installation
-
-Running the Project Locally - 
+# Setup & Installation 
 
 Clone the Repository:      
 git clone https://github.com/caffreydev/codeclan.git
@@ -47,6 +45,43 @@ cd codeclan
 
 Install the necessary dependencies:            
 npm install
+
+# Firebase Setup
+
+Firebase is used to provide authentication, data storage, and other features in CodeClan. To get started, follow these steps:
+
+1. **Create a Firebase Project**:
+   If you don't have a Firebase project, you can create one by visiting the [Firebase Console](https://console.firebase.google.com/).
+
+2. **Obtain Firebase Configuration**:
+   - Go to your project settings in the Firebase Console.
+   - Click on the "Your apps" section and select the web app (</> icon).
+   - Find the "Config" option (Project Settings - General) to access your Firebase configuration object.
+   - Replace the placeholder values in the configuration with your actual Firebase project settings. 
+	 - It should look like this but with your private details:
+
+   ```javascript
+   const firebaseConfig = {
+     apiKey: "your-api-key",
+     authDomain: "your-auth-domain",
+     projectId: "your-project-id",
+     storageBucket: "your-storage-bucket",
+     messagingSenderId: "your-messaging-sender-id",
+     appId: "your-app-id",
+   };
+
+## Secure Private Keys:
+To keep your Firebase configuration settings secure,  create an .env.local file in the root directory of your project and store your private keys there.
+Make sure to add your .env file to your project's .gitignore to keep your private keys from being exposed in version control.
+### .env.local
+- NEXT_PUBLIC_FIREBASE_API_KEY=your-api-key
+- NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-auth-domain
+- NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
+- NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-storage-bucket
+- NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
+- NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
+
+### Run locallly
 
 Start the frontend development server:          
 npm run dev
