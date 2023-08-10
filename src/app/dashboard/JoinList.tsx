@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../function/button';
+import Button from '../components/Button';
 import { requestPairRequests } from '@/Utils/requestPairRequests';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
