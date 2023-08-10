@@ -12,6 +12,7 @@ import { auth } from '@/firebase/firebase';
 import { useSearchParams } from 'next/navigation';
 import KataPair from '../components/pairing components/KataPair';
 import RequestList from './RequestList';
+import useHasMounted from '@/hooks/useHasMounted';
 
 type pageProps = {};
 
@@ -19,10 +20,14 @@ export default function page() {
   const userId = useSearchParams().get('user_id'); //view another user profile
   const [user] = useAuthState(auth);
   const [userRetrieved, setUserRetrieved] = useState(false);
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const userData = useGetUser(userId || (user?.uid as string), setUserRetrieved);
 
-  if (!userRetrieved) return <></>;
+  const mounted = useHasMounted();
+
+  if (!mounted) return null;
+
+  if (!userRetrieved) return null;
 
   return (
     userData && (
