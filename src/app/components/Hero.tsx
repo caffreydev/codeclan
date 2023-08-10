@@ -40,14 +40,16 @@ const Hero: React.FC<HeroProps> = () => {
             <span className='bg-grey-t rounded-2xl border border-grey-600 bg-grey-900 px-3 py-1 text-[11px] uppercase tracking-normal text-grey-300'>
               Unlock the Power of Pairing
             </span>
-            <h2 className='mx-auto flex max-w-[40rem] flex-wrap items-center justify-center text-4xl text-grey-100 md:text-7xl'>
+            <h2 className='mx-auto flex max-w-[22rem] flex-wrap items-center justify-center text-4xl text-grey-100 md:max-w-[40rem] md:text-7xl'>
               A better
-              <span className='bg-gradient-to-r from-purple-400 to-primary bg-clip-text px-2 leading-normal text-transparent'>paired</span>
-              <span className='-mb-5 -mt-10 bg-gradient-to-r from-purple-400 to-primary bg-clip-text pr-2 leading-normal text-transparent'>programming</span>
+              <span className='bg-gradient-to-r from-purple-400 to-primary bg-clip-text px-2 leading-loose text-transparent md:leading-normal'>paired</span>
+              <span className='-mb-5 -mt-10 bg-gradient-to-r from-purple-400 to-primary bg-clip-text pr-2 leading-loose text-transparent md:leading-normal'>
+                programming
+              </span>
               experience
             </h2>
           </div>
-          <p className='font-mono text-xl text-grey-400'>“Two heads are better than one.”</p>
+          <p className='font-mono text-sm text-grey-400 md:text-xl'>“Two heads are better than one.”</p>
           <div className='flex items-center justify-center gap-5'>
             <button
               className='group relative mt-4 inline-flex items-center justify-start overflow-hidden rounded-md border border-grey-500 bg-grey-900 py-3 pl-4 pr-12 tracking-normal text-white transition-all duration-150 ease-in-out hover:border-primary hover:border-transparent hover:pl-10 hover:pr-6'

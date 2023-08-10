@@ -1,13 +1,43 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
 import Wrapper from '../components/Wrapper';
+import MessageList, { boxType } from '../components/MessageList';
 
 const Message: React.FC = () => {
+  const [page, setPage] = useState<boxType>('Inbox');
+
+  const handleClick = (page: boxType) => {
+    setPage(page);
+  };
+
   return (
-    <Wrapper>
-      <div className='border-1px mx-auto w-5/6 max-w-screen-xl px-2 py-10'>
-        <h2 className='mb-6 text-4xl font-bold'>Message</h2>
-        <hr className='border border-grey-600' />
-        <p>Username:</p>I am the message - any nudes?
+    <Wrapper className='pb-4 sm:pb-6 md:pb-8'>
+      <h2 className='my-7 text-3xl font-bold'>Messages </h2>
+      <div className='h-full rounded-lg bg-grey-800'>
+        <div className='border-b border-grey-600 p-4 pb-0'>
+          <nav className='-mb-px flex'>
+            <button
+              onClick={() => handleClick('Inbox')}
+              className={`border bg-grey-800 px-4 py-2 text-base font-medium ${
+                page === 'Inbox'
+                  ? ` -mb-[1px]  rounded-t-md border-grey-600  border-b-transparent text-primary`
+                  : 'border-transparent border-b-grey-600 text-grey-300 hover:text-grey-100'
+              }`}>
+              Inbox
+            </button>
+
+            <button
+              onClick={() => handleClick('Outbox')}
+              className={` border bg-grey-800 px-4 py-2 text-base font-medium ${
+                page === 'Outbox'
+                  ? ` -mb-[1px] rounded-t-md border-grey-600  border-b-transparent text-primary`
+                  : 'border-transparent border-b-grey-600 text-grey-300 hover:text-grey-100'
+              }`}>
+              Sent
+            </button>
+          </nav>
+        </div>
+        {page && <MessageList boxType={page} />}
       </div>
     </Wrapper>
   );
