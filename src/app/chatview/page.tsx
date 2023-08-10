@@ -10,6 +10,7 @@ import { useSearchParams } from 'next/navigation';
 import ChatViewItem from '../components/ChatViewItem';
 import { Timestamp, doc, setDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
+import Wrapper from '../components/Wrapper';
 
 type pageProps = {};
 
@@ -62,6 +63,8 @@ const page: React.FC<pageProps> = () => {
         autoClose: 5000,
         theme: 'dark',
       });
+      setNewMessageSubject('');
+      setNewMessageText('');
     } catch (e: any) {
       alert(e?.message);
     }
@@ -77,41 +80,53 @@ const page: React.FC<pageProps> = () => {
 
   if (!messagesRetrieved || !friendUserRetrieved)
     return (
-      <div className='border-1px mx-auto w-5/6 max-w-screen-xl px-2 py-10'>
-        <h2 className='mb-6 text-4xl font-bold'>Your Chat With</h2>
-      </div>
+      <Wrapper className='pb-4 sm:pb-6 md:pb-8'>
+        <h2 className='my-7 text-3xl font-bold'>
+          Chat with <span className='tracking-widest'>...</span>
+        </h2>
+        <p>Loading messages...</p>
+      </Wrapper>
     );
 
   return (
-    <div className='border-1px mx-auto w-5/6 max-w-screen-xl px-2 py-10'>
-      <h2 className='mb-10 text-4xl font-bold'>Your Chat With {friendUser.displayName}</h2>
-      <form className='mb-5' onSubmit={handleSendMessage}>
-        <label htmlFor='messageSubject' />
-        <input
-          className='mb-2 block w-full rounded-2xl border border-gray-300 bg-gray-100 p-2.5 pb-2 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
-          onChange={handleNewMessageSubjectChange}
-          type='text'
-          name='messageSubject'
-          placeholder='Enter your message subject here...'
-        />
-        <label htmlFor='messageText' />
-        <textarea
-          className='mb-2 block w-full rounded-2xl border border-gray-300 bg-gray-100 p-2.5 pb-2 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
-          rows={4}
-          placeholder='Enter your insightful message here...'
-          onChange={handleMessageTextChange}
-        />
-        <button type='submit' className='rounded-lg bg-blue-200 p-3 text-black hover:bg-blue-500 hover:text-white'>
-          Send Message
+    <Wrapper className='pb-4  sm:pb-6 md:pb-8'>
+      <h2 className='my-7 text-3xl font-bold '>
+        Chat with <span className='text-3xl font-bold text-primary'>{friendUser.displayName}</span>
+      </h2>
+      <form
+        className='mb-4 flex flex-col gap-4 rounded-lg border border-grey-600 bg-grey-800 p-4 sm:mb-6 sm:gap-6 sm:p-6 md:mb-8 md:p-8'
+        onSubmit={handleSendMessage}>
+        <label>
+          <input
+            className='w-full rounded-lg  border border-grey-600  bg-grey-600 bg-transparent p-2 py-2.5 pe-10 text-sm text-grey-200 shadow-sm outline-none transition hover:border-grey-500 focus:border-grey-300 sm:text-sm'
+            onChange={handleNewMessageSubjectChange}
+            type='text'
+            name='messageSubject'
+            value={newMessageSubject}
+            placeholder='Enter your message subject here...'
+          />
+        </label>
+        <label>
+          <textarea
+            className='w-full rounded-lg  border border-grey-600  bg-grey-600 bg-transparent p-2 py-2.5 pe-10 text-sm text-grey-200 shadow-sm outline-none transition hover:border-grey-500 focus:border-grey-300 sm:text-sm'
+            rows={4}
+            placeholder='Enter your insightful message here...'
+            value={newMessageText}
+            onChange={handleMessageTextChange}
+          />
+        </label>
+        <button type='submit' className='rounded-lg bg-primary px-4 py-2  hover:bg-opacity-60'>
+          Send message
         </button>
       </form>
+      {messagesArray.length === 0 && sentMessages.length === 0 ? <h1>Wow, so much empty!... why not send the first message?</h1> : ''}
       {sentMessages.map((message: Message) => {
-        return <ChatViewItem message={message} userId={user?.uid as string} />;
+        return <ChatViewItem key={message.id} message={message} userId={user?.uid as string} />;
       })}
       {messagesArray.map((message: Message) => {
-        return <ChatViewItem message={message} userId={user?.uid as string} />;
+        return <ChatViewItem key={message.id} message={message} userId={user?.uid as string} />;
       })}
-    </div>
+    </Wrapper>
   );
 };
 export default page;

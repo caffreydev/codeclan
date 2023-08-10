@@ -1,13 +1,15 @@
 'use client';
 import { useEffect, useState } from 'react';
 import group from '../function/groupByKata';
-import {auth, firestore } from "../../firebase/firebase"
+import { auth, firestore } from '../../firebase/firebase';
 import { requestPairRequests } from '@/Utils/retrievePairRequests';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import groupByReceiver from '../function/groupByReceiever';
-
+import { FiCheck, FiCheckCircle, FiUserCheck, FiUserX, FiX } from 'react-icons/fi';
 
 import Link from 'next/link';
+import { FaUserCheck } from 'react-icons/fa';
+import { Loader } from '../components/Loader';
 
 interface Request {
   sender: string;
@@ -32,7 +34,7 @@ const RequestList: React.FC<RequestListProps> = () => {
   const [acceptedRequests, setAcceptedRequests] = useState<AcceptedRequest[]>([]);
   const [user] = useAuthState(auth);
   useEffect(() => {
-             const filter = groupByReceiver(user?.displayName, requests)
+    const filter = groupByReceiver(user?.displayName, requests)
     setGrouped(group(filter));
   }, [loadState]);
 
@@ -58,37 +60,37 @@ const RequestList: React.FC<RequestListProps> = () => {
             return null;
           }
           return (
-            <li className='col-span-1 rounded-xl border border-grey-600 bg-grey-800 p-4' key={pair[0]}>
+            <li className='col-span-1 rounded-lg border border-grey-600 bg-grey-800 p-4' key={pair[0]}>
               <h4 className='mb-2 text-xl font-bold'>{pair[0]}</h4>
-              <ul>
+              <ul className='flex flex-col gap-2'>
                 {pair[1].map((requestObj: Request, i: number) => {
                   const isAccepted = acceptedRequests.some(
                     (acceptedRequest) => acceptedRequest.sender === requestObj.sender && acceptedRequest.title === pair[0],
                   );
                   return (
-                    <li className={`${i + 1 == pair[1].length} flex items-center rounded p-2`} key={requestObj.reqId}>
+                    <li className={`${i + 1 == pair[1].length} flex items-center rounded bg-grey-700 p-2`} key={requestObj.reqId}>
                       <Link href='/' className='grow'>
                         {requestObj.sender}
                       </Link>
                       {isAccepted ? (
                         <Link href={`/use-client?sender=${requestObj.sender}&title=${pair[0]}`} className='w-15 mx-15 rounded-lg border-0 bg-accept p-1'>
-                          <p>Click to Join</p>
+                          <p className='text-sm'>Click to Join</p>
                         </Link>
                       ) : (
                         <>
                           <button
-                            className='mx-3 w-9 rounded-lg border-0 bg-accept p-1'
+                            className='mr-2 rounded-lg border border-accept p-1 transition hover:bg-green-800'
                             onClick={() => {
                               handleAccept(requestObj.sender, pair[0]);
                             }}>
-                            ✔
+                            <FiCheck />
                           </button>
                           <button
-                            className='w-9 rounded-lg border-0 bg-decline p-1'
+                            className='rounded-lg border border-decline p-1 transition hover:bg-red-800'
                             onClick={() => {
                               handleDelete(requestObj.sender, pair[0]);
                             }}>
-                            ✘
+                            <FiX />
                           </button>
                         </>
                       )}

@@ -1,5 +1,4 @@
 const group = (requests) => {
-
   let groupObj = {};
   const titles = requests.map((request) => request.title);
   const filteredTitles = titles.filter((title, i) => i === titles.indexOf(title));

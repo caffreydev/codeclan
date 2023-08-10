@@ -127,22 +127,22 @@ const KataLikes: React.FC<KataLikesProps> = ({ kataId, likesOnClick }) => {
     <>
       <p>
         <span
-          onClick={useLikesOnClick}
-          className={`py-1.3 inline-flex items-center justify-center gap-1 rounded-full bg-green-500 px-2.5 text-sm text-white ${
-            likesOnClick ? 'hover:cursor-pointer' : ''
-          } ${liked ? 'border-4 border-green-700' : ''}`}>
-          <FaThumbsUp />
-          {kata.likes + (liked ? 1 : 0)}
+          onClick={useDislikesOnClick}
+          className={`py-1.3 inline-flex items-center justify-center gap-1 rounded-full bg-red-500 px-2.5 text-sm text-white ${
+            likesOnClick ? 'cursor-pointer transition ease-in-out hover:scale-110 hover:opacity-80' : ''
+          } ${disliked ? 'border-4 border-red-800' : ''}`}>
+          <FaThumbsDown />
+          {kata.dislikes + (disliked ? 1 : 0)}
         </span>
       </p>
       <p>
         <span
-          onClick={useDislikesOnClick}
-          className={`py-1.3 inline-flex items-center justify-center gap-1 rounded-full bg-red-500 px-2.5 text-sm text-white ${
-            likesOnClick ? 'hover:cursor-pointer' : ''
-          } ${disliked ? 'border-4 border-red-700' : ''}`}>
-          <FaThumbsDown />
-          {kata.dislikes + (disliked ? 1 : 0)}
+          onClick={useLikesOnClick}
+          className={`py-1.3 inline-flex items-center justify-center gap-1 rounded-full bg-green-500 px-2.5 text-sm text-white ${
+            likesOnClick ? 'cursor-pointer transition ease-in-out hover:scale-110' : ''
+          } ${liked ? 'border-4 border-green-700' : ''}`}>
+          <FaThumbsUp />
+          {kata.likes + (liked ? 1 : 0)}
         </span>
       </p>
     </>
