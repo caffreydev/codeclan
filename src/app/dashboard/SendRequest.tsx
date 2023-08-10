@@ -4,10 +4,12 @@ import group from '../function/groupByKata';
 import Link from 'next/link';
 import { requestPairRequests } from '@/Utils/requestPairRequests';
 import groupByEmptyReceiever from '../function/groupByEmptyReceiver';
-interface Request {
-  sender: string;
-  reqId: number;
-}
+import { Request } from '@/types/firestoreTypes';
+
+// interface Request {
+//   sender: string;
+//   reqId: number;
+// }
 
 interface AcceptedRequest {
   sender: string;
@@ -52,7 +54,7 @@ const SendRequest: React.FC<SendRequestProps> = () => {
                     (acceptedRequest) => acceptedRequest.sender === requestObj.sender && acceptedRequest.title === pair[0],
                   );
                   return (
-                    <li className={`${i + 1 == pair[1].length} flex items-center rounded p-2`} key={requestObj.reqId}>
+                    <li className={`${i + 1 == pair[1].length} flex items-center rounded p-2`} key={requestObj.id}>
                       <Link href='/' className='grow'>
                         {requestObj.sender}
                       </Link>

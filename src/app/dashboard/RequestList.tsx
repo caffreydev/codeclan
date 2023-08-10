@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import group from '../function/groupByKata';
-import { auth, firestore } from '../../firebase/firebase';
+import { auth } from '../../firebase/firebase';
 import { requestPairRequests } from '@/Utils/requestPairRequests';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import groupByReceiver from '../function/groupByReceiever';
@@ -9,8 +9,6 @@ import { FiCheck, FiCheckCircle, FiUserCheck, FiUserX, FiX } from 'react-icons/f
 import { Request } from '@/Utils/pairRequest';
 
 import Link from 'next/link';
-import { FaUserCheck } from 'react-icons/fa';
-import { Loader } from '../components/Loader';
 
 interface AcceptedRequest {
   sender: string;

@@ -1,8 +1,6 @@
 import React from 'react';
-import Button from '../function/button';
 import RequestList from './RequestList';
 import JoinList from './SendRequest';
-import Link from 'next/link';
 import Wrapper from '../components/Wrapper';
 
 type pageProps = {};

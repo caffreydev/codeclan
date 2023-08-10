@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import lfp from '@/sample-data/LfP';
 type JoinListProps = {};
+import { Request } from '@/types/firestoreTypes';
 
 const JoinList: React.FC<JoinListProps> = () => {
   const [loadState, setLoadState] = useState(false);
