@@ -10,6 +10,8 @@ import { useGetUser } from '@/Utils/useGetUser';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase/firebase';
 import { useSearchParams } from 'next/navigation';
+import KataPair from '../components/pairing components/KataPair';
+import RequestList from './RequestList';
 
 type pageProps = {};
 
@@ -17,6 +19,7 @@ export default function page() {
   const userId = useSearchParams().get('user_id'); //view another user profile
   const [user] = useAuthState(auth);
   const [userRetrieved, setUserRetrieved] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
   const userData = useGetUser(userId || (user?.uid as string), setUserRetrieved);
 
   if (!userRetrieved) return <></>;
@@ -73,8 +76,8 @@ export default function page() {
           </div>
           <div className='rounded-lg border border-grey-600 bg-grey-700 p-4'>
             <div className='flex items-center'>
-              <TbProgress className='mr-1 text-xl' />
-              <h3 className='p-2 text-xl text-primary'> Katas in progress</h3>
+              {!userId && <RequestList />}
+              <h3 className='p-2 text-xl text-primary'> Request List</h3>
             </div>
           </div>
         </section>

@@ -5,12 +5,16 @@ import KataLikes from './KataLikes';
 import { kataLibrary } from '../katas/katalibrary/kataLibrary';
 import { useSearchParams } from 'next/navigation';
 import { kataTestsAsText } from '../katas/katalibrary/kataTestsAsText';
+import { Seymour_One } from 'next/font/google';
 
-type InstructionPanelProps = {};
+type InstructionPanelProps = {
+  setIsOpen: any;
+};
 
-const InstructionPanel: React.FC<InstructionPanelProps> = () => {
-  const kataId = Number(useSearchParams().get('kata_id'));
-
+const InstructionPanel: React.FC<InstructionPanelProps> = ({setIsOpen}) => {
+  const params = useSearchParams();
+  const kataId = parseInt(params.get('kata_id') as string) || 0;
+  
   return (
     <section className='flex flex-col gap-2 overflow-auto p-4'>
       <div className='mb-2 flex justify-between'>
@@ -46,6 +50,9 @@ const InstructionPanel: React.FC<InstructionPanelProps> = () => {
           <li key={`test ${index} of kata ${kataId}`}>{testStr}</li>
         ))}
       </ol>
+      <button onClick={() => setIsOpen(true)} className='border px-2 py-1'>
+          Pair up with someone
+      </button>
     </section>
   );
 };

@@ -34,7 +34,7 @@ const RequestList: React.FC<RequestListProps> = () => {
   const [acceptedRequests, setAcceptedRequests] = useState<AcceptedRequest[]>([]);
   const [user] = useAuthState(auth);
   useEffect(() => {
-    const filter = groupByReceiver(user?.displayName, requests);
+    const filter = groupByReceiver(user?.displayName, requests)
     setGrouped(group(filter));
   }, [loadState]);
 
@@ -51,7 +51,7 @@ const RequestList: React.FC<RequestListProps> = () => {
   const handleAccept = (sender: string, title: string) => {
     setAcceptedRequests([...acceptedRequests, { sender, title }]);
   };
-  if (!loadState) return <Loader />;
+  if (!loadState) return <h1>Loading Dashboard</h1>;
   else {
     return (
       <ul className='mt-5 grid auto-rows-auto gap-5'>

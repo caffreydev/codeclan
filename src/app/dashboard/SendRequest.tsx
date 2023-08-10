@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import group from '../function/groupByKata';
-import lfp from '@/sample-data/LfP';
 import Link from 'next/link';
 import { requestPairRequests } from '@/Utils/retrievePairRequests';
 import groupByEmptyReceiever from '../function/groupByEmptyReceiver';
@@ -15,17 +14,17 @@ interface AcceptedRequest {
   title: string;
 }
 
-type GroupedRequests = {
+type Grouped = {
   [key: string]: Request[];
-};
+}
 
 type SendRequestProps = {};
 
 const SendRequest: React.FC<SendRequestProps> = () => {
   const [loadState, setLoadState] = useState(false);
-  const requests: Request[] = requestPairRequests(setLoadState);
+  const requests: Request[] | undefined= requestPairRequests(setLoadState);
   const [acceptedRequests, setAcceptedRequests] = useState<AcceptedRequest[]>([]);
-  const [grouped, setGrouped] = useState<GroupedRequests>();
+  const [grouped, setGrouped] = useState<Grouped>({});
   const handleAccept = (sender: string, title: string) => {
     setAcceptedRequests([...acceptedRequests, { sender, title }]);
   };

@@ -12,35 +12,36 @@ import { useSearchParams } from 'next/navigation';
 import ControlPanel from '../components/ControlPanel';
 import { useGetUser } from '@/Utils/useGetUser';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, firestore } from '@/firebase/firebase';
 import { User } from '@/types/firestoreTypes';
-import { doc, setDoc } from 'firebase/firestore';
+import { auth, firestore } from '@/firebase/firebase';
+import ProfilePair from '../components/pairing components/ProfilePair';
 import useHasMounted from '@/hooks/useHasMounted';
+import { doc, setDoc } from 'firebase/firestore';
 
 type pageProps = {};
 
 /* 
 function fibonnaciFunTime(n) {
-
-switch (n) {
-	case 0: 
-		return 0
-	case 1: return 1
-	case 2: return 1
-	default: return fibonnaciFunTime(n - 1) + fibonnaciFunTime(n - 2)
-}
+  switch (n) {
+    case 0: 
+      return 0
+    case 1: return 1
+    case 2: return 1
+    default: return fibonnaciFunTime(n - 1) + fibonnaciFunTime(n - 2)
+  }
 }
 */
 
 const page: React.FC<pageProps> = () => {
   const params = useSearchParams();
   const kataId = parseInt(params.get('kata_id') as string) || 0;
-
   const [codeText, setCodeText] = useState<string>(kataLibrary[kataId].starterCode);
   const [message, setMessage] = useState<string>('Build your code and hit run!');
   const [success, setSuccess] = useState<boolean>(false);
   const [kata, setKata] = useState<Kata>(kataLibrary[kataId]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+
   const [completedKatasSession, setCompletedKatasSession] = useState<string[]>([]);
 
   //retrieves user details
@@ -52,10 +53,10 @@ const page: React.FC<pageProps> = () => {
     setCodeText(kataLibrary[kataId].starterCode);
     setKata(kataLibrary[kataId]);
     setSuccess(false);
-
     setMessage('Build your code and hit run!');
   }, [kataId]);
 
+  
   const handleChangeValue = (value: string) => {
     setCodeText(value);
   };
@@ -135,11 +136,12 @@ const page: React.FC<pageProps> = () => {
 
   return (
     <>
+      <ProfilePair kata={kata} isOpen={isOpen} setIsOpen={setIsOpen} />
       <ControlPanel />
       <main className='h-full'>
         {success && <Confetti gravity={0.3} tweenDuration={4000} width={window.innerWidth - 25} height={window.innerHeight - 1} />}
         <Split minSize={0} className='split h-full'>
-          <InstructionPanel />
+          <InstructionPanel setIsOpen={setIsOpen} />
           <section>
             <Split minSize={0} direction='vertical' className='h-full'>
               <div className='w-full overflow-auto bg-[#1e1e1e]'>
@@ -175,3 +177,7 @@ const page: React.FC<pageProps> = () => {
   );
 };
 export default page;
+function dispatch(arg0: any) {
+  throw new Error('Function not implemented.');
+}
+
