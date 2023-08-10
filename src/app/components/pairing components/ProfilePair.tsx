@@ -11,7 +11,7 @@ import { IoClose } from 'react-icons/io5';
 import pairRequest, { Request } from '@/Utils/pairRequest';
 import { Kata } from '@/app/katas/katalibrary/kataLibrary';
 import { toast } from 'react-toastify';
-import { Request } from '../../../Utils/pairRequest';
+import { Timestamp } from 'firebase/firestore';
 
 type ProfilePairProps = {
   kata: Kata;
@@ -29,28 +29,23 @@ const ProfilePair: React.FC<ProfilePairProps> = ({ kata, isOpen, setIsOpen }) =>
   const requestData = requestPairRequests(setRequestRetrieved) as Request[];
 
   const handlePairUp = (receiver = '') => {
-    if (requestRetrieved) {
-      const requestDetails: Request = {
-        message: '',
-        title: kata.title,
-        receiver,
-      };
-      pairRequest(requestDetails, user, setRequestSent);
-      setDisabledList(curr => {
-        return [
-          requestDetails,
-          ...curr
-        ]
-      })
-      if (requestSent) {
-        toast.success('Request has been sent!', {
-          position: 'top-right',
-          autoClose: 5000,
-          theme: 'dark',
-        });
-      }
-    } else {
-      toast.error('The server is a bit slow today please try again', {
+    const timeStamp = new Timestamp(Math.floor(new Date().getTime() / 1000), 0);
+    const idString = `From ${user?.displayName} to ${receiver} at ${timeStamp}`;
+    const requestDetails: Request = {
+      id: idString,
+      title: kata.title,
+      receiver,
+      sender: user?.displayName as string
+    };
+    pairRequest(requestDetails, setRequestSent);
+    setDisabledList(curr => {
+      return [
+        requestDetails,
+        ...curr
+      ]
+    })
+    if (requestSent) {
+      toast.success('Request has been sent!', {
         position: 'top-right',
         autoClose: 5000,
         theme: 'dark',
@@ -60,7 +55,7 @@ const ProfilePair: React.FC<ProfilePairProps> = ({ kata, isOpen, setIsOpen }) =>
 
   useEffect(() => {
     if (requestRetrieved) setDisabledList(requestData.filter((request) => request.sender === user?.displayName && request.title === kata.title));
-  }, [requestRetrieved]);
+  }, [requestRetrieved, kata]);
 
   if (!usersRetrieved) {
     <p>Loading users...</p>;

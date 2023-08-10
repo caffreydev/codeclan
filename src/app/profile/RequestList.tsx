@@ -26,6 +26,15 @@ const RequestList:React.FC<RequestListProps> = () => {
 
   if (!requestRetrieved) return null
   return <div>
+    {/* <ul className='flex flex-col gap-3'>
+      {userData.completedKatas.map((kata) => {
+        return (
+          <li key={kata} className={`flex items-center rounded-lg border border-grey-500  bg-grey-600 p-2 transition hover:border-primary hover:bg-grey-500`}>
+            <p className='hover:text-grey-100'>{kata}</p>
+          </li>
+        );
+      })}
+    </ul> */}
     <ul>
       {requestData.filter(request => request.sender === user?.displayName).map(request => {
         return <li key={request.id} >

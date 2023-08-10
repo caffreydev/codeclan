@@ -10,15 +10,13 @@ import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import { javascript } from '@codemirror/lang-javascript';
 import { useSearchParams } from 'next/navigation';
 import ControlPanel from '../components/ControlPanel';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../redux/Store';
-import { setCurrentKata } from '@/redux/features/currentKata-slice';
 import { useGetUser } from '@/Utils/useGetUser';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { User } from 'firebase/auth';
-import { auth } from '@/firebase/firebase';
+import { User } from '@/types/firestoreTypes';
+import { auth, firestore } from '@/firebase/firebase';
 import ProfilePair from '../components/pairing components/ProfilePair';
 import useHasMounted from '@/hooks/useHasMounted';
+import { doc, setDoc } from 'firebase/firestore';
 
 type pageProps = {};
 
