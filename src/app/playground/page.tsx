@@ -39,7 +39,7 @@ const page: React.FC<pageProps> = () => {
   const [codeText, setCodeText] = useState<string>(kataLibrary[kataId].starterCode);
   const [message, setMessage] = useState<string>('Build your code and hit run!');
   const [success, setSuccess] = useState<boolean>(false);
-  const [kata, setKata] = useState<Kata>();
+  const [kata, setKata] = useState<Kata>(kataLibrary[kataId]);
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false)
 
@@ -130,8 +130,7 @@ const page: React.FC<pageProps> = () => {
     setCodeText(kata.starterCode);
     setMessage('Build your code and hit run!');
   };
-  
-  if (!kataId) return (<p>Loading kata details...</p>)
+
   return (
     <>
       <ProfilePair kata={kata} isOpen={isOpen} setIsOpen={setIsOpen} />
