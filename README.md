@@ -31,6 +31,7 @@ You can try it out by visiting the website and exploring its features.
 
 - Next.js 13
 - Typescript
+- Redux
 - Firebase
 - Tailwind CSS
 
