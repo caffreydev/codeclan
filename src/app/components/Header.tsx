@@ -25,11 +25,15 @@ export default function Header() {
     <nav className='Header bg-blur fixed inset-x-0 top-0 z-50 border-b border-grey-600 bg-grey-800 bg-opacity-60'>
       <div className='flex flex-wrap items-center justify-between'>
         <Link href='/' className='flex items-center'>
-          <span className='self-center whitespace-nowrap px-4 py-3 text-2xl font-semibold text-grey-100 hover:text-primary'>CodeClan</span>
+          <span className='self-center whitespace-nowrap bg-gradient-to-r from-purple-400 to-primary bg-clip-text px-4 py-3 text-2xl text-grey-100 text-transparent hover:opacity-60'>
+            {`<`}
+            <b>CodeClan</b>
+            {`/>`}
+          </span>
         </Link>
         <div className='flex items-center justify-between' id='navbar-user'>
           {user && (
-            <ul className='flex space-x-8 rounded-lg p-4 font-medium'>
+            <ul className='hidden space-x-2 rounded-lg p-4 font-medium sm:flex md:space-x-8'>
               <li>
                 <Link href={'/dashboard'} data-active={segment == 'dashboard'} className='Header-Link'>
                   Dashboard
@@ -41,13 +45,18 @@ export default function Header() {
                 </Link>
               </li>
               <li>
-                <Link href={'/profile'} data-active={segment == 'profile'} className='Header-Link'>
-                  Profile
+                <Link href={'/users'} data-active={segment == 'users'} className='Header-Link'>
+                  Users
                 </Link>
               </li>
               <li>
-                <Link href={'/users'} data-active={segment == 'users'} className='Header-Link'>
-                  Users
+                <Link href={'/message'} data-active={segment == 'message'} className='Header-Link'>
+                  Messages
+                </Link>
+              </li>
+              <li>
+                <Link href={'/profile'} data-active={segment == 'profile'} className='Header-Link'>
+                  Profile
                 </Link>
               </li>
             </ul>

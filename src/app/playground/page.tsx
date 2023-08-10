@@ -15,6 +15,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, firestore } from '@/firebase/firebase';
 import { User } from '@/types/firestoreTypes';
 import { doc, setDoc } from 'firebase/firestore';
+import useHasMounted from '@/hooks/useHasMounted';
 
 type pageProps = {};
 
@@ -33,7 +34,7 @@ switch (n) {
 
 const page: React.FC<pageProps> = () => {
   const params = useSearchParams();
-  const kataId = parseInt(params.get('kata_id') as string);
+  const kataId = parseInt(params.get('kata_id') as string) || 0;
 
   const [codeText, setCodeText] = useState<string>(kataLibrary[kataId].starterCode);
   const [message, setMessage] = useState<string>('Build your code and hit run!');
@@ -74,6 +75,11 @@ const page: React.FC<pageProps> = () => {
           autoClose: 2000,
           theme: 'dark',
         });
+        if (!user) {
+          setTimeout(() => setSuccess(false), 5000);
+          return;
+        }
+
         if (!currUser?.completedKatas.includes(kata.title) && !completedKatasSession.includes(kata.title)) {
           const newUserTableEntry = { ...currUser };
           const completedKatas = [...newUserTableEntry.completedKatas];
@@ -107,7 +113,7 @@ const page: React.FC<pageProps> = () => {
     } catch (e: any) {
       setIsLoading(false);
       setMessage(String(e));
-      console.log(typeof message, '< message state, error catch>', typeof String(e));
+
       toast.error(`There's a bug in your code!`, {
         position: 'top-right',
         autoClose: 2000,
@@ -117,6 +123,15 @@ const page: React.FC<pageProps> = () => {
 
     setTimeout(() => setSuccess(false), 5000);
   };
+
+  const handleResetCode = () => {
+    setCodeText(kata.starterCode);
+    setMessage('Build your code and hit run!');
+  };
+
+  const hasMounted = useHasMounted();
+
+  if (!hasMounted) return null;
 
   return (
     <>
@@ -143,11 +158,13 @@ const page: React.FC<pageProps> = () => {
                   <button
                     disabled={isLoading}
                     data-disabled={isLoading}
-                    className='w-full rounded-lg bg-grey-300 px-3 py-2 hover:bg-opacity-60 data-[disabled=true]:cursor-not-allowed'
-                    onClick={() => handleTestCase()}>
+                    className='w-full rounded-lg bg-primary px-3 py-2 hover:bg-opacity-60 data-[disabled=true]:cursor-not-allowed'
+                    onClick={handleTestCase}>
                     Run
                   </button>
-                  <button className='w-full rounded-lg bg-primary px-3 py-2 hover:bg-opacity-60'>Submit</button>
+                  <button onClick={handleResetCode} className='w-full rounded-lg bg-gray-500 px-3 py-2 hover:bg-opacity-60'>
+                    Reset to Starter Code
+                  </button>
                 </footer>
               </div>
             </Split>

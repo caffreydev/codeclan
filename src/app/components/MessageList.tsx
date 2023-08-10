@@ -6,9 +6,12 @@ import { auth } from '@/firebase/firebase';
 import { Message } from '.';
 import MessageListItem from './MessageListItem';
 import { useGetMessages } from '@/Utils/useGetMessages';
+import { Loader } from './Loader';
+
+export type boxType = 'Inbox' | 'Outbox' | 'Chat View';
 
 type MessageListProps = {
-  boxType: 'Inbox' | 'Outbox' | 'Chat View';
+  boxType: boxType;
 };
 
 const MessageList: React.FC<MessageListProps> = ({ boxType }) => {
@@ -19,19 +22,19 @@ const MessageList: React.FC<MessageListProps> = ({ boxType }) => {
 
   if (!messagesRetrieved) {
     return (
-      <div className='border-1px mx-auto w-5/6 max-w-screen-xl px-2 py-10'>
-        <h2 className='mb-6 text-4xl font-bold'>{boxType}</h2>
+      <div className='flex flex-col gap-3 rounded-b-lg border border-t-0 border-grey-600 bg-grey-800 p-5'>
+        <Loader />
       </div>
     );
   }
 
   return (
-    <div className='border-1px mx-auto w-5/6 max-w-screen-xl px-2 py-10'>
-      <h2 className='mb-6 text-4xl font-bold'>{boxType}</h2>
-      <hr className='border' />
-      {messagesArray.map((message) => (
-        <MessageListItem messageType={boxType === 'Inbox' ? 'from' : 'to'} message={message} />
-      ))}
+    <div className='flex flex-col gap-3 rounded-b-lg border border-t-0 border-grey-600 bg-grey-800 p-5'>
+      {messagesArray.length === 0 ? (
+        <h1>Wow, so much empty!...</h1>
+      ) : (
+        messagesArray.map((message) => <MessageListItem key={message.id} messageType={boxType === 'Inbox' ? 'from' : 'to'} message={message} />)
+      )}
     </div>
   );
 };

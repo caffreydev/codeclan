@@ -12,23 +12,30 @@ const InstructionPanel: React.FC<InstructionPanelProps> = () => {
   const kataId = Number(useSearchParams().get('kata_id'));
 
   return (
-    <section className='flex flex-col gap-1 overflow-auto p-4'>
-      <div className='mb-2 flex gap-2'>
-        <span className='py-1.3 inline-flex items-center justify-center gap-1 rounded-full bg-primary px-2.5 text-sm  text-teal-950'>
-          <FaCode />
-          {kataLibrary[kataId].category}
-        </span>
-        <span className={`${badgeColour[kataLibrary[kataId].difficulty]} py-1.3 inline-flex items-center justify-center gap-1 rounded-full px-2.5 text-sm`}>
-          {kataLibrary[kataId].difficulty === 'Easy' ? (
-            <FaRegFaceLaughWink />
-          ) : kataLibrary[kataId].difficulty === 'Moderate' ? (
-            <FaRegFaceMeh />
-          ) : (
-            <FaRegFaceFlushed />
-          )}
-          {kataLibrary[kataId].difficulty}
-        </span>
-        <KataLikes kataId={kataLibrary[kataId].id} likesOnClick={true} />
+    <section className='flex flex-col gap-2 overflow-auto p-4'>
+      <div className='mb-2 flex justify-between'>
+        <div className='flex items-center gap-2'>
+          <span className='py-1.3 inline-flex items-center justify-center gap-1 rounded-full bg-primary px-2.5 text-sm  text-teal-950'>
+            <FaCode />
+            {kataLibrary[kataId].category}
+          </span>
+          <span className={`${badgeColour[kataLibrary[kataId].difficulty]} py-1.3 inline-flex items-center justify-center gap-1 rounded-full px-2.5 text-sm`}>
+            {kataLibrary[kataId].difficulty === 'Easy' ? (
+              <FaRegFaceLaughWink />
+            ) : kataLibrary[kataId].difficulty === 'Moderate' ? (
+              <FaRegFaceMeh />
+            ) : (
+              <FaRegFaceFlushed />
+            )}
+            {kataLibrary[kataId].difficulty}
+          </span>
+          <span className='py-1.3 text-300 inline-flex items-center justify-center gap-1 rounded-full bg-grey-400  px-2.5 text-sm  text-grey-200'>
+            JavaScript
+          </span>
+        </div>
+        <div className='flex gap-2'>
+          <KataLikes kataId={kataLibrary[kataId].id} likesOnClick={true} />
+        </div>
       </div>
       <h2 className='text-lg'>Description:</h2>
       <p className='text-base'>{kataLibrary[kataId].problemStatement}</p>
