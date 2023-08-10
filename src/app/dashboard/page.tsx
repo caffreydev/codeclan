@@ -11,9 +11,6 @@ const page: React.FC<pageProps> = () => {
   return (
     <Wrapper className='pb-4 sm:pb-6 md:pb-8'>
       <h2 className='my-7 text-3xl font-bold'>Dashboard</h2>
-      <Link href='/inbox'>
-        <Button style='bg-primary border-0'>Inbox</Button>
-      </Link>
       <div className='grid grid-cols-1 gap-10 md:grid-cols-2'>
         <div>
           <h3 className='my-1 mb-3 text-2xl font-bold'>Requests</h3>

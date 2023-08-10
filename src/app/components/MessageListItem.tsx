@@ -11,7 +11,7 @@ const MessageListItem: React.FC<MessageListItemProps> = ({ message, messageType 
   return (
     <Link
       href={{ pathname: '/chatview', query: { friendId: messageType === 'from' ? message.fromId : message.toId } }}
-      className='mb-3 box-border flex items-center border p-3'>
+      className='relative w-full rounded-lg border border-grey-600 bg-grey-700 p-4 text-grey-100 transition hover:border-primary'>
       <p>
         Message {messageType} {messageType === 'from' ? message.fromDisplay : message.toDisplay}. Subject: {message.subject}
       </p>
