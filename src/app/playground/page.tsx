@@ -18,6 +18,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { User } from 'firebase/auth';
 import { auth } from '@/firebase/firebase';
 import ProfilePair from '../components/pairing components/ProfilePair';
+import useHasMounted from '@/hooks/useHasMounted';
 
 type pageProps = {};
 
@@ -131,6 +132,10 @@ const page: React.FC<pageProps> = () => {
     setMessage('Build your code and hit run!');
   };
 
+  const hasMounted = useHasMounted();
+
+  if (!hasMounted) return null;
+
   return (
     <>
       <ProfilePair kata={kata} isOpen={isOpen} setIsOpen={setIsOpen} />
@@ -138,7 +143,7 @@ const page: React.FC<pageProps> = () => {
       <main className='h-full'>
         {success && <Confetti gravity={0.3} tweenDuration={4000} width={window.innerWidth - 25} height={window.innerHeight - 1} />}
         <Split minSize={0} className='split h-full'>
-          <InstructionPanel kata={kata} setIsOpen={setIsOpen} />
+          <InstructionPanel setIsOpen={setIsOpen} />
           <section>
             <Split minSize={0} direction='vertical' className='h-full'>
               <div className='w-full overflow-auto bg-[#1e1e1e]'>

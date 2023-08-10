@@ -1,20 +1,12 @@
 const groupByReceiver = (title, requests) => {
-    console.log(requests, '<<<<<<<<<<<<<,')
-const filteredReceiver = [...requests]
- const arr = filteredReceiver.filter((eachRequest) => {
-
+  const filteredReceiver = [...requests];
+  const arr = filteredReceiver.filter((eachRequest) => {
     if (eachRequest.receiver === title) {
-         return eachRequest
+      return eachRequest;
     }
-    
- })
+  });
 
-return arr 
-}
+  return arr;
+};
 
-
-
-
-
-
-export default groupByReceiver
+export default groupByReceiver;

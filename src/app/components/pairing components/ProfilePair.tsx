@@ -6,11 +6,12 @@ import Image from 'next/image';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase/firebase';
 import { requestPairRequests } from '@/Utils/retrievePairRequests';
-import { User } from 'firebase/auth';
+import { User } from '@/types/firestoreTypes';
 import { IoClose } from 'react-icons/io5';
 import pairRequest, { Request } from '@/Utils/pairRequest';
 import { Kata } from '@/app/katas/katalibrary/kataLibrary';
 import { toast } from 'react-toastify';
+import { Request } from '../../../Utils/pairRequest';
 
 type ProfilePairProps = {
   kata: Kata;
@@ -19,7 +20,7 @@ type ProfilePairProps = {
 };
 
 const ProfilePair: React.FC<ProfilePairProps> = ({ kata, isOpen, setIsOpen }) => {
-  const [user] = useAuthState(auth) as User[];
+  const [user] = useAuthState(auth);
   const [usersRetrieved, setUsersRetrieved] = useState(false);
   const [requestRetrieved, setRequestRetrieved] = useState(false);
   const [requestSent, setRequestSent] = useState(false)
@@ -58,7 +59,7 @@ const ProfilePair: React.FC<ProfilePairProps> = ({ kata, isOpen, setIsOpen }) =>
   };
 
   useEffect(() => {
-    if (requestRetrieved) setDisabledList(requestData.filter((request) => request.sender === user.displayName));
+    if (requestRetrieved) setDisabledList(requestData.filter((request) => request.sender === user?.displayName && request.title === kata.title));
   }, [requestRetrieved]);
 
   if (!usersRetrieved) {
@@ -78,27 +79,28 @@ const ProfilePair: React.FC<ProfilePairProps> = ({ kata, isOpen, setIsOpen }) =>
               <div className='grid-cols-[max-content_min-minmax(0, 1fr)] grid auto-rows-auto rounded-b-lg border border-grey-700 bg-grey-700 px-7 py-4'>
                 <h2 className='text-3xl'>Take your pick</h2>
                 <button onClick={() => handlePairUp()} className='rounded border px-2'>
-                  Post to @everyone
+                  {disabledList.some(request => request.receiver === '') ? 'Posted!' : 'Post to @everyone' }
+                  
                 </button>
                 <ul className='col-span-2 pt-3'>
-                  {usersData?.map((user) => {
+                  {usersData?.filter((userObj: User) => userObj.userId !== user?.uid)?.map((userObj) => {
                     return (
                       <li
-                        key={user.displayName}
+                        key={userObj.displayName}
                         className='mb-2 grid grid-cols-[max-content_1fr_max-content] items-center gap-3 rounded-lg border-none bg-grey-600 p-3'>
                         <Image
-                          src={user.photoURL}
-                          alt={`${user.displayName} avatar image`}
+                          src={userObj.photoURL}
+                          alt={`${userObj.displayName} avatar image`}
                           width={100}
                           height={100}
                           className='h-[30px] w-[30px] overflow-hidden rounded-full'
                         />
-                        <p className='inline h-min align-middle'>{user.displayName}</p>
+                        <p className='inline h-min align-middle'>{userObj.displayName}</p>
                         <button
-                          onClick={() => handlePairUp(user.displayName)}
-                          disabled={disabledList.some((request) => request.receiver === user.displayName)}
+                          onClick={() => handlePairUp(userObj.displayName)}
+                          disabled={disabledList.some((request) => request.receiver === userObj.displayName)}
                           className='rounded border px-2 py-1'>
-                          {disabledList.some((request) => request.receiver === user.displayName) ? 'Request Sent' : 'Pair up!'}
+                          {disabledList.some((request) => request.receiver === userObj.displayName) ? 'Request Sent' : 'Pair up!'}
                         </button>
                       </li>
                     );
