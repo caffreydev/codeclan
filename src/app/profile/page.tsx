@@ -22,62 +22,63 @@ export default function page() {
   if (!userRetrieved) return <></>;
 
   return (
-    <Wrapper className='pb-4 sm:pb-6 md:pb-8'>
-      <h2 className='my-7 text-3xl font-bold'>Profile</h2>
-      <div className='mt-6 grid grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-4'>
-        <div className='flex h-auto items-center justify-center rounded-lg border border-b-0 border-grey-600 bg-grey-800 p-4'>
-          <UserObj user={userData} userDetail='profileImg' />
-        </div>
-        <div className='h-auto rounded-lg border border-b-0 border-grey-600 bg-grey-800 p-4 lg:col-span-2'>
-          <UserObj user={userData} userDetail='displayName' />
-          <div className='flex items-center justify-between'>
-            <div>
-              <UserObj user={userData} userDetail='github' />
-              <p className='text-sm text-grey-200'>
-                {' '}
-                <UserObj user={userData} userDetail='joinTime' />
-              </p>
-            </div>
-            <div className='mb-4 mt-6 flex flex-wrap justify-center gap-4'>
-              {!userId && (
-                <Link href='/editProfile' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:opacity-60'>
-                  Edit
+    userData && (
+      <Wrapper className='pb-4 sm:pb-6 md:pb-8'>
+        <h2 className='my-7 text-3xl font-bold'>Profile</h2>
+        <div className='mt-6 grid grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-4'>
+          <div className='flex h-auto items-center justify-center rounded-lg border border-b-0 border-grey-600 bg-grey-800 p-4'>
+            <UserObj user={userData} userDetail='profileImg' />
+          </div>
+          <div className='h-auto rounded-lg border border-b-0 border-grey-600 bg-grey-800 p-4 lg:col-span-2'>
+            <UserObj user={userData} userDetail='displayName' />
+            <div className='flex items-center justify-between'>
+              <div>
+                <UserObj user={userData} userDetail='github' />
+                <p className='text-sm text-grey-200'>
+                  {' '}
+                  <UserObj user={userData} userDetail='joinTime' />
+                </p>
+              </div>
+              <div className='mb-4 mt-6 flex flex-wrap justify-center gap-4'>
+                {!userId && (
+                  <Link href='/editProfile' className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:opacity-60'>
+                    Edit
+                  </Link>
+                )}
+                <Link
+                  href={userId ? `chatview?friendId=` + userId : '/message'}
+                  className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:opacity-60'>
+                  {userId ? 'Message' : 'Inbox'}
                 </Link>
-              )}
-              <Link href={userId ? `chatview?friendId=` + userId : '/inbox'} className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:opacity-60'>
-                {userId ? 'Message' : 'Inbox'}
-              </Link>
-              {userId && (
+                {userId && (
+                  <Link href={`/sendRequest?user_id=${userId}`} className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:opacity-60'>
+                    Pair up!
+                  </Link>
+                )}
+              </div>
+            </div>
+            <hr className='border-grey-600' />
+            <p className='mb-2 mt-4 text-xl font-bold'>Bio</p>
+            <UserObj user={userData} userDetail='bio' />
+          </div>
+        </div>
 
-                <Link href={`/sendRequest?user_id=${userId}`} className='rounded bg-primary px-3 py-2 text-grey-100 transition hover:bg-grey-200'>
-
-                  Pair up!
-                </Link>
-              )}
+        <section className='mt-3 grid grid-cols-1 gap-6 rounded-lg border border-b-0 border-grey-600 bg-grey-800 p-4 md:grid-cols-2'>
+          <div className='rounded-lg border border-grey-600 bg-grey-700 p-4'>
+            <div className='flex items-center'>
+              <CgCheckO className='mr-1 text-xl' />
+              <h3 className='p-2 text-xl text-primary'>Completed Katas</h3>
+            </div>
+            <UserListKatas userData={userData} />
+          </div>
+          <div className='rounded-lg border border-grey-600 bg-grey-700 p-4'>
+            <div className='flex items-center'>
+              <TbProgress className='mr-1 text-xl' />
+              <h3 className='p-2 text-xl text-primary'> Katas in progress</h3>
             </div>
           </div>
-          <hr className='border-grey-600' />
-          <p className='mb-2 mt-4 text-xl font-bold'>Bio</p>
-          <UserObj user={userData} userDetail='bio' />
-        </div>
-      </div>
-
-      <section className='mt-3 grid grid-cols-1 gap-6 rounded-lg border border-b-0 border-grey-600 bg-grey-800 p-4 md:grid-cols-2'>
-        <div className='rounded-lg border border-grey-600 bg-grey-700 p-4'>
-          <div className='flex items-center'>
-            <CgCheckO className='mr-1 text-xl' />
-            <h3 className='p-2 text-xl text-primary'>Completed Katas</h3>
-          </div>
-          {userData && <UserListKatas userData={userData} />}
-        </div>
-        <div className='rounded-lg border border-grey-600 bg-grey-700 p-4'>
-          <div className='flex items-center'>
-            <TbProgress className='mr-1 text-xl' />
-            <h3 className='p-2 text-xl text-primary'> Katas in progress</h3>
-          </div>
-          {/* <UserListKatas /> */}
-        </div>
-      </section>
-    </Wrapper>
+        </section>
+      </Wrapper>
+    )
   );
 }
