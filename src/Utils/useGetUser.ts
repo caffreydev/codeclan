@@ -23,5 +23,5 @@ export function useGetUser(userId: string, setUserRetrieved: React.Dispatch<Reac
 
     getUser();
   }, [userId, setUserRetrieved]);
-  return user;
+  return user as User;
 }

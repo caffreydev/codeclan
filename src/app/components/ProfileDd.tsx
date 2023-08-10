@@ -5,6 +5,8 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
 import UserObj from './UserObj';
+import { User } from 'firebase/auth';
+import { useGetUser } from '@/Utils/useGetUser';
 
 type ProfileDdProps = {};
 
@@ -12,6 +14,8 @@ const ProfileDd: React.FC<ProfileDdProps> = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [signOut, loading, error] = useSignOut(auth);
   const [user] = useAuthState(auth);
+  const [retrievedUser, setRetrievedUser] = useState(false);
+  const userObj = useGetUser(user?.uid as string, setRetrievedUser);
 
   const handleToggleMenu = () => setIsOpen(!isOpen);
   return (
@@ -23,7 +27,7 @@ const ProfileDd: React.FC<ProfileDdProps> = () => {
         className='mr-3 flex rounded-full bg-grey-300 text-sm hover:opacity-80 focus:ring-2 focus:ring-primary md:mr-0'
         id='user-menu-button'>
         <span className='sr-only'>Open user menu</span>
-        <UserObj user={user} userDetail='profileImgNavbar' />
+        <UserObj user={userObj} userDetail='profileImgNavbar' />
       </button>
 
       {/* <!-- Dropdown content --> */}
@@ -63,7 +67,7 @@ const ProfileDd: React.FC<ProfileDdProps> = () => {
               </Link>
             </li>
             <li>
-              <Link href='/authentication' onClick={() => signOut()} className='block px-4 py-2 text-sm transition hover:bg-grey-600 hover:text-primary'>
+              <Link href='/authentication' onClick={signOut} className='block px-4 py-2 text-sm transition hover:bg-grey-600 hover:text-primary'>
                 Sign out
               </Link>
             </li>
