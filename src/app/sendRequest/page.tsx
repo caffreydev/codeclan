@@ -27,7 +27,7 @@ export default function sendRequest() {
       <h1>Send Request</h1>
       <form className='flex max-w-sm flex-col gap-3 p-6 text-grey-200' onSubmit={handleSubmit}>
         <input onChange={handleInputChange} type='text' placeholder='message' name='message' className='text-grey-300' />
-        <select onChange={handleInputChange} className='cursor-pointer bg-grey-300 p-4 text-grey-100 hover:bg-grey-200' name='kata_name' id='kata_name'>
+        <select onChange={handleInputChange} className='cursor-pointer bg-grey-300 p-4 text-grey-100 hover:bg-grey-200' name='title' id='title'>
           <option value='none'></option>
           {kataLibrary.map((eachKata) => {
             return <option value={eachKata.title}>{eachKata.title}</option>;

@@ -15,10 +15,10 @@ export default function PairRequest ({requestDetails, userId}) {
    
     const [user] = useAuthState(auth);
     
-     const [idReceiver , setIdReceiver] = useState('')
+     const [idReceiver , setIdReceiver] = useState({})
     const [userRetrieved, setUserRetrieved] = useState(false);
-    const userData = useGetUser(userId || (user?.uid as string), setUserRetrieved);
-
+    const userData = useGetUser(userId, setUserRetrieved);
+console.log(userData)
     useEffect(()=> {
 
         
@@ -27,21 +27,24 @@ export default function PairRequest ({requestDetails, userId}) {
 
 
 
-const {message, kata_name} = requestDetails
+const {message, title} = requestDetails
 
 //  const docRef = async function request() {
-//     await deleteDoc(doc(db, "requests", "paCkmLGICNN1ftlJAWLx"));
+//     await deleteDoc(doc(db, "requests", "1XR3ruebV2u8222WAsoy"));
 // }
 
 const docRef = async function request() { await addDoc(collection(db, "requests", ), {
     
     message:  message,
-    title: kata_name,
+    title: title,
     sender: `${user?.displayName}`,
     receiver: `${idReceiver.displayName}` 
+    
   }, );
 
 }
+
+
 docRef()
    
 
