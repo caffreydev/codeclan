@@ -15,6 +15,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, firestore } from '@/firebase/firebase';
 import { User } from '@/types/firestoreTypes';
 import { doc, setDoc } from 'firebase/firestore';
+import useHasMounted from '@/hooks/useHasMounted';
 
 type pageProps = {};
 
@@ -127,6 +128,10 @@ const page: React.FC<pageProps> = () => {
     setCodeText(kata.starterCode);
     setMessage('Build your code and hit run!');
   };
+
+  const hasMounted = useHasMounted();
+
+  if (!hasMounted) return null;
 
   return (
     <>
