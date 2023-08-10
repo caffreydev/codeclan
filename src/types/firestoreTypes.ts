@@ -37,3 +37,10 @@ export interface FeedbackFirestore {
   kataId: number;
   feedbackType: 'like' | 'dislike';
 }
+
+export type Request = {
+  id: string;
+  title: string;
+  receiver: string;
+  sender: string;
+};

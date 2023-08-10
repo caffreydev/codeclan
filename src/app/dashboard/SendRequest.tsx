@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import group from '../function/groupByKata';
 import Link from 'next/link';
-import { requestPairRequests } from '@/Utils/retrievePairRequests';
+import { requestPairRequests } from '@/Utils/requestPairRequests';
 import groupByEmptyReceiever from '../function/groupByEmptyReceiver';
 interface Request {
   sender: string;
@@ -16,13 +16,13 @@ interface AcceptedRequest {
 
 type Grouped = {
   [key: string]: Request[];
-}
+};
 
 type SendRequestProps = {};
 
 const SendRequest: React.FC<SendRequestProps> = () => {
   const [loadState, setLoadState] = useState(false);
-  const requests: Request[] | undefined= requestPairRequests(setLoadState);
+  const requests: Request[] | undefined = requestPairRequests(setLoadState);
   const [acceptedRequests, setAcceptedRequests] = useState<AcceptedRequest[]>([]);
   const [grouped, setGrouped] = useState<Grouped>({});
   const handleAccept = (sender: string, title: string) => {
