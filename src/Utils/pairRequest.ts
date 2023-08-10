@@ -1,5 +1,5 @@
 import { firestore } from '../firebase/firebase';
-import { collection, setDoc, doc, deleteDoc, addDoc, Timestamp } from 'firebase/firestore';
+import { setDoc, doc } from 'firebase/firestore';
 
 export type Request = {
   id: string;
@@ -13,13 +13,13 @@ export default function pairRequest(requestDetails: Request, setRequestSent: Rea
 
   const docRef = async function request() {
     try {
-      const docSnap = await setDoc(doc(firestore, 'requests', id), {
+      await setDoc(doc(firestore, 'requests', id), {
         title,
         receiver,
         sender,
-        id
+        id,
       });
-      setRequestSent(true)
+      setRequestSent(true);
     } catch {}
   };
 
