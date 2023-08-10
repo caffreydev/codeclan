@@ -10,7 +10,6 @@ import { useGetUser } from '@/Utils/useGetUser';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase/firebase';
 import { useSearchParams } from 'next/navigation';
-import KataPair from '../components/pairing components/KataPair';
 import RequestList from './RequestList';
 import useHasMounted from '@/hooks/useHasMounted';
 
