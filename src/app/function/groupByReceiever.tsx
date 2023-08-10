@@ -1,8 +1,12 @@
 const groupByReceiver = (title, requests) => {
-  const filteredReceiver = [...requests];
-  const arr = filteredReceiver.filter((eachRequest) => {
-    if (eachRequest.receiver === title) {
-      return eachRequest;
+
+   
+const filteredReceiver = [...requests]
+ const arr = filteredReceiver.filter((eachRequest) => {
+
+    if (eachRequest.receiver === title && eachRequest.sender !== title) {
+         return eachRequest
+
     }
   });
 

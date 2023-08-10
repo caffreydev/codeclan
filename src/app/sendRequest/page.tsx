@@ -24,6 +24,8 @@ export default function sendRequest() {
   };
 
   return (
+
+
     <Wrapper className='pb-4 sm:pb-6 md:pb-8'>
       <h2 className='my-7 text-3xl font-bold'>Send Request</h2>
       <div className='flex flex-col gap-4 rounded-lg border border-grey-600 bg-grey-700 p-4 sm:gap-6 sm:p-6 md:gap-8 md:p-8'>
@@ -55,5 +57,6 @@ export default function sendRequest() {
         </form>
       </div>
     </Wrapper>
+
   );
 }
