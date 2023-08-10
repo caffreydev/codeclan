@@ -40,7 +40,7 @@ const page: React.FC<pageProps> = () => {
   const [success, setSuccess] = useState<boolean>(false);
   const [kata, setKata] = useState<Kata>(kataLibrary[kataId]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   const [completedKatasSession, setCompletedKatasSession] = useState<string[]>([]);
 
@@ -56,7 +56,6 @@ const page: React.FC<pageProps> = () => {
     setMessage('Build your code and hit run!');
   }, [kataId]);
 
-  
   const handleChangeValue = (value: string) => {
     setCodeText(value);
   };
@@ -177,7 +176,3 @@ const page: React.FC<pageProps> = () => {
   );
 };
 export default page;
-function dispatch(arg0: any) {
-  throw new Error('Function not implemented.');
-}
-

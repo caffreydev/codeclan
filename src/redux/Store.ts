@@ -1,14 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authModalStateReducer from './features/auth-slice';
-import pairModalStateReducer from './features/pair-slice'
-import currentKataReducer from './features/currentKata-slice';
+// import pairModalStateReducer from './features/pair-slice';
+// import currentKataReducer from './features/currentKata-slice';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
 export const store = configureStore({
   reducer: {
     authModalStateReducer,
-    pairModalStateReducer,
-    currentKataReducer,
+    // pairModalStateReducer,
+    // currentKataReducer,
   },
 });
 
