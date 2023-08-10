@@ -56,8 +56,8 @@ export default function sendRequest() {
           <select
             onChange={handleInputChange}
             className='w-full rounded-md border border-grey-500 bg-transparent p-3  text-sm text-grey-400 outline-none transition hover:border-grey-500 focus:border-grey-300 focus:text-grey-300'
-            name='kata_name'
-            id='kata_name'>
+            name='title'
+            id='title'>
             <option value='none'>Select a kata</option>
             {kataLibrary.map((eachKata) => {
               return (
