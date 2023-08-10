@@ -56,8 +56,9 @@ Firebase is used to provide authentication, data storage, and other features in 
 2. **Obtain Firebase Configuration**:
    - Go to your project settings in the Firebase Console.
    - Click on the "Your apps" section and select the web app (</> icon).
-   - Find the "Config" option to access your Firebase configuration object.
-   - Replace the placeholder values in the configuration with your actual Firebase project settings.
+   - Find the "Config" option (Project Settings - General) to access your Firebase configuration object.
+   - Replace the placeholder values in the configuration with your actual Firebase project settings. 
+	 - It should look like this but with your private details:
 
    ```javascript
    const firebaseConfig = {
