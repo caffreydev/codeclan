@@ -79,10 +79,8 @@ export default function page() {
             <UserListKatas userData={userData} />
           </div>
           <div className='rounded-lg border border-grey-600 bg-grey-700 p-4'>
-            <div className='flex items-center'>
-              {!userId && <RequestList />}
-              <h3 className='p-2 text-xl text-primary'> Request List</h3>
-            </div>
+            <h3 className='p-2 text-xl text-primary'> Request List</h3>
+            {!userId && <RequestList />}
           </div>
         </section>
       </Wrapper>
