@@ -9,7 +9,7 @@ Welcome to CodeClan! This full-stack application provides a collaborative coding
 A hosted version of the project can be found at the link below.
 You can try it out by visiting the website and exploring its features.
 
----------- DEPLOYED LINK HERE ---------------
+https://codeclan-six.vercel.app/
 
 ### Features:
 
