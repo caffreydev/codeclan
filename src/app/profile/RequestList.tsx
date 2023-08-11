@@ -16,9 +16,17 @@ const RequestList: React.FC<RequestListProps> = () => {
   const handleDelete = async (reqId: string) => {
     try {
       await deleteDoc(doc(firestore, 'requests', reqId));
-      toast.success('Your request has been deleted');
+      toast.success('Your request has been deleted', {
+        position: 'top-right',
+        autoClose: 5000,
+        theme: 'dark',
+      });
     } catch {
-      toast.error('Request not deleted. Please try again.');
+      toast.error('Request not deleted. Please try again.', {
+        position: 'top-right',
+        autoClose: 5000,
+        theme: 'dark',
+      });
     }
   };
 
@@ -34,14 +42,18 @@ const RequestList: React.FC<RequestListProps> = () => {
         );
       })}
     </ul> */}
-      <ul>
+      <ul className='flex flex-col gap-4 rounded-lg  p-4'>
         {requestData
           .filter((request) => request.sender === user?.displayName)
           .map((request) => {
             return (
-              <li key={request.id}>
-                <p>{`Request sent to ${request.receiver} for ${request.title} kata`}</p>
-                <button onClick={() => handleDelete(request.id)}>Delete Request</button>
+              <li key={request.id} className='grid grid-cols-3 rounded-lg border border-grey-500 bg-grey-600 p-2'>
+                <p className='col-span-2 mr-20'>{`Request sent to ${request.receiver} for ${request.title} kata`}</p>
+                <div>
+                  <button className='max-w-sm rounded-lg border border-grey-300 p-2 px-2 transition hover:bg-red-800' onClick={() => handleDelete(request.id)}>
+                    Delete request
+                  </button>
+                </div>
               </li>
             );
           })}

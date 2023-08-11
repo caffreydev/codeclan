@@ -23,7 +23,7 @@ const JoinList: React.FC<JoinListProps> = () => {
               </span>{' '}
               wants to do <span className='inline-block cursor-pointer  transition ease-in-out hover:text-teal-600 '>{request.title} </span> with you
             </p>
-            <Button style='bg-primary border-0'>Send Request</Button>
+            <Button style='bg-primary border-0'>Send request</Button>
           </li>
         );
       })}
