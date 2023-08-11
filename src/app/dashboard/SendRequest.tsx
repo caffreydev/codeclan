@@ -48,13 +48,13 @@ const SendRequest: React.FC<SendRequestProps> = () => {
           return (
             <li className='col-span-1 rounded-lg border border-grey-600 bg-grey-800 p-4' key={pair[0]}>
               <h4 className='mb-2 text-xl font-bold'>{pair[0]}</h4>
-              <ul>
+              <ul className='flex flex-col gap-2'>
                 {pair[1].map((requestObj: Request, i: number) => {
                   const isAccepted = acceptedRequests.some(
                     (acceptedRequest) => acceptedRequest.sender === requestObj.sender && acceptedRequest.title === pair[0],
                   );
                   return (
-                    <li className={`${i + 1 == pair[1].length} flex items-center rounded p-2`} key={requestObj.id}>
+                    <li className={`${i + 1 == pair[1].length} flex items-center rounded bg-grey-700 p-2`} key={requestObj.id}>
                       <Link href='/' className='grow'>
                         {requestObj.sender}
                       </Link>
@@ -63,11 +63,11 @@ const SendRequest: React.FC<SendRequestProps> = () => {
                       ) : (
                         <>
                           <button
-                            className='rounded-lg border-2 p-1 px-3'
+                            className='rounded-lg border border-primary p-1 px-3 transition hover:bg-primary'
                             onClick={() => {
                               handleAccept(requestObj.sender, pair[0]);
                             }}>
-                            Send Request
+                            Send request
                           </button>
                         </>
                       )}
