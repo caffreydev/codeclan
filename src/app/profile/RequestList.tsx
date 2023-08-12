@@ -50,7 +50,7 @@ const RequestList: React.FC<RequestListProps> = () => {
               <li key={request.id} className='grid grid-cols-3 rounded-lg border border-grey-500 bg-grey-600 p-2'>
                 <p className='col-span-2 mr-20'>{`Request sent to ${request.receiver} for ${request.title} kata`}</p>
                 <div>
-                  <button className='max-w-sm rounded-lg border border-grey-300 p-2 px-2 transition hover:bg-red-800' onClick={() => handleDelete(request.id)}>
+                  <button className='max-w-sm rounded-lg border border-red-500 px-2 py-1 transition hover:bg-red-800' onClick={() => handleDelete(request.id)}>
                     Delete request
                   </button>
                 </div>

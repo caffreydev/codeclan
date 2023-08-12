@@ -11,15 +11,15 @@ type InstructionPanelProps = {
   setIsOpen: any;
 };
 
-const InstructionPanel: React.FC<InstructionPanelProps> = ({setIsOpen}) => {
+const InstructionPanel: React.FC<InstructionPanelProps> = ({ setIsOpen }) => {
   const params = useSearchParams();
   const kataId = parseInt(params.get('kata_id') as string) || 0;
-  
+
   return (
     <section className='flex flex-col gap-2 overflow-auto p-4'>
-      <div className='mb-2 flex justify-between'>
+      <div className='mb-2 flex flex-wrap justify-between'>
         <div className='flex items-center gap-2'>
-          <span className='py-1.3 inline-flex items-center justify-center gap-1 rounded-full bg-primary px-2.5 text-sm  text-teal-950'>
+          <span className='py-1.3 hidden items-center justify-center gap-1 rounded-full bg-primary px-2.5 text-sm text-teal-950 md:inline-flex'>
             <FaCode />
             {kataLibrary[kataId].category}
           </span>
@@ -50,8 +50,8 @@ const InstructionPanel: React.FC<InstructionPanelProps> = ({setIsOpen}) => {
           <li key={`test ${index} of kata ${kataId}`}>{testStr}</li>
         ))}
       </ol>
-      <button onClick={() => setIsOpen(true)} className='border px-2 py-1'>
-          Pair up with someone
+      <button onClick={() => setIsOpen(true)} className='self-end rounded-lg border px-2 py-1 hover:bg-primary'>
+        Pair up with someone
       </button>
     </section>
   );

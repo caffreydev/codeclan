@@ -60,17 +60,17 @@ const ProfilePair: React.FC<ProfilePairProps> = ({ kata, isOpen, setIsOpen }) =>
     return (
       isOpen && (
         <>
-          <div className='Modal rounded-t-lg'>
+          <div className='Modal z-50 max-h-[500px] overflow-scroll rounded-t-lg'>
             <header className='relative rounded-t-lg bg-grey-800'>
-              <h1 className='p-4 pl-7 text-xl'>'Pair up with our amazing coders'</h1>
+              <h1 className='p-4 pl-7 text-xl'>Pair up with our amazing coders</h1>
               <button className='absolute inset-y-0 right-0 p-5 text-xl transition hover:scale-125' onClick={() => setIsOpen(false)}>
                 <IoClose />
               </button>
             </header>
-            <div className='rounded-b-lg border border-grey-600 bg-grey-700'>
+            <div className='rounded-b-lg border border-grey-600 bg-grey-700 '>
               <div className='grid-cols-[max-content_min-minmax(0, 1fr)] grid auto-rows-auto rounded-b-lg border border-grey-700 bg-grey-700 px-7 py-4'>
                 <h2 className='text-3xl'>Take your pick</h2>
-                <button onClick={() => handlePairUp()} className='rounded border px-2'>
+                <button onClick={() => handlePairUp()} className='cursor-pointer rounded border px-2 transition hover:bg-primary'>
                   {disabledList.some((request) => request.receiver === '') ? 'Posted!' : 'Post to @everyone'}
                 </button>
                 <ul className='col-span-2 pt-3'>
@@ -92,7 +92,7 @@ const ProfilePair: React.FC<ProfilePairProps> = ({ kata, isOpen, setIsOpen }) =>
                           <button
                             onClick={() => handlePairUp(userObj.displayName)}
                             disabled={disabledList.some((request) => request.receiver === userObj.displayName)}
-                            className='rounded border px-2 py-1'>
+                            className='cursor-pointer rounded border px-2 py-1 transition hover:bg-primary'>
                             {disabledList.some((request) => request.receiver === userObj.displayName) ? 'Request Sent' : 'Pair up!'}
                           </button>
                         </li>
