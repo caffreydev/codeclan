@@ -155,7 +155,7 @@ const page: React.FC<pageProps> = () => {
               </div>
               <div className='relative'>
                 <p className='p-3'>{message}</p>
-                <footer className='absolute bottom-0 left-0 right-0 z-50 flex gap-3 bg-grey-600 p-3'>
+                <footer className='absolute bottom-0 left-0 right-0 z-10 flex gap-3 bg-grey-600 p-3'>
                   <button
                     disabled={isLoading}
                     data-disabled={isLoading}
