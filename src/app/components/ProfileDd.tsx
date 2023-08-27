@@ -66,6 +66,11 @@ const ProfileDd: React.FC<ProfileDdProps> = () => {
                 Manage Profile
               </Link>
             </li>
+						 <li>
+              <Link href='/katas' className='block px-4 py-2 text-sm transition hover:bg-grey-600 hover:text-primary'>
+                Katas
+              </Link>
+            </li>
             <li>
               <Link href='/authentication' onClick={signOut} className='block px-4 py-2 text-sm transition hover:bg-grey-600 hover:text-primary'>
                 Sign out
